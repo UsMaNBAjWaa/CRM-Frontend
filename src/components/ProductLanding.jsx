@@ -1,105 +1,65 @@
-import React, { useEffect, useState } from 'react';
-import heroImage from '../assets/hero.png';
+import React from 'react';
+import { products, services } from '../data/dummyData';
 
-const fallbackProducts = [
-  {
-    id: 1,
-    slug: 'crm-growth-suite',
-    name: 'CRM Growth Suite',
-    description: 'A complete customer management portal for sales teams, support staff, and company administrators.',
-    image: heroImage,
-  },
-  {
-    id: 2,
-    slug: 'support-desk-pro',
-    name: 'Support Desk Pro',
-    description: 'Track tickets, manage customer issues, and keep service teams aligned from one clean dashboard.',
-    image: heroImage,
-  },
-  {
-    id: 3,
-    slug: 'sales-automation-hub',
-    name: 'Sales Automation Hub',
-    description: 'Manage follow-ups, automate lead stages, and keep revenue teams focused on the next best action.',
-    image: heroImage,
-  },
-];
-
-export default function ProductLanding({ onViewDetails }) {
-  const [products, setProducts] = useState(fallbackProducts);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    let isMounted = true;
-
-    fetch('/api/products/')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Products request failed');
-        }
-        return response.json();
-      })
-      .then((data) => {
-        if (!isMounted) return;
-        const productList = Array.isArray(data) ? data : data.results || fallbackProducts;
-        setProducts(productList);
-      })
-      .catch(() => {
-        if (isMounted) {
-          setProducts(fallbackProducts);
-        }
-      })
-      .finally(() => {
-        if (isMounted) {
-          setIsLoading(false);
-        }
-      });
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
+function ListingCard({ item, type, onViewDetails }) {
   return (
-    <div className="space-y-6 py-6 text-slate-100">
-      <div className="border-b border-slate-800 pb-4">
-        <h2 className="text-2xl font-bold tracking-tight text-white">Products</h2>
-        <p className="text-xs text-slate-400">Loaded from GET /api/products/</p>
-      </div>
-
-      {isLoading && (
-        <div className="rounded-xl border border-slate-800 bg-slate-900 p-5 text-sm text-slate-400">
-          Loading products...
+    <article className="flex h-full flex-col overflow-hidden rounded-xl border border-slate-800 bg-slate-900">
+      <img src={item.image} alt={item.name} className="h-48 w-full object-cover" />
+      <div className="flex flex-1 flex-col p-5">
+        <div className="flex-1">
+          <p className="text-xs font-bold uppercase tracking-widest text-slate-500">{type}</p>
+          <h3 className="mt-2 text-lg font-bold text-white">{item.name}</h3>
+          <p className="mt-2 text-sm leading-6 text-slate-400">{item.shortDescription}</p>
         </div>
-      )}
-
-      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-        {products.map((product) => (
-          <article
-            key={product.id || product.slug || product.name}
-            className="overflow-hidden rounded-xl border border-slate-800 bg-slate-900"
-          >
-            <img
-              src={product.image || product.product_image || heroImage}
-              alt={product.name || product.product_name}
-              className="h-52 w-full object-cover"
-            />
-            <div className="space-y-4 p-5">
-              <div>
-                <h3 className="text-lg font-bold text-white">{product.name || product.product_name}</h3>
-                <p className="mt-2 text-sm leading-6 text-slate-400">{product.description}</p>
-              </div>
-              <button
-                type="button"
-                onClick={() => onViewDetails(product.slug || fallbackProducts[0].slug)}
-                className="rounded-lg bg-teal-500 px-4 py-2 text-sm font-bold text-slate-950 transition hover:bg-teal-400"
-              >
-                View Details
-              </button>
-            </div>
-          </article>
-        ))}
+        <button
+          type="button"
+          onClick={() => onViewDetails(item.slug)}
+          className="mt-5 rounded-lg bg-teal-500 px-4 py-2 text-sm font-bold text-slate-950 transition hover:bg-teal-400"
+        >
+          View Details
+        </button>
       </div>
+    </article>
+  );
+}
+
+export default function ProductLanding({ onViewProductDetails, onViewServiceDetails }) {
+  return (
+    <div className="space-y-10 py-6 text-slate-100">
+      <section className="grid gap-8 rounded-2xl border border-slate-800 bg-slate-900 p-8 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="flex flex-col justify-center">
+          <p className="text-xs font-bold uppercase tracking-widest text-teal-400">CRM Subscription Portal</p>
+          <h2 className="mt-3 text-4xl font-bold tracking-tight text-white">Products and services for growing customer teams</h2>
+          <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-400">
+            Explore CRM products, implementation services, support workflows, feedback tools, and admin approval screens using frontend dummy data only.
+          </p>
+        </div>
+        <img src={products[0].image} alt="CRM portal preview" className="h-72 w-full rounded-xl border border-slate-800 object-cover" />
+      </section>
+
+      <section className="space-y-4">
+        <div className="border-b border-slate-800 pb-3">
+          <h2 className="text-2xl font-bold tracking-tight text-white">Products</h2>
+          <p className="text-xs text-slate-400">Dummy product cards prepared for later API integration.</p>
+        </div>
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          {products.map((product) => (
+            <ListingCard key={product.id} item={product} type="Product" onViewDetails={onViewProductDetails} />
+          ))}
+        </div>
+      </section>
+
+      <section className="space-y-4">
+        <div className="border-b border-slate-800 pb-3">
+          <h2 className="text-2xl font-bold tracking-tight text-white">Services</h2>
+          <p className="text-xs text-slate-400">Service placeholders with pricing and detail navigation.</p>
+        </div>
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          {services.map((service) => (
+            <ListingCard key={service.id} item={service} type="Service" onViewDetails={onViewServiceDetails} />
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

@@ -1,4 +1,3 @@
-// File: src/App.jsx
 import React, { useState } from 'react';
 import ForgotPassword from './components/ForgotPassword';
 import ChangePassword from './components/ChangePassword';
@@ -6,81 +5,78 @@ import UserDashboard from './components/UserDashboard';
 import AdminDashboard from './components/AdminDashboard';
 import ProductLanding from './components/ProductLanding';
 import ProductDetails from './components/ProductDetails';
+import ServiceDetails from './components/ServiceDetails';
 import RegistrationPage from './components/RegistrationPage';
 import LoginPage from './components/LoginPage';
+import SupportPage from './components/SupportPage';
+import FeedbackPage from './components/FeedbackPage';
+import ProfilePage from './components/ProfilePage';
+import AdminSupportDashboard from './components/AdminSupportDashboard';
+import AdminFeedbackDashboard from './components/AdminFeedbackDashboard';
+
+const navItems = [
+  ['landing', 'Landing'],
+  ['product-details', 'Product Details'],
+  ['service-details', 'Service Details'],
+  ['register', 'Register'],
+  ['login', 'Login'],
+  ['forgot', 'Forgot'],
+  ['user-dashboard', 'User DB'],
+  ['support', 'Support'],
+  ['feedback', 'Feedback'],
+  ['profile', 'Profile'],
+  ['change-password', 'Change Password'],
+  ['admin-dashboard', 'Approvals'],
+  ['admin-support', 'Admin Support'],
+  ['admin-feedback', 'Admin Feedback'],
+];
 
 export default function App() {
-  const [screen, setScreen] = useState('landing'); // Screen states: landing, product-details, register, login, forgot, change-password, user-dashboard, admin-dashboard
-  const [selectedProductSlug, setSelectedProductSlug] = useState('crm-growth-suite');
+  const [screen, setScreen] = useState('landing');
+  const [selectedProductSlug, setSelectedProductSlug] = useState('sales-crm');
+  const [selectedServiceSlug, setSelectedServiceSlug] = useState('crm-implementation');
 
   const openProductDetails = (slug) => {
     setSelectedProductSlug(slug);
     setScreen('product-details');
   };
 
+  const openServiceDetails = (slug) => {
+    setSelectedServiceSlug(slug);
+    setScreen('service-details');
+  };
+
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 font-sans">
-      {/* Dynamic Selector Header */}
-      <nav className="border-b border-slate-800 bg-slate-900/50 backdrop-blur px-6 py-4 flex justify-between items-center">
-        <h1 className="text-xl font-bold tracking-wider text-teal-400">
-          SYSTEM<span className="text-white">PORTAL</span>
-        </h1>
-        <div className="flex flex-wrap gap-2 bg-slate-950 p-1 border border-slate-800 rounded-lg">
+      <nav className="border-b border-slate-800 bg-slate-900/50 px-6 py-4">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4">
           <button
+            type="button"
             onClick={() => setScreen('landing')}
-            className={`px-3 py-1.5 rounded-md text-xs font-bold transition ${screen === 'landing' ? 'bg-slate-800 text-teal-400' : 'text-slate-400 hover:text-slate-200'}`}
+            className="text-xl font-bold tracking-wider text-teal-400 transition hover:text-teal-300"
           >
-            Page 1 (Landing)
+            CRM<span className="text-white">PORTAL</span>
           </button>
-          <button
-            onClick={() => setScreen('product-details')}
-            className={`px-3 py-1.5 rounded-md text-xs font-bold transition ${screen === 'product-details' ? 'bg-slate-800 text-teal-400' : 'text-slate-400 hover:text-slate-200'}`}
-          >
-            Page 2 (Details)
-          </button>
-          <button
-            onClick={() => setScreen('register')}
-            className={`px-3 py-1.5 rounded-md text-xs font-bold transition ${screen === 'register' ? 'bg-slate-800 text-teal-400' : 'text-slate-400 hover:text-slate-200'}`}
-          >
-            Page 3 (Register)
-          </button>
-          <button
-            onClick={() => setScreen('login')}
-            className={`px-3 py-1.5 rounded-md text-xs font-bold transition ${screen === 'login' ? 'bg-slate-800 text-teal-400' : 'text-slate-400 hover:text-slate-200'}`}
-          >
-            Page 4 (Login)
-          </button>
-          <button 
-            onClick={() => setScreen('forgot')} 
-            className={`px-3 py-1.5 rounded-md text-xs font-bold transition ${screen === 'forgot' ? 'bg-slate-800 text-teal-400' : 'text-slate-400 hover:text-slate-200'}`}
-          >
-            Page 5 (Forgot)
-          </button>
-          <button 
-            onClick={() => setScreen('change-password')} 
-            className={`px-3 py-1.5 rounded-md text-xs font-bold transition ${screen === 'change-password' ? 'bg-slate-800 text-teal-400' : 'text-slate-400 hover:text-slate-200'}`}
-          >
-            Page 6 (Change)
-          </button>
-          <button 
-            onClick={() => setScreen('user-dashboard')} 
-            className={`px-3 py-1.5 rounded-md text-xs font-bold transition ${screen === 'user-dashboard' ? 'bg-slate-800 text-teal-400' : 'text-slate-400 hover:text-slate-200'}`}
-          >
-            Page 7 (User DB)
-          </button>
-          <button 
-            onClick={() => setScreen('admin-dashboard')} 
-            className={`px-3 py-1.5 rounded-md text-xs font-bold transition ${screen === 'admin-dashboard' ? 'bg-slate-800 text-teal-400' : 'text-slate-400 hover:text-slate-200'}`}
-          >
-            Page 8 (Admin DB)
-          </button>
+          <div className="flex flex-wrap gap-2 rounded-lg border border-slate-800 bg-slate-950 p-1">
+            {navItems.map(([key, label]) => (
+              <button
+                key={key}
+                onClick={() => setScreen(key)}
+                className={`rounded-md px-3 py-1.5 text-xs font-bold transition ${screen === key ? 'bg-slate-800 text-teal-400' : 'text-slate-400 hover:text-slate-200'}`}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
         </div>
       </nav>
 
-      {/* Main Content Area where different pages render dynamically */}
-      <main className="max-w-5xl mx-auto p-6">
+      <main className="mx-auto max-w-7xl p-6">
         {screen === 'landing' && (
-          <ProductLanding onViewDetails={openProductDetails} />
+          <ProductLanding
+            onViewProductDetails={openProductDetails}
+            onViewServiceDetails={openServiceDetails}
+          />
         )}
         {screen === 'product-details' && (
           <ProductDetails
@@ -89,25 +85,32 @@ export default function App() {
             onBuySubscription={() => setScreen('register')}
           />
         )}
-        {screen === 'register' && (
-          <RegistrationPage />
+        {screen === 'service-details' && (
+          <ServiceDetails
+            slug={selectedServiceSlug}
+            onBack={() => setScreen('landing')}
+            onBuy={() => setScreen('register')}
+          />
         )}
-        {screen === 'login' && (
-          <LoginPage onForgotPassword={() => setScreen('forgot')} />
-        )}
-        {screen === 'forgot' && (
-          <ForgotPassword onBackToLogin={() => setScreen('login')} />
-        )}
-        {screen === 'change-password' && (
-          <ChangePassword onComplete={() => setScreen('user-dashboard')} />
-        )}
+        {screen === 'register' && <RegistrationPage />}
+        {screen === 'login' && <LoginPage onForgotPassword={() => setScreen('forgot')} />}
+        {screen === 'forgot' && <ForgotPassword onBackToLogin={() => setScreen('login')} />}
+        {screen === 'change-password' && <ChangePassword onComplete={() => setScreen('user-dashboard')} />}
         {screen === 'user-dashboard' && (
-          <UserDashboard onTriggerPasswordChange={() => setScreen('change-password')} />
+          <UserDashboard
+            onTriggerPasswordChange={() => setScreen('change-password')}
+            onOpenFeedback={() => setScreen('feedback')}
+            onOpenProfile={() => setScreen('profile')}
+          />
         )}
-        {screen === 'admin-dashboard' && (
-          <AdminDashboard />
-        )}
+        {screen === 'support' && <SupportPage />}
+        {screen === 'feedback' && <FeedbackPage />}
+        {screen === 'profile' && <ProfilePage />}
+        {screen === 'admin-dashboard' && <AdminDashboard />}
+        {screen === 'admin-support' && <AdminSupportDashboard />}
+        {screen === 'admin-feedback' && <AdminFeedbackDashboard />}
       </main>
+
     </div>
   );
 }

@@ -1,96 +1,75 @@
-// File: src/components/AdminDashboard.jsx
 import React, { useState } from 'react';
+import { approvalRequests } from '../data/dummyData';
+import { DataTable, PageHeader, SecondaryButton, StatusBadge } from './ui';
 
 export default function AdminDashboard() {
-  // Page 8 Required Display Parameters (Company Logo, Company Name, Owner Name, Email, Status, Approve & Reject Actions)
-  const [applications, setApplications] = useState([
-    {
-      id: 1,
-      companyLogo: "🌟",
-      companyName: "Skyline Ventures",
-      ownerName: "Zainab Ahmed",
-      email: "zainab@skyline.com",
-      status: "Pending"
-    },
-    {
-      id: 2,
-      companyLogo: "💠",
-      companyName: "Apex Software Lab",
-      ownerName: "Bilal Malik",
-      email: "bilal@apexlab.io",
-      status: "Pending"
-    }
-  ]);
+  const [applications, setApplications] = useState(approvalRequests);
+  const [selectedApplicationId, setSelectedApplicationId] = useState(null);
+  const selectedApplication = applications.find((app) => app.id === selectedApplicationId);
 
   const handleApprove = (id) => {
-    setApplications(applications.map(app => 
-      app.id === id ? { ...app, status: 'Approved' } : app
-    ));
+    setApplications(applications.map((app) => app.id === id ? { ...app, status: 'Approved' } : app));
   };
 
   const handleReject = (id) => {
-    setApplications(applications.map(app => 
-      app.id === id ? { ...app, status: 'Rejected' } : app
-    ));
+    setApplications(applications.map((app) => app.id === id ? { ...app, status: 'Rejected' } : app));
   };
 
   return (
     <div className="space-y-6 py-6 text-slate-100">
-      <div className="border-b border-slate-800 pb-4">
-        <h2 className="text-2xl font-bold tracking-tight text-white">Admin Control Dashboard</h2>
-        <p className="text-xs text-slate-400">Evaluate and approve registered workspace requests</p>
-      </div>
+      <PageHeader title="Registration Approval Dashboard" subtitle="Review company registration requests." />
 
-      <div className="space-y-4">
-        {applications.map((app) => (
-          <div 
-            key={app.id} 
-            className="bg-slate-900 border border-slate-800 rounded-xl p-5 flex flex-wrap justify-between items-center gap-6"
-          >
-            {/* Left Section: Company Logo, Name, Owner Name, and Email */}
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-slate-950 rounded-xl flex items-center justify-center text-xl border border-slate-800">
-                {app.companyLogo}
+      <DataTable
+        columns={[
+          {
+            key: 'companyLogo',
+            label: 'Company Logo',
+            render: (row) => (
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-slate-800 bg-slate-950 text-xs font-bold text-teal-400">
+                {row.companyLogo}
               </div>
-              <div className="space-y-1">
-                <h4 className="text-base font-bold text-white">{app.companyName}</h4>
-                <div className="text-xs space-y-0.5">
-                  <p className="text-slate-300">Owner Name: <span className="font-semibold text-teal-400">{app.ownerName}</span></p>
-                  <p className="text-slate-400">Email: {app.email}</p>
-                </div>
-              </div>
-            </div>
+            ),
+          },
+          { key: 'companyName', label: 'Company Name' },
+          { key: 'ownerName', label: 'Owner Name' },
+          { key: 'email', label: 'Email' },
+          { key: 'status', label: 'Status', render: (row) => <StatusBadge status={row.status} /> },
+        ]}
+        rows={applications}
+        renderActions={(row) => (
+          <SecondaryButton onClick={() => setSelectedApplicationId((current) => current === row.id ? null : row.id)}>
+            View Details
+          </SecondaryButton>
+        )}
+      />
 
-            {/* Right Section: Status Badge, Approve Button, Reject Button */}
-            <div className="flex items-center gap-4">
-              <span className={`px-2.5 py-1 rounded-lg text-xs font-bold uppercase tracking-wider ${
-                app.status === 'Approved' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 
-                app.status === 'Rejected' ? 'bg-rose-500/10 text-rose-400 border border-rose-500/20' : 
-                'bg-yellow-500/10 text-yellow-400 border border-yellow-500/20'
-              }`}>
-                {app.status}
-              </span>
-
-              {app.status === 'Pending' && (
-                <div className="flex gap-2">
-                  <button 
-                    onClick={() => handleApprove(app.id)}
-                    className="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-slate-950 rounded-lg text-xs font-bold transition"
-                  >
-                    Approve
-                  </button>
-                  <button 
-                    onClick={() => handleReject(app.id)}
-                    className="px-3.5 py-1.5 bg-rose-600 hover:bg-rose-500 text-slate-950 rounded-lg text-xs font-bold transition"
-                  >
-                    Reject
-                  </button>
-                </div>
-              )}
+      {selectedApplication && (
+        <section className="rounded-xl border border-slate-800 bg-slate-900 p-6">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <h3 className="text-xl font-bold text-white">Registration Details</h3>
+              <p className="text-sm text-slate-400">{selectedApplication.companyName}</p>
             </div>
+            <StatusBadge status={selectedApplication.status} />
           </div>
-        ))}
-      </div>
+          <div className="mt-5 grid gap-4 text-sm text-slate-300 md:grid-cols-2">
+            <p>Owner Name: {selectedApplication.ownerName}</p>
+            <p>Email: {selectedApplication.email}</p>
+            <p>Phone Number: {selectedApplication.phoneNumber}</p>
+            <p>Country: {selectedApplication.country}</p>
+            <p>CNIC: {selectedApplication.cnic}</p>
+            <p>Address: {selectedApplication.address}</p>
+          </div>
+          <div className="mt-6 flex flex-wrap gap-2">
+            <button onClick={() => handleApprove(selectedApplication.id)} className="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-bold text-slate-950 transition hover:bg-emerald-500">
+              Approve
+            </button>
+            <button onClick={() => handleReject(selectedApplication.id)} className="rounded-lg bg-rose-600 px-4 py-2 text-sm font-bold text-slate-950 transition hover:bg-rose-500">
+              Reject
+            </button>
+          </div>
+        </section>
+      )}
     </div>
   );
 }
