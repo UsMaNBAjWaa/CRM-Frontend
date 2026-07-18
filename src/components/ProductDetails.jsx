@@ -35,10 +35,10 @@ export default function ProductDetails({ slug = 'sales-crm', onBack, onBuySubscr
 
       <section className="grid gap-5 md:grid-cols-2">
         {product.pricingPlans.map((plan) => (
-          <div key={plan.name} className="flex flex-col rounded-xl border border-slate-800 bg-slate-900 p-5">
+          <div key={plan.name} className="product-card pricing-card rounded-xl border border-slate-800 p-5">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <h4 className="text-lg font-bold text-white">{plan.name}</h4>
+                <h4 className="product-card-title text-lg font-bold text-white">{plan.name}</h4>
                 <p className="text-xs text-slate-400">Billing Cycle: {plan.billingCycle}</p>
                 <p className="text-xs text-slate-400">Currency: {plan.currency}</p>
               </div>
@@ -63,7 +63,9 @@ export default function ProductDetails({ slug = 'sales-crm', onBack, onBuySubscr
                 </ul>
               </div>
             </div>
-            <PrimaryButton onClick={onBuySubscription}>Buy Subscription</PrimaryButton>
+            <div className="mt-5 pricing-card-action">
+              <PrimaryButton onClick={onBuySubscription}>Buy Subscription</PrimaryButton>
+            </div>
           </div>
         ))}
       </section>

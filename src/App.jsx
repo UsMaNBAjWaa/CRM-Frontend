@@ -48,21 +48,25 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 font-sans">
-      <nav className="border-b border-slate-800 bg-slate-900/50 px-6 py-4">
+      <nav className="orbit-nav border-b border-slate-800 bg-slate-900/50 px-6 py-4">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4">
           <button
             type="button"
             onClick={() => setScreen('landing')}
-            className="text-xl font-bold tracking-wider text-teal-400 transition hover:text-teal-300"
+            className="orbit-brand text-xl font-bold tracking-wider text-teal-400 transition hover:text-teal-300"
           >
-            CRM<span className="text-white">PORTAL</span>
+            <span className="orbit-logo" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+            </span>CRMPORTAL
           </button>
-          <div className="flex flex-wrap gap-2 rounded-lg border border-slate-800 bg-slate-950 p-1">
+          <div className="orbit-nav-links flex flex-wrap gap-2 rounded-lg border border-slate-800 bg-slate-950 p-1">
             {navItems.map(([key, label]) => (
               <button
                 key={key}
                 onClick={() => setScreen(key)}
-                className={`rounded-md px-3 py-1.5 text-xs font-bold transition ${screen === key ? 'bg-slate-800 text-teal-400' : 'text-slate-400 hover:text-slate-200'}`}
+                className={`rounded-md px-3 py-1.5 text-xs font-bold transition ${screen === key ? 'active bg-slate-800 text-teal-400' : 'text-slate-400 hover:text-slate-200'}`}
               >
                 {label}
               </button>
