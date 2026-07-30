@@ -7,31 +7,10 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-# Environment and private config
-.env
-.env.*
-!.env.example
-*.pem
-*.key
-*.crt
-
 node_modules
 dist
 dist-ssr
 *.local
-
-# Local archives and packaged exports
-*.rar
-*.zip
-*.7z
-*.tar
-*.tar.gz
-
-# Tool and framework caches
-.cache
-.parcel-cache
-.vite
-coverage
 
 # Editor directories and files
 .vscode/*
