@@ -1,0 +1,6353 @@
+:root {
+  --bg: #eef4fb;
+  --bg-soft: #f8fbff;
+  --surface: #ffffff;
+  --surface-muted: #f8fafc;
+  --surface-raised: rgba(255, 255, 255, 0.92);
+  --border: #cbd8e6;
+  --border-strong: #9fb4ca;
+  --text: #10213f;
+  --muted: #5f6f84;
+  --muted-strong: #31435a;
+  --primary: #1c4f73;
+  --primary-hover: #163f5c;
+  --primary-soft: #eaf4ff;
+  --success: #0f8a5f;
+  --success-soft: #e8f7f0;
+  --danger: #c93434;
+  --danger-soft: #fdecec;
+  --warning: #a36100;
+  --warning-soft: #fff3db;
+  --shadow: 0 24px 70px rgba(28, 45, 72, 0.13);
+  --shadow-soft: 0 10px 28px rgba(28, 45, 72, 0.08);
+  --radius: 8px;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    linear-gradient(135deg, rgba(1, 118, 211, 0.1), transparent 34%),
+    linear-gradient(180deg, #fbfdff 0%, var(--bg) 48%, #e6eef8 100%);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(34, 87, 201, 0.18);
+  outline-offset: 2px;
+}
+
+.app {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  background: linear-gradient(180deg, #032d60 0%, #063b83 100%);
+  color: #ffffff;
+  padding: 28px 10px;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: none;
+}
+
+.sidebar h1 {
+  width: 56px;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 26px;
+  padding: 0;
+  border-radius: var(--radius);
+  background: transparent;
+  font-size: 0;
+}
+
+.sidebar h1::before {
+  content: "";
+  width: 30px;
+  height: 27px;
+  margin: 0;
+  border-radius: 3px 3px 2px 2px;
+  background: #ffffff;
+  clip-path: polygon(50% 0, 100% 38%, 84% 38%, 84% 100%, 60% 100%, 60% 68%, 40% 68%, 40% 100%, 16% 100%, 16% 38%, 0 38%);
+  box-shadow: none;
+}
+
+.sidebar button {
+  width: 100%;
+  min-height: 78px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  margin-bottom: 6px;
+  padding: 7px 4px;
+  background: transparent;
+  color: #ffffff;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.15;
+  transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+
+.sidebar button svg {
+  width: 31px;
+  height: 31px;
+  stroke-width: 2.5;
+}
+
+.sidebar-sales-icon {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  border: 2px solid #ffffff;
+  border-radius: 8px;
+}
+
+.sidebar-sales-icon::before {
+  content: "";
+  position: absolute;
+  inset: 9px;
+  background: center / contain no-repeat url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 25H27' stroke='white' stroke-width='2.4' stroke-linecap='round'/%3E%3Cpath d='M7 25V7H26' stroke='white' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M9 21L15 15L19 19L26 10' stroke='white' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M21 10H26V15' stroke='white' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.sidebar button:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.sidebar button.active {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border-color: #ffffff;
+  box-shadow: none;
+}
+
+.content {
+  min-width: 0;
+  padding: 36px;
+}
+
+.page {
+  display: grid;
+  gap: 20px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 112px;
+  border: 1px solid rgba(216, 225, 236, 0.82);
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.9));
+  box-shadow: var(--shadow-soft);
+  padding: 24px;
+}
+
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+h2 {
+  font-size: 36px;
+  line-height: 1.05;
+  font-weight: 850;
+  letter-spacing: 0;
+}
+
+h3 {
+  font-size: 21px;
+  font-weight: 800;
+}
+
+h4 {
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.page-header p,
+.detail-block p,
+.modal-text {
+  margin-top: 7px;
+  color: var(--muted);
+  max-width: 720px;
+}
+
+.button {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  padding: 0 16px;
+  font-weight: 800;
+  white-space: nowrap;
+  transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease, border-color 150ms ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+}
+
+.button.primary {
+  background: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 12px 24px rgba(11, 92, 171, 0.22);
+}
+
+.button.primary:hover {
+  background: var(--primary-hover);
+}
+
+.button.secondary {
+  background: #ffffff;
+  color: #032d60;
+  border-color: #9fb4ca;
+}
+
+.button.secondary:hover {
+  border-color: #1c4f73;
+  background: #f2f8ff;
+  box-shadow: var(--shadow-soft);
+}
+
+.button.success {
+  background: var(--success);
+  color: #ffffff;
+}
+
+.button.danger {
+  background: var(--danger);
+  color: #ffffff;
+}
+
+.alert {
+  position: sticky;
+  top: 18px;
+  z-index: 12;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid;
+  border-radius: var(--radius);
+  margin: 0 auto 18px;
+  max-width: 1440px;
+  padding: 13px 16px;
+  font-weight: 750;
+  box-shadow: var(--shadow-soft);
+}
+
+.alert.success {
+  color: var(--success);
+  background: var(--success-soft);
+  border-color: rgba(15, 138, 95, 0.22);
+}
+
+.alert.error {
+  color: var(--danger);
+  background: var(--danger-soft);
+  border-color: rgba(201, 52, 52, 0.22);
+}
+
+.alert button {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  border: 0;
+  border-radius: var(--radius);
+  background: transparent;
+  color: currentColor;
+}
+
+.alert button:hover {
+  background: rgba(255, 255, 255, 0.65);
+}
+
+.toolbar {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) repeat(4, minmax(150px, auto));
+  gap: 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-raised);
+  box-shadow: var(--shadow-soft);
+  padding: 14px;
+}
+
+.lead-toolbar {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+
+.lead-toolbar .search {
+  flex: 1 1 280px;
+}
+
+.lead-toolbar .filter {
+  flex: 1 1 145px;
+}
+
+.lead-toolbar .button {
+  flex: 0 0 auto;
+}
+
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(120px, 1fr));
+  gap: 12px;
+  margin-top: -6px;
+}
+
+.summary-cards div {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-raised);
+  box-shadow: var(--shadow-soft);
+  padding: 14px;
+}
+
+.summary-cards span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.summary-cards strong {
+  display: block;
+  margin-top: 6px;
+  color: var(--text);
+  font-size: 22px;
+}
+
+.search,
+.filter {
+  position: relative;
+  min-height: 46px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #ffffff;
+  padding: 0 12px;
+  color: var(--muted);
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.searchable-filter {
+  overflow: visible;
+}
+
+.searchable-field {
+  min-height: auto;
+  align-items: stretch;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  padding: 0;
+  color: var(--text);
+}
+
+.searchable-field > svg {
+  display: none;
+}
+
+.searchable-field > span {
+  color: var(--muted-strong);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.searchable-field input {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #ffffff;
+  color: var(--text);
+  outline: 0;
+  padding: 11px 12px;
+}
+
+.searchable-filter input {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding-right: 24px;
+}
+
+.searchable-chevron {
+  flex: 0 0 auto;
+  color: var(--muted);
+  pointer-events: none;
+}
+
+.filter-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  z-index: 25;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #ffffff;
+  box-shadow: var(--shadow-soft);
+}
+
+.filter-menu button,
+.filter-empty {
+  width: 100%;
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  border: 0;
+  background: #ffffff;
+  color: var(--text);
+  padding: 0 12px;
+  text-align: left;
+  font-weight: 700;
+}
+
+.filter-menu button:hover {
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+
+.filter-empty {
+  color: var(--muted);
+}
+
+.search-highlight {
+  border-radius: 4px;
+  background: #fff3a3;
+  color: #5f3d00;
+  padding: 0 2px;
+}
+
+.search:focus-within,
+.filter:focus-within {
+  border-color: rgba(34, 87, 201, 0.48);
+  box-shadow: 0 0 0 4px rgba(34, 87, 201, 0.1);
+}
+
+.filter span {
+  color: var(--muted-strong);
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.date-filter {
+  min-width: 190px;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.owner-filter {
+  min-width: 230px;
+}
+
+.owner-filter input {
+  min-width: 120px;
+}
+
+.date-filter span {
+  font-size: 10px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.date-filter input {
+  min-height: 22px;
+}
+
+.search input,
+.filter select,
+.filter input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text);
+}
+
+.table-wrap {
+  overflow: visible;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #ffffff;
+  box-shadow: var(--shadow);
+}
+
+table {
+  width: 100%;
+  min-width: 1040px;
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: left;
+}
+
+th,
+td {
+  padding: 15px 16px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #f1f6ff;
+  color: #16243a;
+  font-size: 12px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+td {
+  color: var(--muted-strong);
+  font-size: 14px;
+}
+
+tbody tr {
+  transition: background 140ms ease;
+}
+
+tbody tr:hover {
+  background: #f8fbff;
+}
+
+tbody tr.selected-row,
+tbody tr.selected-row:hover {
+  background: #eaf4ff;
+}
+
+tbody tr.duplicate-row,
+tbody tr.duplicate-row:hover {
+  background: #fff7df;
+  box-shadow: inset 4px 0 0 #d08a00;
+}
+
+tbody tr.clickable-row {
+  cursor: pointer;
+}
+
+.table-link {
+  border: 0;
+  background: transparent;
+  color: var(--accent);
+  font: inherit;
+  font-weight: 800;
+  padding: 0;
+}
+
+.companies-page .sr-link {
+  font-weight: 400;
+}
+
+.expanded-action-row td {
+  background: #f8fbff;
+  padding: 10px 16px;
+}
+
+.inline-row-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-weight: inherit;
+  text-transform: inherit;
+}
+
+.sort-indicator {
+  color: var(--primary);
+  font-size: 12px;
+  line-height: 1;
+}
+
+.sort .active {
+  color: var(--primary);
+}
+
+.pill {
+  display: inline-flex;
+  min-height: 26px;
+  align-items: center;
+  border-radius: 999px;
+  padding: 2px 10px;
+  background: var(--primary-soft);
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.pill.high,
+.pill.lost,
+.pill.inactive {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.pill.medium,
+.pill.contacted {
+  background: var(--warning-soft);
+  color: var(--warning);
+}
+
+.pill.qualified {
+  background: #f1e8ff;
+  color: #6b2fb8;
+}
+
+.pill.converted {
+  background: #dff5e8;
+  color: #09613f;
+}
+
+.pill.low,
+.pill.new,
+.pill.active,
+.pill.paid {
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+.pill.unpaid {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.pill.customer {
+  background: #dff5e8;
+  color: #09613f;
+}
+
+.pill.prospect,
+.pill.partner {
+  background: #e8f2ff;
+  color: #0756a5;
+}
+
+.pill.competitor,
+.pill.hot {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.pill.warm {
+  background: var(--warning-soft);
+  color: var(--warning);
+}
+
+.pill.cold,
+.pill.none,
+.pill.other {
+  background: #eef1f6;
+  color: var(--muted-strong);
+}
+
+.pill.partially {
+  background: var(--warning-soft);
+  color: var(--warning);
+}
+
+.stats-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+}
+
+.stage-management table {
+  min-width: 520px;
+}
+
+.stats-strip div {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-raised);
+  box-shadow: var(--shadow-soft);
+  padding: 14px;
+}
+
+.stats-strip span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.stats-strip strong {
+  display: block;
+  margin-top: 6px;
+  color: var(--text);
+  font-size: 20px;
+}
+
+.stats-strip .draggable-stat {
+  cursor: grab;
+}
+
+.stats-strip .draggable-stat:active {
+  cursor: grabbing;
+}
+
+.stats-strip .draggable-stat:hover {
+  border-color: rgba(34, 87, 201, 0.36);
+}
+
+.kanban-board {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(260px, 1fr);
+  gap: 14px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.kanban-column {
+  min-height: 520px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: var(--shadow-soft);
+  padding: 12px;
+}
+
+.kanban-column > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+  padding: 2px 2px 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.kanban-column h3 {
+  font-size: 15px;
+}
+
+.kanban-column > header span {
+  min-width: 28px;
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--primary-soft);
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.kanban-list {
+  display: grid;
+  gap: 10px;
+}
+
+.opportunity-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #ffffff;
+  box-shadow: 0 10px 24px rgba(28, 45, 72, 0.08);
+  padding: 14px;
+  transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
+}
+
+.opportunity-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(34, 87, 201, 0.28);
+  box-shadow: 0 18px 32px rgba(28, 45, 72, 0.14);
+}
+
+.opportunity-card.duplicate-card {
+  border-color: rgba(208, 138, 0, 0.55);
+  background: #fff7df;
+  box-shadow: 0 16px 34px rgba(208, 138, 0, 0.18);
+}
+
+.opportunity-card:active {
+  cursor: grabbing;
+}
+
+.card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.card-top strong {
+  line-height: 1.25;
+}
+
+.opportunity-card p {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.opportunity-card dl {
+  display: grid;
+  gap: 8px;
+  margin: 14px 0 0;
+}
+
+.opportunity-card dl div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.opportunity-card dt {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.opportunity-card dd {
+  margin: 0;
+  color: var(--muted-strong);
+  font-size: 12px;
+  font-weight: 750;
+  text-align: right;
+}
+
+.payment-toolbar {
+  grid-template-columns: minmax(260px, 1fr) repeat(6, minmax(132px, auto));
+}
+
+.salesforce-leads {
+  max-width: none;
+  gap: 10px;
+}
+
+.salesforce-leads {
+  position: relative;
+}
+
+.salesforce-leads::before {
+  content: "";
+  position: absolute;
+  inset: 0 20px auto;
+  height: 138px;
+  z-index: -1;
+  border-radius: 0 0 18px 18px;
+  background:
+    linear-gradient(135deg, rgba(0, 161, 168, 0.18), rgba(1, 118, 211, 0.1)),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.44));
+}
+
+.salesforce-leads .sf-list-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 30px 20px 8px;
+}
+
+.sf-title-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.sf-title-wrap p {
+  color: var(--muted-strong);
+  font-size: 13px;
+  line-height: 1;
+}
+
+.sf-list-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  border-bottom: 1px solid #747474;
+  background: transparent;
+  padding: 0 0 8px;
+  margin-top: 8px;
+  color: #032d60;
+  font-size: 34px;
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+.sf-list-title:hover {
+  color: #014486;
+}
+
+.sf-list-view-menu {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 68px;
+  z-index: 120;
+  width: min(750px, calc(100vw - 180px));
+  border: 1px solid #d8dde6;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+  padding: 12px 14px 10px;
+}
+
+.sf-list-view-menu label {
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 3px solid #032d60;
+  border-radius: 8px;
+  padding: 0 10px;
+}
+
+.sf-list-view-menu input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  color: #181818;
+}
+
+.sf-list-view-menu p {
+  margin: 12px 2px 6px;
+  color: #181818;
+  font-size: 14px;
+}
+
+.sf-list-view-menu button {
+  width: 100%;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 0;
+  border-radius: 4px;
+  background: #ffffff;
+  color: #3e3e3c;
+  padding: 0 20px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.sf-list-view-menu button.selected {
+  border: 2px solid #032d60;
+  background: #d8e9ff;
+  color: #181818;
+}
+
+.sf-list-view-menu button:not(.selected) span {
+  margin-left: 40px;
+}
+
+.sf-list-view-menu button:hover {
+  background: #f3f3f3;
+}
+
+.sf-object-icon {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: #00a1a8;
+}
+
+.salesforce-leads .sf-object-icon {
+  background: linear-gradient(135deg, #00a1a8, #0176d3);
+  box-shadow: 0 10px 24px rgba(1, 118, 211, 0.2);
+}
+
+.sf-object-icon span {
+  content: "";
+  display: block;
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+
+.sf-object-icon span::before,
+.sf-object-icon span::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  background: #ffffff;
+  transform: translateX(-50%);
+}
+
+.sf-object-icon span::before {
+  top: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+}
+
+.sf-object-icon span::after {
+  top: 9px;
+  width: 24px;
+  height: 15px;
+  clip-path: polygon(50% 0, 62% 34%, 100% 34%, 70% 56%, 82% 100%, 50% 72%, 18% 100%, 30% 56%, 0 34%, 38% 34%);
+}
+
+.pipeline-icon {
+  background: linear-gradient(135deg, #5867e8, #1c4f73) !important;
+}
+
+.pipeline-icon span {
+  width: 22px;
+  height: 22px;
+  border: 2px solid #ffffff;
+  border-radius: 4px;
+}
+
+.pipeline-icon span::before,
+.pipeline-icon span::after {
+  display: none;
+}
+
+.pipeline-icon span {
+  background: center / 18px 18px no-repeat url("data:image/svg+xml,%3Csvg width='22' height='22' viewBox='0 0 22 22' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 16L8.5 11.5L11.5 14.5L18 7.5' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M14 7.5H18V11.5' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.contacts-icon {
+  background: linear-gradient(135deg, #1f7a8c, #31b59f) !important;
+  color: #ffffff;
+  font-weight: 900;
+}
+
+.companies-icon {
+  background: linear-gradient(135deg, #235da8, #5a8dee) !important;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.payment-icon {
+  background: linear-gradient(135deg, #2e844a, #0f7b55) !important;
+}
+
+.payment-icon span {
+  width: 24px;
+  height: 18px;
+  border: 2px solid #ffffff;
+  border-radius: 4px;
+}
+
+.payment-icon span::before,
+.payment-icon span::after {
+  display: none;
+}
+
+.payment-icon span {
+  background:
+    linear-gradient(#ffffff, #ffffff) 4px 5px / 16px 2px no-repeat,
+    linear-gradient(#ffffff, #ffffff) 4px 11px / 9px 2px no-repeat;
+}
+
+.sf-pin {
+  width: 32px;
+  height: 32px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid #747474;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #1c4f73;
+}
+
+.sf-action-strip {
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid #747474;
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgba(3, 45, 96, 0.08);
+}
+
+.sf-action {
+  min-height: 38px;
+  border: 0;
+  border-right: 1px solid #747474;
+  background: #ffffff;
+  color: #032d60;
+  padding: 0 20px;
+  font-weight: 700;
+}
+
+.sf-action:last-child {
+  border-right: 0;
+}
+
+.sf-action:hover {
+  background: #eef4ff;
+  color: #032d60;
+}
+
+.sf-action:disabled {
+  color: #8c8c8c;
+  cursor: not-allowed;
+}
+
+.sf-list-meta {
+  padding: 0 20px 8px 42px;
+  color: #3e3e3c;
+  font-size: 14px;
+}
+
+.salesforce-leads .lead-toolbar {
+  justify-content: flex-end;
+  gap: 8px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: 0 20px 8px;
+}
+
+.salesforce-leads .lead-toolbar .filter,
+.salesforce-leads .lead-toolbar .search,
+.salesforce-leads .lead-toolbar .icon-button {
+  min-height: 40px;
+  border-color: #747474;
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+.salesforce-leads .lead-toolbar .search {
+  border-color: #8bb7e0;
+  box-shadow: 0 6px 18px rgba(1, 118, 211, 0.1);
+}
+
+.salesforce-leads .lead-toolbar .filter {
+  flex: 0 1 154px;
+}
+
+.salesforce-leads .lead-toolbar .filter select {
+  min-width: 72px;
+  color: #032d60;
+  font-size: 16px;
+}
+
+.salesforce-leads .lead-toolbar .owner-filter {
+  flex-basis: 210px;
+  min-width: 210px;
+}
+
+.salesforce-leads .lead-toolbar .date-filter {
+  min-width: 172px;
+}
+
+.salesforce-leads .lead-toolbar .search {
+  flex: 0 1 300px;
+}
+
+.contacts-page .lead-toolbar,
+.companies-page .lead-toolbar {
+  margin: 0 20px;
+}
+
+.contacts-page .sf-list-head,
+.companies-page .sf-list-head {
+  margin-bottom: 2px;
+}
+
+.contacts-page .sf-list-meta,
+.companies-page .sf-list-meta {
+  margin-top: 0;
+  margin-bottom: 4px;
+}
+
+.contacts-page .lead-toolbar,
+.companies-page .lead-toolbar {
+  margin-top: 0;
+  margin-bottom: 4px;
+}
+
+.contacts-page .sf-title-block h2,
+.companies-page .sf-title-block h2 {
+  color: #032d60;
+  font-weight: 500;
+}
+
+.contacts-page .enhanced-heading,
+.companies-page .enhanced-heading {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid #6e6e6e;
+  color: #032d60;
+  font-size: 34px;
+  line-height: 1.05;
+  font-weight: 500;
+}
+
+.contacts-page .sf-title-block > div:nth-child(2),
+.companies-page .sf-title-block > div:nth-child(2) {
+  display: grid;
+  gap: 2px;
+}
+
+.inline-list-meta {
+  margin-top: 2px;
+  color: #181818;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.contacts-page .pin-button,
+.companies-page .pin-button {
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  border: 1px solid #747474;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #014f9f;
+}
+
+.row-menu-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.contacts-page table,
+.companies-page table {
+  font-family: inherit;
+  min-width: 1180px;
+}
+
+.contacts-page th,
+.contacts-page td,
+.companies-page th,
+.companies-page td {
+  height: 58px;
+  padding: 10px 12px;
+  color: #181818;
+  font-size: 14px;
+}
+
+.contacts-page th,
+.companies-page th {
+  color: #032d60;
+  font-weight: 800;
+}
+
+.salesforce-leads .sf-filter-toggle {
+  width: 42px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #1c4f73;
+  border-radius: 0 999px 999px 0;
+  background: #1c4f73;
+  color: #ffffff;
+}
+
+.salesforce-leads .sf-filter-toggle:hover,
+.salesforce-leads .sf-filter-toggle.active {
+  background: #163f5c;
+}
+
+.selected-bulk-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 20px 8px;
+  border: 1px solid #9fc4ff;
+  border-radius: 20px;
+  background: #d9eaff;
+  padding: 16px 24px;
+}
+
+.selected-bulk-banner > div {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.selected-bulk-icon {
+  width: 48px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: #2f78b8;
+  color: #ffffff;
+  box-shadow: 0 10px 20px rgba(47, 120, 184, 0.26);
+}
+
+.selected-bulk-banner strong {
+  color: #3e3e3c;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.selected-bulk-actions button {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border-radius: 8px;
+  padding: 0 22px;
+  font-weight: 800;
+}
+
+.cancel-selected,
+.bulk-cancel {
+  border: 1px solid #5b8cc0;
+  background: #dcecff;
+  color: #5b8cc0;
+}
+
+.recycle-selected,
+.bulk-delete {
+  border: 1px solid #e53935;
+  background: #e53935;
+  color: #ffffff;
+  box-shadow: 0 8px 18px rgba(229, 57, 53, 0.22);
+}
+
+.salesforce-leads .lead-toolbar .filter span {
+  color: #444;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: none;
+}
+
+.sf-list-panel {
+  position: relative;
+  margin: 0 20px;
+  border: 1px solid #c9c9c9;
+  border-radius: 8px;
+  background: #ffffff;
+  min-height: 0;
+  overflow: visible;
+}
+
+.salesforce-leads .sf-list-panel {
+  border-color: #b7c9dd;
+  box-shadow: 0 14px 34px rgba(3, 45, 96, 0.08);
+}
+
+.sf-card-close {
+  border: 0;
+  background: transparent;
+  color: #1c4f73;
+}
+
+.sf-filter-popup {
+  display: grid;
+  gap: 14px;
+}
+
+.sf-filter-popup > p {
+  color: #3e3e3c;
+  font-size: 16px;
+}
+
+.sf-filter-popup-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.sf-filter-card {
+  position: relative;
+  display: grid;
+  gap: 8px;
+  border: 1px solid #c9c9c9;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 16px 44px 16px 16px;
+}
+
+.sf-filter-card + .sf-filter-card {
+  margin-top: 0;
+}
+
+.sf-filter-card span {
+  color: #032d60;
+  font-size: 15px;
+}
+
+.sf-filter-card select,
+.sf-filter-card input {
+  width: 100%;
+  min-height: 28px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #032d60;
+  font-size: 16px;
+}
+
+.sf-card-close {
+  position: absolute;
+  top: 18px;
+  right: 14px;
+  color: #5c5c5c;
+}
+
+.date-range-card {
+  grid-template-columns: 1fr 1fr;
+}
+
+.date-range-card.wide {
+  grid-column: 1 / -1;
+}
+
+.date-range-card span {
+  grid-column: 1 / -1;
+}
+
+.sf-filter-links {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 18px;
+}
+
+.sf-filter-links button,
+.sf-filter-logic {
+  border: 0;
+  background: transparent;
+  color: #005fb2;
+  padding: 0;
+  font-size: 16px;
+}
+
+.sf-filter-logic {
+  margin-top: 34px;
+}
+
+.salesforce-leads .modal {
+  width: min(720px, 100%);
+  max-height: calc(100vh - 48px);
+}
+
+.salesforce-leads .table-wrap {
+  border: 0;
+  border-radius: 8px 8px 0 0;
+  box-shadow: none;
+}
+
+.salesforce-leads table {
+  min-width: 1160px;
+}
+
+.salesforce-leads th,
+.salesforce-leads td {
+  padding: 11px 10px;
+  border-right: 1px solid #d8dde6;
+  border-bottom-color: #d8dde6;
+}
+
+.salesforce-leads th:last-child,
+.salesforce-leads td:last-child {
+  border-right: 0;
+}
+
+.salesforce-leads th {
+  background: linear-gradient(180deg, #f8fbff, #edf4fc);
+  color: #1f3b5f;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: none;
+}
+
+.salesforce-leads td {
+  color: #3e3e3c;
+  font-size: 14px;
+}
+
+.salesforce-leads tbody tr:hover {
+  background: #f2f8ff;
+}
+
+.salesforce-leads .link-cell {
+  color: #014f9f;
+  font-weight: 700;
+}
+
+.salesforce-leads .pill {
+  min-height: auto;
+  border-radius: 0;
+  background: transparent;
+  color: #3e3e3c;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.salesforce-leads .icon-button {
+  width: 30px;
+  height: 30px;
+  border-color: #747474;
+  border-radius: 999px;
+  color: #1c4f73;
+}
+
+
+.salesforce-leads .row-action-menu {
+  width: 160px;
+}
+
+.salesforce-leads .table-footer {
+  margin-top: auto;
+  border: 0;
+  border-top: 1px solid #d8dde6;
+  border-radius: 0 0 8px 8px;
+  background: #ffffff;
+  box-shadow: none;
+  padding: 10px 12px;
+}
+
+.salesforce-leads .button {
+  min-height: 32px;
+  border-radius: 4px;
+  padding: 0 12px;
+  box-shadow: none;
+  font-size: 13px;
+}
+
+.salesforce-pipeline .pipeline-toolbar {
+  justify-content: flex-end;
+}
+
+.pipeline-filter-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: 0 20px 8px;
+}
+
+.pipeline-filter-row .filter {
+  min-height: 40px;
+  flex: 0 1 170px;
+  border-color: #747474;
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+.salesforce-pipeline .stage-management {
+  box-shadow: none;
+}
+
+.salesforce-payments .payment-list-toolbar {
+  justify-content: flex-end;
+}
+
+.opportunity-form {
+  display: grid;
+  gap: 12px;
+}
+
+.opportunity-form .field {
+  gap: 5px;
+}
+
+.opportunity-form .field input[readonly] {
+  background: #f6f7f9;
+  color: #5c5c5c;
+}
+
+.opportunity-form small {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.form-error-banner {
+  border: 1px solid rgba(201, 52, 52, 0.3);
+  border-radius: var(--radius);
+  background: var(--danger-soft);
+  color: var(--danger);
+  padding: 11px 12px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.field.field-error span {
+  color: var(--danger);
+}
+
+.field.field-error input,
+.field.field-error select,
+.field.field-error textarea {
+  border-color: var(--danger);
+  background: #fffafa;
+  box-shadow: 0 0 0 3px rgba(201, 52, 52, 0.1);
+}
+
+.related-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px 10px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px;
+}
+
+.related-row span {
+  grid-column: 1 / -1;
+  color: var(--muted-strong);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.related-row strong {
+  color: var(--text);
+  font-size: 13px;
+}
+
+.related-row button {
+  border: 0;
+  background: transparent;
+  color: #005fb2;
+  padding: 0;
+  font-size: 12px;
+}
+
+.detail-edit-button {
+  min-width: 150px;
+  min-height: 46px;
+  font-size: 15px;
+}
+
+.actions {
+  display: flex;
+  gap: 6px;
+}
+
+.icon-button {
+  width: 35px;
+  height: 35px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #ffffff;
+  color: #1c4f73;
+  transition: transform 150ms ease, background 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+
+.icon-button:hover {
+  transform: translateY(-1px);
+  border-color: rgba(11, 92, 171, 0.42);
+  background: #eaf4ff;
+}
+
+.link-cell {
+  border: 0;
+  background: transparent;
+  color: var(--primary);
+  font-weight: 800;
+  padding: 0;
+  text-align: left;
+}
+
+.link-cell:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
+.action-menu-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.row-action-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  z-index: 100;
+  width: 170px;
+  overflow: visible;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #ffffff;
+  box-shadow: var(--shadow);
+}
+
+.row-action-menu.menu-up {
+  top: auto;
+  bottom: calc(100% + 8px);
+}
+
+.row-action-menu hr {
+  height: 1px;
+  border: 0;
+  margin: 6px 0;
+  background: var(--border);
+}
+
+.row-action-menu button {
+  width: 100%;
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  background: #ffffff;
+  color: var(--text);
+  padding: 0 12px;
+  font-weight: 750;
+  text-align: left;
+}
+
+.row-action-menu button:hover {
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+
+.row-action-menu button.danger-menu-item {
+  color: var(--danger);
+}
+
+.row-action-menu button.danger-menu-item:hover {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.button.danger-outline {
+  color: var(--danger);
+  border-color: rgba(201, 52, 52, 0.45);
+}
+
+.button.danger-outline:hover {
+  border-color: var(--danger);
+  background: var(--danger-soft);
+  box-shadow: 0 10px 24px rgba(201, 52, 52, 0.12);
+}
+
+.table-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-raised);
+  box-shadow: var(--shadow-soft);
+  padding: 12px;
+}
+
+.bulk-actions,
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.bulk-actions span,
+.pagination span {
+  color: var(--muted-strong);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.pagination select {
+  min-height: 40px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #ffffff;
+  color: var(--text);
+  padding: 0 10px;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  transform: none;
+}
+
+.column-picker {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.column-picker label {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0 10px;
+  color: var(--muted-strong);
+  font-weight: 800;
+}
+
+.drawer {
+  position: fixed;
+  inset: 0 0 0 auto;
+  z-index: 30;
+  width: min(740px, 100vw);
+  overflow-y: auto;
+  border-left: 1px solid var(--border);
+  background: #ffffff;
+  box-shadow: -24px 0 70px rgba(28, 45, 72, 0.22);
+  padding: 26px;
+}
+
+.drawer::before {
+  content: "";
+  position: fixed;
+  inset: 0 min(740px, 100vw) 0 0;
+  z-index: -1;
+  background: rgba(16, 24, 40, 0.18);
+}
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.field {
+  display: grid;
+  gap: 7px;
+}
+
+.field.wide,
+.panel-actions.wide {
+  grid-column: span 2;
+}
+
+.field span {
+  color: var(--muted-strong);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #ffffff;
+  color: var(--text);
+  outline: 0;
+  padding: 11px 12px;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: rgba(34, 87, 201, 0.58);
+  box-shadow: 0 0 0 4px rgba(34, 87, 201, 0.1);
+}
+
+.panel-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.stack {
+  display: grid;
+  gap: 15px;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.detail-grid div,
+.detail-block {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-muted);
+  padding: 15px;
+}
+
+.detail-grid span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.detail-grid strong {
+  display: block;
+  margin-top: 5px;
+  color: var(--text);
+}
+
+.detail-block h4 {
+  margin-bottom: 6px;
+}
+
+.company-profile {
+  display: grid;
+  gap: 16px;
+}
+
+.profile-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.profile-metrics div {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #f8fbff;
+  padding: 14px;
+  text-align: center;
+}
+
+.profile-metrics span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.profile-metrics strong {
+  display: block;
+  margin-top: 6px;
+  color: var(--text);
+  font-size: 18px;
+}
+
+.small-table {
+  margin-top: 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.small-table th,
+.small-table td {
+  padding: 10px;
+  font-size: 13px;
+}
+
+.modal-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  background: rgba(16, 24, 40, 0.46);
+  padding: 16px;
+  backdrop-filter: blur(5px);
+}
+
+.modal {
+  width: min(520px, 100%);
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+  border: 1px solid rgba(255, 255, 255, 0.64);
+  border-radius: var(--radius);
+  background: #ffffff;
+  box-shadow: 0 28px 90px rgba(15, 23, 42, 0.32);
+  padding: 24px;
+}
+
+.modal .field {
+  margin-bottom: 12px;
+}
+
+.empty {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  padding: 48px 16px;
+  color: var(--muted);
+}
+
+.empty h3 {
+  color: var(--text);
+}
+
+@media (max-width: 1100px) {
+  .toolbar,
+  .lead-toolbar,
+  .payment-toolbar,
+  .summary-cards,
+  .stats-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .search {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 900px) {
+  .app {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    height: auto;
+    z-index: 20;
+    padding: 14px;
+  }
+
+  .sidebar h1 {
+    min-height: 44px;
+    margin-bottom: 12px;
+  }
+
+  .sidebar button {
+    width: calc(50% - 5px);
+    display: inline-flex;
+    margin-right: 5px;
+  }
+
+  .content {
+    padding: 20px;
+  }
+
+  .page-header {
+    align-items: flex-start;
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  h2 {
+    font-size: 30px;
+  }
+
+  .toolbar,
+  .lead-toolbar,
+  .summary-cards,
+  .payment-toolbar,
+  .stats-strip,
+  .form-grid,
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .search,
+  .field.wide,
+  .panel-actions.wide {
+    grid-column: span 1;
+  }
+}
+
+@media (max-width: 560px) {
+  .content {
+    padding: 14px;
+  }
+
+  .page-header,
+  .toolbar,
+  .drawer,
+  .modal {
+    padding: 18px;
+  }
+
+  .button {
+    width: 100%;
+  }
+
+  .panel-actions {
+    flex-direction: column-reverse;
+  }
+
+  .sidebar button {
+    width: 100%;
+  }
+}
+
+/* Unified CRM design system override */
+:root {
+  --bg: #eef3f8;
+  --bg-soft: #f7f9fc;
+  --surface: #ffffff;
+  --surface-muted: #f8fafc;
+  --surface-raised: rgba(255, 255, 255, 0.92);
+  --border: #d8e1ec;
+  --border-strong: #c4d0df;
+  --text: #152033;
+  --muted: #66758a;
+  --muted-strong: #48566b;
+  --primary: #2257c9;
+  --primary-hover: #173f9b;
+  --primary-soft: #eaf0ff;
+  --success: #0f8a5f;
+  --success-soft: #e8f7f0;
+  --danger: #c93434;
+  --danger-soft: #fdecec;
+  --warning: #a36100;
+  --warning-soft: #fff3db;
+  --shadow: 0 24px 70px rgba(28, 45, 72, 0.13);
+  --shadow-soft: 0 10px 28px rgba(28, 45, 72, 0.08);
+  --radius: 8px;
+}
+
+body {
+  color: var(--text);
+  background:
+    linear-gradient(135deg, rgba(34, 87, 201, 0.08), transparent 34%),
+    linear-gradient(180deg, #f8fbff 0%, #eef3f8 52%, #e9f0f7 100%);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.app {
+  grid-template-columns: 264px minmax(0, 1fr);
+}
+
+.sidebar {
+  background: linear-gradient(180deg, #101828 0%, #17223a 100%);
+  padding: 24px 16px;
+  box-shadow: 14px 0 34px rgba(16, 24, 40, 0.16);
+}
+
+.sidebar h1 {
+  width: auto;
+  min-height: 44px;
+  justify-content: flex-start;
+  gap: 12px;
+  margin-bottom: 26px;
+  padding: 0 10px;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 850;
+}
+
+.sidebar h1::before {
+  width: 12px;
+  height: 12px;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  background: #70e0b2;
+  clip-path: none;
+  box-shadow: 0 0 0 5px rgba(112, 224, 178, 0.14);
+}
+
+.sidebar button {
+  min-height: 46px;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 10px;
+  margin-bottom: 8px;
+  padding: 0 13px;
+  border-radius: var(--radius);
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.sidebar button svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2.35;
+}
+
+.sidebar-sales-icon {
+  width: 18px;
+  height: 18px;
+  border: 0;
+  border-radius: 0;
+}
+
+.sidebar-sales-icon::before {
+  inset: 0;
+}
+
+.sidebar button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.sidebar button.active {
+  background: #ffffff;
+  color: #152033;
+  border-color: #ffffff;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.16);
+}
+
+.sidebar button.active .sidebar-sales-icon::before {
+  filter: invert(1);
+}
+
+.content {
+  padding: 36px;
+}
+
+.page {
+  max-width: 1440px;
+  gap: 20px;
+}
+
+h2,
+.contacts-page .enhanced-heading,
+.companies-page .enhanced-heading {
+  color: var(--text);
+  font-weight: 850;
+}
+
+.page-header,
+.sf-list-panel,
+.drawer,
+.modal,
+.kanban-column,
+.detail-grid div,
+.detail-block,
+.profile-metrics div {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+}
+
+.button,
+.sf-action,
+.selected-bulk-actions button {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: var(--radius);
+  font-weight: 800;
+  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.button:hover,
+.sf-action:hover,
+.selected-bulk-actions button:hover {
+  transform: translateY(-1px);
+}
+
+.button.primary,
+.primary-action {
+  background: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+  box-shadow: 0 12px 24px rgba(34, 87, 201, 0.22);
+}
+
+.button.primary:hover,
+.primary-action:hover {
+  background: var(--primary-hover);
+}
+
+.button.secondary,
+.sf-action {
+  background: #ffffff;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.button.success {
+  background: var(--success);
+  color: #ffffff;
+}
+
+.button.danger,
+.bulk-delete,
+.recycle-selected {
+  background: var(--danger);
+  color: #ffffff;
+  border-color: var(--danger);
+}
+
+.icon-button,
+.salesforce-leads .icon-button {
+  width: 35px;
+  height: 35px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #ffffff;
+  color: var(--primary);
+}
+
+.icon-button svg {
+  width: 15px;
+  height: 15px;
+}
+
+.icon-button:hover,
+.salesforce-leads .icon-button:hover {
+  background: var(--primary-soft);
+  border-color: rgba(34, 87, 201, 0.38);
+}
+
+.search,
+.filter,
+.salesforce-leads .lead-toolbar .search,
+.salesforce-leads .lead-toolbar .filter {
+  min-height: 46px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.field input,
+.field select,
+.field textarea,
+.searchable-field input {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #ffffff;
+  padding: 11px 12px;
+}
+
+.field span,
+.searchable-field > span {
+  color: var(--muted-strong);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus,
+.search:focus-within,
+.filter:focus-within {
+  border-color: rgba(34, 87, 201, 0.58);
+  box-shadow: 0 0 0 4px rgba(34, 87, 201, 0.1);
+}
+
+.table-wrap,
+.salesforce-leads .table-wrap {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #ffffff;
+  box-shadow: var(--shadow-soft);
+  overflow: visible;
+}
+
+table,
+.salesforce-leads table {
+  background: #ffffff;
+}
+
+th,
+.salesforce-leads th {
+  background: #f1f6ff;
+  color: #24324a;
+  font-size: 12px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+td,
+.salesforce-leads td {
+  color: var(--muted-strong);
+  font-size: 14px;
+}
+
+th,
+td,
+.salesforce-leads th,
+.salesforce-leads td {
+  padding: 15px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+tbody tr:hover,
+.salesforce-leads tbody tr:hover {
+  background: #f8fbff;
+}
+
+.pill,
+.salesforce-leads .pill {
+  min-height: 26px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 2px 10px;
+  background: var(--primary-soft);
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 850;
+  text-transform: none;
+}
+
+.pill.high,
+.pill.lost,
+.pill.inactive,
+.pill.competitor,
+.pill.hot {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.pill.medium,
+.pill.contacted,
+.pill.qualified,
+.pill.warm,
+.pill.partially {
+  background: #fff7e6;
+  color: #b45309;
+}
+
+.pill.low,
+.pill.new,
+.pill.active,
+.pill.paid,
+.pill.converted,
+.pill.customer {
+  background: #e6fffb;
+  color: #0f766e;
+}
+
+.sort-indicator,
+.salesforce-leads .link-cell,
+.contacts-page .enhanced-heading,
+.companies-page .enhanced-heading {
+  color: #0f766e;
+}
+
+.contacts-page .enhanced-heading,
+.companies-page .enhanced-heading {
+  border-bottom-color: rgba(15, 118, 110, 0.42);
+}
+
+.bulk-cancel,
+.cancel-selected {
+  border-color: rgba(15, 118, 110, 0.38);
+  background: #e6fffb;
+  color: #0f766e;
+}
+
+.search-highlight {
+  background: #fff1b8;
+  color: #7c4a00;
+}
+
+.alert {
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+}
+
+@media (max-width: 900px) {
+  .app {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: relative;
+    height: auto;
+  }
+
+  .content {
+    padding: 20px;
+  }
+}
+
+/* Final sidebar branding: LeadFlow reference */
+.sidebar {
+  background: #0b1e33 !important;
+  padding: 24px 20px !important;
+}
+
+.sidebar::before {
+  display: none !important;
+  content: none !important;
+}
+
+.sidebar h1 {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 12px !important;
+  width: auto !important;
+  min-height: 60px !important;
+  margin: 0 0 26px !important;
+  padding: 0 0 24px !important;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.12) !important;
+  background: transparent !important;
+  color: #ffffff !important;
+  font-size: 25px !important;
+  font-weight: 850 !important;
+  letter-spacing: -0.045em !important;
+  line-height: 1 !important;
+}
+
+.sidebar h1::before,
+.sidebar h1::after {
+  display: none !important;
+  content: none !important;
+}
+
+.sidebar h1 > span:not(.sidebar-logo) {
+  color: #2f73c6 !important;
+}
+
+.sidebar-logo {
+  width: 58px !important;
+  height: 58px !important;
+  min-width: 58px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 18px !important;
+  background: #123154 !important;
+  color: #2f73c6 !important;
+  box-shadow: none !important;
+}
+
+.sidebar-logo svg {
+  width: 34px !important;
+  height: 34px !important;
+  color: #2f73c6 !important;
+  stroke: #2f73c6 !important;
+  stroke-width: 2.35 !important;
+}
+
+.sidebar-section-label {
+  margin: 0 0 10px 8px !important;
+  color: #6f8196 !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+}
+
+/* Final shared CRM button color */
+.button.primary,
+.primary-action,
+.sf-action:first-child,
+.leadflow-primary-action,
+.contacts-page .sf-actions .primary-action,
+.companies-page .sf-actions .primary-action,
+.salesforce-leads .sf-list-head .sf-action-strip .sf-action:first-child {
+  background: #1c4f73 !important;
+  border-color: #1c4f73 !important;
+  color: #ffffff !important;
+}
+
+.button.primary:hover,
+.primary-action:hover,
+.sf-action:first-child:hover,
+.leadflow-primary-action:hover,
+.contacts-page .sf-actions .primary-action:hover,
+.companies-page .sf-actions .primary-action:hover,
+.salesforce-leads .sf-list-head .sf-action-strip .sf-action:first-child:hover {
+  background: #163f5c !important;
+  border-color: #163f5c !important;
+  color: #ffffff !important;
+}
+
+/* Final shared CRM button color */
+.button.primary,
+.primary-action,
+.sf-action:first-child,
+.leadflow-primary-action,
+.contacts-page .sf-actions .primary-action,
+.companies-page .sf-actions .primary-action,
+.salesforce-leads .sf-list-head .sf-action-strip .sf-action:first-child {
+  background: #1c4f73 !important;
+  border-color: #1c4f73 !important;
+  color: #ffffff !important;
+}
+
+.button.primary:hover,
+.primary-action:hover,
+.sf-action:first-child:hover,
+.leadflow-primary-action:hover,
+.contacts-page .sf-actions .primary-action:hover,
+.companies-page .sf-actions .primary-action:hover,
+.salesforce-leads .sf-list-head .sf-action-strip .sf-action:first-child:hover {
+  background: #163f5c !important;
+  border-color: #163f5c !important;
+  color: #ffffff !important;
+}
+
+/* Shared CRM button color */
+.button.primary,
+.primary-action,
+.sf-action:first-child,
+.leadflow-primary-action,
+.contacts-page .sf-actions .primary-action,
+.companies-page .sf-actions .primary-action,
+.salesforce-leads .sf-list-head .sf-action-strip .sf-action:first-child {
+  background: #1c4f73 !important;
+  border-color: #1c4f73 !important;
+  color: #ffffff !important;
+}
+
+.button.primary:hover,
+.primary-action:hover,
+.sf-action:first-child:hover,
+.leadflow-primary-action:hover,
+.contacts-page .sf-actions .primary-action:hover,
+.companies-page .sf-actions .primary-action:hover,
+.salesforce-leads .sf-list-head .sf-action-strip .sf-action:first-child:hover {
+  background: #163f5c !important;
+  border-color: #163f5c !important;
+  color: #ffffff !important;
+}
+
+/* LeadFlow-style Leads header */
+.leads-page.salesforce-leads .sf-list-head {
+  position: relative !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  align-items: start !important;
+  gap: 28px 24px !important;
+  margin: 0 24px !important;
+  padding: 36px 38px 32px !important;
+  border: 0 !important;
+  border-radius: 30px 30px 0 0 !important;
+  background: #ffffff !important;
+  box-shadow: none !important;
+}
+
+.leadflow-head-main {
+  position: relative;
+  min-width: 0;
+}
+
+.leadflow-title-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.leadflow-object-icon {
+  width: auto;
+  height: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 0.6rem;
+  border-radius: 14px;
+  background: #eef2ff;
+  color: #2f73c6;
+}
+
+.leadflow-object-icon i {
+  color: #2f73c6;
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.leadflow-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  background: transparent;
+  color: #102033;
+  padding: 0;
+  font-size: 36px;
+  font-weight: 850;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.leadflow-title:hover {
+  color: #1f5edc;
+}
+
+.leadflow-count,
+.leadflow-date-pill {
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  background: #edf2f8;
+  color: #617186;
+  padding: 4px 18px;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.leadflow-head-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.leadflow-outline-action,
+.leadflow-primary-action,
+.leadflow-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border-radius: 999px;
+  border: 1px solid #dce4ef;
+  min-height: 42px;
+  padding: 0 22px;
+  background: #ffffff;
+  color: #1f2d40;
+  font-size: 16px;
+  font-weight: 750;
+  line-height: 1;
+  transition: background 140ms ease, border-color 140ms ease, color 140ms ease, transform 140ms ease;
+}
+
+.leadflow-outline-action:hover,
+.leadflow-chip:hover {
+  background: #f4f7fb;
+  border-color: #c9d5e4;
+}
+
+.leadflow-primary-action {
+  border-color: #1c4f73;
+  background: #1c4f73;
+  color: #ffffff;
+}
+
+.leadflow-primary-action:hover {
+  background: #163f5c;
+  border-color: #163f5c;
+  transform: translateY(-1px);
+}
+
+.leadflow-filter-row {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.leadflow-chip-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.leadflow-chip {
+  min-width: 118px;
+  min-height: 36px;
+  padding: 0 20px;
+  background: #f8fafd;
+  font-size: 16px;
+}
+
+.leadflow-chip > span {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.leadflow-chip.active {
+  background: #1c4f73;
+  border-color: #1c4f73;
+  color: #ffffff;
+}
+
+.leadflow-chip.active-soft {
+  background: #eef3ff;
+  border-color: #d9e4ff;
+  color: #245bd7;
+}
+
+.leadflow-date-pill {
+  min-height: 30px;
+  padding: 5px 22px;
+  font-size: 17px;
+}
+
+.leadflow-date-pill svg {
+  color: #1c4f73;
+}
+
+.leads-page .sf-list-view-menu {
+  top: 62px;
+  left: 0;
+}
+
+@media (max-width: 1100px) {
+  .leads-page.salesforce-leads .sf-list-head {
+    grid-template-columns: 1fr !important;
+  }
+
+  .leadflow-head-actions,
+  .leadflow-filter-row {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+}
+
+/* Final LeadFlow sidebar brand override */
+.sidebar h1 {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 12px !important;
+  width: auto !important;
+  min-height: 58px !important;
+  margin: 0 0 24px !important;
+  padding: 0 !important;
+  background: transparent !important;
+  color: #ffffff !important;
+  font-size: 25px !important;
+  font-weight: 850 !important;
+  letter-spacing: -0.04em !important;
+  line-height: 1 !important;
+}
+
+.sidebar h1::before,
+.sidebar h1::after {
+  display: none !important;
+  content: none !important;
+}
+
+.sidebar h1 > span:not(.sidebar-logo) {
+  color: #2f73c6 !important;
+}
+
+.sidebar-logo {
+  width: 58px !important;
+  height: 58px !important;
+  min-width: 58px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 18px !important;
+  background: #132b49 !important;
+  color: #2f73c6 !important;
+  box-shadow: none !important;
+}
+
+.sidebar-logo svg {
+  width: 34px !important;
+  height: 34px !important;
+  color: #2f73c6 !important;
+  stroke: #2f73c6 !important;
+  stroke-width: 2.35 !important;
+}
+
+/* Companies type/rating badges use the same calm badge language as Leads. */
+.companies-page.salesforce-leads .pill {
+  min-height: 24px !important;
+  border-radius: 999px !important;
+  padding: 2px 10px !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  background: #dbeafe !important;
+  color: #245f9e !important;
+}
+
+.companies-page.salesforce-leads .pill.customer {
+  background: #d1fae5 !important;
+  color: #047857 !important;
+}
+
+.companies-page.salesforce-leads .pill.prospect {
+  background: #dbeafe !important;
+  color: #245f9e !important;
+}
+
+.companies-page.salesforce-leads .pill.partner,
+.companies-page.salesforce-leads .pill.warm {
+  background: #fef3c7 !important;
+  color: #b45309 !important;
+}
+
+.companies-page.salesforce-leads .pill.competitor,
+.companies-page.salesforce-leads .pill.hot {
+  background: #ffe4e6 !important;
+  color: #be123c !important;
+}
+
+.companies-page.salesforce-leads .pill.other,
+.companies-page.salesforce-leads .pill.none,
+.companies-page.salesforce-leads .pill.cold {
+  background: #f1f5f9 !important;
+  color: #475569 !important;
+}
+
+/* Unified search focus color across all pages. */
+.search:focus-within,
+.salesforce-leads .lead-toolbar .search:focus-within {
+  border-color: #a2c1d6 !important;
+  background: #ffffff !important;
+  box-shadow: 0 0 0 4px rgba(162, 193, 214, 0.28) !important;
+}
+
+.search input:focus,
+.salesforce-leads .lead-toolbar .search input:focus {
+  outline: none !important;
+}
+
+.search input:focus-visible,
+.salesforce-leads .lead-toolbar .search input:focus-visible {
+  outline: none !important;
+}
+
+/* Replace remaining green active/focus UI states with the shared soft blue. */
+:root {
+  --focus-blue: #a2c1d6;
+  --focus-blue-soft: rgba(162, 193, 214, 0.3);
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+.icon-button:focus-visible,
+.sf-action:focus-visible,
+.sf-filter-toggle:focus-visible {
+  outline: 3px solid var(--focus-blue-soft) !important;
+  outline-offset: 2px !important;
+}
+
+.search:focus-within,
+.filter:focus-within,
+.searchable-filter:focus-within,
+.field input:focus,
+.field select:focus,
+.field textarea:focus,
+.salesforce-leads .lead-toolbar .search:focus-within,
+.salesforce-leads .lead-toolbar .filter:focus-within {
+  border-color: var(--focus-blue) !important;
+  box-shadow: 0 0 0 4px var(--focus-blue-soft) !important;
+}
+
+.salesforce-leads .sf-filter-toggle.active,
+.payment-list-toolbar .sf-filter-toggle.active,
+.pipeline-toolbar .sf-filter-toggle.active {
+  background: var(--focus-blue) !important;
+  border-color: var(--focus-blue) !important;
+  color: #0f172a !important;
+}
+
+input[type="checkbox"] {
+  accent-color: var(--focus-blue) !important;
+}
+
+.selected-bulk-icon {
+  background: var(--focus-blue) !important;
+  color: #0f172a !important;
+  box-shadow: none !important;
+}
+
+.cancel-selected {
+  border-color: var(--focus-blue) !important;
+  background: rgba(162, 193, 214, 0.18) !important;
+  color: #0f172a !important;
+}
+
+.field.searchable-filter,
+.sf-filter-card.searchable-filter,
+.sf-filter-card-inner.searchable-filter {
+  position: relative !important;
+  overflow: visible !important;
+}
+
+.sf-filter-card-inner.searchable-filter {
+  display: grid !important;
+  gap: 8px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+.field.searchable-filter input,
+.sf-filter-card.searchable-filter input,
+.sf-filter-card-inner.searchable-filter input {
+  width: 100% !important;
+  cursor: text !important;
+}
+
+.searchable-filter .filter-menu {
+  z-index: 9999 !important;
+  max-height: 220px !important;
+  overflow-y: auto !important;
+  border-color: #a2c1d6 !important;
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.14) !important;
+}
+
+.searchable-filter .filter-menu button:hover {
+  background: rgba(162, 193, 214, 0.22) !important;
+  color: #0f172a !important;
+}
+
+/* Contacts heading typography must match the Sales/Leads page exactly. */
+.contacts-page.salesforce-leads .sf-title-wrap p {
+  color: var(--color-muted) !important;
+  font-size: 13px !important;
+  line-height: 1 !important;
+  font-weight: 500 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+.contacts-page.salesforce-leads .sf-list-title {
+  color: var(--color-heading) !important;
+  font-family: Sora, Manrope, ui-sans-serif, system-ui, sans-serif !important;
+  font-size: 26px !important;
+  line-height: 1.15 !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  margin-top: 4px !important;
+  padding: 0 0 8px !important;
+  border: 0 !important;
+  border-bottom: 1px solid #747474 !important;
+  background: transparent !important;
+}
+
+.contacts-page.salesforce-leads .sf-list-head {
+  margin: 0 !important;
+  padding: 26px !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: var(--radius-panel) !important;
+  background: var(--color-card) !important;
+  box-shadow: var(--shadow-panel) !important;
+}
+
+.contacts-page.salesforce-leads .sf-list-head .sf-title-wrap {
+  margin-left: -2px !important;
+}
+
+.contacts-page.salesforce-leads .sf-title-wrap p {
+  transform: translateY(-2px) !important;
+}
+
+/* Payments status badges match the Sales/Leads badge style. */
+.salesforce-payments .pill {
+  min-height: 24px !important;
+  border-radius: 999px !important;
+  padding: 2px 10px !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+}
+
+.salesforce-payments .pill.paid {
+  background: #d1fae5 !important;
+  color: #047857 !important;
+}
+
+.salesforce-payments .pill.partially {
+  background: #fef3c7 !important;
+  color: #b45309 !important;
+}
+
+.salesforce-payments .pill.unpaid {
+  background: #fee2e2 !important;
+  color: #b91c1c !important;
+}
+
+/* Keep search bars and toolbar icons aligned together from the right on every page. */
+.salesforce-leads .lead-toolbar,
+.salesforce-pipeline .pipeline-toolbar,
+.salesforce-payments .payment-list-toolbar,
+.contacts-page .lead-toolbar,
+.companies-page .lead-toolbar {
+  justify-content: flex-end !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.salesforce-leads .lead-toolbar .search {
+  flex: 0 0 448px !important;
+  width: 448px !important;
+  max-width: min(448px, 100%) !important;
+}
+
+.salesforce-leads .lead-toolbar .icon-button,
+.salesforce-leads .sf-filter-toggle {
+  flex: 0 0 40px !important;
+}
+
+.stage-management tbody tr.clickable-row {
+  cursor: pointer;
+}
+
+.stage-management tbody tr.clickable-row:hover {
+  background: #f8fbff;
+}
+
+.compact-button {
+  min-height: 35px !important;
+  height: 35px !important;
+  padding: 0 12px !important;
+  border-radius: var(--radius-control) !important;
+  font-size: 12px !important;
+  white-space: nowrap;
+}
+
+.form-choice-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.choice-card {
+  display: grid;
+  gap: 8px;
+  min-height: 118px;
+  padding: 18px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-panel);
+  background: #ffffff;
+  color: var(--color-body);
+  text-align: left;
+  transition: border-color 150ms ease, background 150ms ease, transform 150ms ease;
+}
+
+.choice-card:hover {
+  border-color: #a2c1d6;
+  background: #f8fbff;
+  transform: translateY(-1px);
+}
+
+.choice-card strong {
+  color: var(--color-heading);
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.choice-card span {
+  color: var(--color-muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.custom-builder {
+  display: grid;
+  gap: 16px;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--color-border);
+}
+
+.custom-builder .form-grid {
+  grid-template-columns: minmax(180px, 1.4fr) minmax(150px, 1fr) minmax(130px, 0.8fr) auto !important;
+  align-items: end;
+}
+
+.custom-builder .form-grid .panel-actions {
+  grid-column: auto !important;
+  align-self: end;
+  margin: 0;
+}
+
+.custom-builder .form-grid .panel-actions .button {
+  min-height: 42px;
+  white-space: nowrap;
+}
+
+.custom-builder .custom-field-grid {
+  grid-template-columns: minmax(220px, 1fr) minmax(220px, 1fr) minmax(160px, auto) !important;
+  grid-template-areas:
+    "fieldName dataType spacer"
+    "required empty addField" !important;
+  align-items: start !important;
+  column-gap: 18px !important;
+  row-gap: 14px !important;
+}
+
+.custom-field-grid > :nth-child(1) {
+  grid-area: fieldName;
+  align-self: start !important;
+}
+
+.custom-field-grid > :nth-child(2) {
+  grid-area: dataType;
+  align-self: start !important;
+}
+
+.custom-field-grid > :nth-child(3) {
+  grid-area: required;
+}
+
+.custom-field-grid > :nth-child(4) {
+  grid-area: addField;
+  justify-self: end;
+  align-self: end;
+}
+
+.custom-field-grid > :nth-child(4) .button {
+  min-width: 150px;
+}
+
+.field-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.field-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 3px 10px;
+  border: 1px solid #a2c1d6;
+  border-radius: 999px;
+  background: rgba(162, 193, 214, 0.18);
+  color: #0f172a;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.custom-fields-table {
+  display: grid;
+  gap: 8px;
+}
+
+.custom-field-row,
+.empty-field-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 54px;
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-control);
+  background: #f8fafc;
+}
+
+.custom-field-row > div:first-child {
+  display: grid;
+  gap: 3px;
+}
+
+.custom-field-row strong {
+  color: var(--color-heading);
+  font-size: 13.5px;
+  font-weight: 800;
+}
+
+.custom-field-row span,
+.empty-field-row {
+  color: var(--color-muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.opportunity-stage-page {
+  overflow-x: auto !important;
+}
+
+.generated-page-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--color-border);
+  background: #ffffff;
+}
+
+.generated-page-head span:first-child {
+  color: var(--color-muted);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.generated-page-head h3 {
+  margin: 4px 0 0;
+  color: var(--color-heading);
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.custom-builder-page {
+  padding: 24px !important;
+}
+
+.custom-builder-page .custom-builder {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.standard-preview-form {
+  padding: 0 !important;
+}
+
+.standard-preview-form input[readonly],
+.standard-preview-form textarea[readonly] {
+  background: #f8fafc !important;
+  color: var(--color-muted) !important;
+  cursor: default;
+}
+
+@media (max-width: 700px) {
+  .form-choice-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .custom-builder .form-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .custom-builder .custom-field-grid {
+    grid-template-areas:
+      "fieldName"
+      "dataType"
+      "required"
+      "addField" !important;
+  }
+
+  .custom-builder .form-grid .panel-actions {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+.stage-form-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  align-items: start;
+}
+
+.stage-form-grid .panel-actions {
+  grid-column: 1 / -1 !important;
+}
+
+@media (max-width: 700px) {
+  .stage-form-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Row action menus open downward and stay visible on all pages. */
+.sf-list-panel,
+.table-wrap,
+.salesforce-leads .sf-list-panel,
+.salesforce-leads .table-wrap,
+.opportunity-stage-page {
+  overflow: visible !important;
+}
+
+.action-menu-wrap {
+  position: relative !important;
+  overflow: visible !important;
+  z-index: 20;
+}
+
+.action-menu-wrap:has(.row-action-menu) {
+  z-index: 10000;
+}
+
+.row-action-menu,
+.row-action-menu.menu-up {
+  top: calc(100% + 8px) !important;
+  bottom: auto !important;
+  z-index: 10000 !important;
+}
+
+.companies-page .sf-list-head .sf-actions {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 10px !important;
+}
+
+.companies-page .sf-list-head .sf-actions .sf-action {
+  min-height: 42px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.companies-page .sf-list-head .sf-actions .back-action::before,
+.salesforce-pipeline .sf-list-head .sf-action.back-action::before {
+  content: none !important;
+  display: none !important;
+}
+
+.companies-page .sf-list-head .sf-actions .back-action {
+  background: #1c4f73 !important;
+  border-color: #1c4f73 !important;
+  color: #ffffff !important;
+}
+
+.companies-page .sf-list-head .sf-actions .back-action svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+.companies-page .sf-list-head .sf-actions .back-action:hover {
+  background: #153d59 !important;
+  border-color: #153d59 !important;
+  color: #ffffff !important;
+}
+
+.sf-object-icon,
+.salesforce-leads .sf-object-icon,
+.contacts-icon,
+.companies-icon,
+.pipeline-icon,
+.payment-icon {
+  background: #2f80b7 !important;
+  background-image: none !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 22px rgba(47, 128, 183, 0.18) !important;
+}
+
+/* Pasted Lead dashboard visual style, scoped to Leads only. */
+.leads-page.salesforce-leads {
+  gap: 18px !important;
+}
+
+.leads-page.salesforce-leads .sf-list-head,
+.leads-page.salesforce-leads .sf-list-panel {
+  border: 1px solid #ecf1f7 !important;
+  border-radius: 28px !important;
+  background: #ffffff !important;
+  box-shadow: 0 8px 30px -8px rgba(0, 20, 30, 0.08) !important;
+}
+
+.leads-page.salesforce-leads .sf-list-head {
+  padding: 28px 32px !important;
+}
+
+.leads-page.salesforce-leads .sf-title-wrap {
+  gap: 12px !important;
+}
+
+.leads-page.salesforce-leads .sf-object-icon {
+  width: 46px !important;
+  height: 46px !important;
+  border-radius: 14px !important;
+  background: #eef2ff !important;
+  color: #2f73c6 !important;
+  box-shadow: none !important;
+}
+
+.leads-page.salesforce-leads .sf-object-icon span::before,
+.leads-page.salesforce-leads .sf-object-icon span::after {
+  background: #2f73c6 !important;
+}
+
+.leads-page.salesforce-leads .sf-title-wrap p {
+  color: #64748b !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+.leads-page.salesforce-leads .sf-list-title {
+  color: #0b1e33 !important;
+  font-family: Inter, Manrope, ui-sans-serif, system-ui, sans-serif !important;
+  font-size: 27px !important;
+  font-weight: 700 !important;
+  line-height: 1.12 !important;
+  border-bottom-color: #94a3b8 !important;
+}
+
+.leads-page.salesforce-leads .sf-pin {
+  display: none !important;
+}
+
+.leads-page.salesforce-leads .sf-action {
+  min-height: 38px !important;
+  border-radius: 999px !important;
+  border-color: #e2e8f0 !important;
+  background: #ffffff !important;
+  color: #1e293b !important;
+  font-family: Inter, Manrope, ui-sans-serif, system-ui, sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  box-shadow: none !important;
+}
+
+.leads-page.salesforce-leads .sf-action:first-child {
+  background: #1c4f73 !important;
+  border-color: #1c4f73 !important;
+  color: #ffffff !important;
+}
+
+.leads-page.salesforce-leads .lead-toolbar {
+  justify-content: flex-end !important;
+  gap: 8px !important;
+}
+
+.leads-page.salesforce-leads .lead-toolbar .search,
+.leads-page.salesforce-leads .lead-toolbar .icon-button,
+.leads-page.salesforce-leads .sf-filter-toggle {
+  min-height: 40px !important;
+  border-radius: 12px !important;
+  border-color: #e2e8f0 !important;
+  background: #ffffff !important;
+  box-shadow: 0 8px 24px -16px rgba(15, 23, 42, 0.24) !important;
+}
+
+.leads-page.salesforce-leads .lead-toolbar .search {
+  flex: 0 0 420px !important;
+  width: 420px !important;
+}
+
+.leads-page.salesforce-leads .sf-list-panel {
+  margin: 0 !important;
+  overflow: visible !important;
+}
+
+.leads-page.salesforce-leads .table-wrap {
+  border-radius: 28px !important;
+  overflow: visible !important;
+}
+
+.leads-page.salesforce-leads th {
+  height: 48px !important;
+  background: #fafcff !important;
+  color: #334155 !important;
+  font-family: Inter, Manrope, ui-sans-serif, system-ui, sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em !important;
+}
+
+.leads-page.salesforce-leads td {
+  height: 58px !important;
+  color: #1e293b !important;
+  font-family: Inter, Manrope, ui-sans-serif, system-ui, sans-serif !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+  border-bottom-color: #f0f4fa !important;
+}
+
+.leads-page.salesforce-leads tbody tr:hover {
+  background: #fafdff !important;
+}
+
+.leads-page.salesforce-leads .link-cell {
+  color: #2f73c6 !important;
+  font-weight: 700 !important;
+}
+
+.leads-page.salesforce-leads td:has(.link-cell) .link-cell:first-child {
+  border-radius: 999px !important;
+  background: #eef2ff !important;
+  padding: 3px 10px !important;
+  font-size: 12px !important;
+}
+
+.leads-page.salesforce-leads .pill {
+  min-height: 24px !important;
+  border-radius: 999px !important;
+  padding: 2px 11px !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+}
+
+.leads-page.salesforce-leads .pill.high {
+  background: #fef2f2 !important;
+  color: #b91c1c !important;
+}
+
+.leads-page.salesforce-leads .pill.medium,
+.leads-page.salesforce-leads .pill.contacted {
+  background: #fffbeb !important;
+  color: #b45309 !important;
+}
+
+.leads-page.salesforce-leads .pill.low {
+  background: #f0fdf4 !important;
+  color: #15803d !important;
+}
+
+.leads-page.salesforce-leads .pill.qualified {
+  background: #e6f7ed !important;
+  color: #0b6b3d !important;
+}
+
+.leads-page.salesforce-leads .pill.new {
+  background: #e0f2fe !important;
+  color: #0369a1 !important;
+}
+
+/* Global LeadFlow visual theme. Functionality and page structure stay unchanged. */
+:root {
+  --lf-bg: #f1f5f9;
+  --lf-sidebar: #0b1e33;
+  --lf-sidebar-soft: #132b49;
+  --lf-blue: #2f73c6;
+  --lf-blue-soft: #eef2ff;
+  --lf-text: #1e293b;
+  --lf-heading: #0b1e33;
+  --lf-muted: #64748b;
+  --lf-border: #e2e8f0;
+  --lf-border-soft: #ecf1f7;
+  --lf-card-shadow: 0 8px 30px -8px rgba(0, 20, 30, 0.08);
+}
+
+body,
+#root {
+  background: var(--lf-bg) !important;
+  font-family: Inter, Manrope, ui-sans-serif, system-ui, sans-serif !important;
+  color: var(--lf-text) !important;
+}
+
+.app {
+  background: var(--lf-bg) !important;
+}
+
+.sidebar {
+  width: 260px !important;
+  background: var(--lf-sidebar) !important;
+  padding: 28px 20px !important;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+.sidebar h1 {
+  min-height: 76px !important;
+  margin: 0 0 28px !important;
+  padding: 0 0 24px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+  color: #ffffff !important;
+  font-size: 24px !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.03em !important;
+}
+
+.sidebar h1 > span:not(.sidebar-logo) {
+  color: #2f73c6 !important;
+}
+
+.sidebar-logo {
+  width: 58px !important;
+  height: 58px !important;
+  border-radius: 18px !important;
+  background: #132b49 !important;
+  color: #2f73c6 !important;
+  box-shadow: none !important;
+}
+
+.sidebar-logo svg {
+  width: 28px !important;
+  height: 28px !important;
+  color: #2f73c6 !important;
+  stroke: #2f73c6 !important;
+}
+
+.sidebar button {
+  min-height: 49px !important;
+  margin: 0 0 6px !important;
+  padding: 0 12px !important;
+  border-radius: 12px !important;
+  color: #cbd5e1 !important;
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  gap: 14px !important;
+  background: transparent !important;
+  border: 0 !important;
+}
+
+.sidebar button svg {
+  color: #94a3b8 !important;
+  stroke: #94a3b8 !important;
+}
+
+.sidebar button:hover,
+.sidebar button.active {
+  background: rgba(96, 165, 250, 0.12) !important;
+  color: #ffffff !important;
+}
+
+.sidebar button:hover svg,
+.sidebar button.active svg {
+  color: #2f73c6 !important;
+  stroke: #2f73c6 !important;
+}
+
+.content {
+  background: var(--lf-bg) !important;
+  padding: 32px 38px 44px !important;
+}
+
+.topbar {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--lf-muted) !important;
+  padding: 0 !important;
+  margin-bottom: 22px !important;
+}
+
+.topbar span {
+  color: var(--lf-heading) !important;
+  font-weight: 700 !important;
+}
+
+.salesforce-leads {
+  gap: 18px !important;
+}
+
+.salesforce-leads .sf-list-head,
+.salesforce-leads .sf-list-panel,
+.table-wrap,
+.modal,
+.drawer {
+  border: 1px solid var(--lf-border-soft) !important;
+  border-radius: 28px !important;
+  background: #ffffff !important;
+  box-shadow: var(--lf-card-shadow) !important;
+}
+
+.salesforce-leads .sf-list-head {
+  padding: 28px 32px !important;
+}
+
+.contacts-page.salesforce-leads .sf-list-head {
+  padding: 26px !important;
+}
+
+.companies-page.salesforce-leads .sf-list-head {
+  padding: 24px !important;
+}
+
+.sf-object-icon,
+.salesforce-leads .sf-object-icon,
+.contacts-icon,
+.companies-icon,
+.pipeline-icon,
+.payment-icon {
+  width: 46px !important;
+  height: 46px !important;
+  border-radius: 14px !important;
+  background: var(--lf-blue-soft) !important;
+  color: var(--lf-blue) !important;
+  box-shadow: none !important;
+}
+
+.sf-object-icon span::before,
+.sf-object-icon span::after,
+.salesforce-leads .sf-object-icon span::before,
+.salesforce-leads .sf-object-icon span::after {
+  background: var(--lf-blue) !important;
+}
+
+.companies-icon {
+  background: var(--lf-blue) !important;
+  color: #ffffff !important;
+}
+
+.sf-title-wrap p,
+.salesforce-leads .sf-title-wrap p {
+  color: var(--lf-muted) !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
+}
+
+.sf-list-title,
+.salesforce-leads .sf-list-title,
+.enhanced-heading {
+  color: var(--lf-heading) !important;
+  font-family: Inter, Manrope, ui-sans-serif, system-ui, sans-serif !important;
+  font-size: 28px !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.03em !important;
+  border-bottom-color: #94a3b8 !important;
+}
+
+.sf-action,
+.button,
+.primary-action {
+  border-radius: 999px !important;
+  min-height: 42px !important;
+  padding: 0 18px !important;
+  font-family: Inter, Manrope, ui-sans-serif, system-ui, sans-serif !important;
+  font-weight: 700 !important;
+}
+
+.sf-action:first-child,
+.button.primary,
+.button.success,
+.primary-action,
+.companies-page .sf-list-head .sf-actions .back-action {
+  background: var(--lf-blue) !important;
+  border-color: var(--lf-blue) !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+}
+
+.sf-action:not(:first-child),
+.button.secondary {
+  background: #ffffff !important;
+  border-color: var(--lf-border) !important;
+  color: var(--lf-text) !important;
+}
+
+.lead-toolbar .search,
+.salesforce-leads .lead-toolbar .search,
+.lead-toolbar .icon-button,
+.salesforce-leads .lead-toolbar .icon-button,
+.sf-filter-toggle {
+  border-radius: 12px !important;
+  border-color: var(--lf-border) !important;
+  background: #ffffff !important;
+  box-shadow: 0 8px 24px -16px rgba(15, 23, 42, 0.24) !important;
+}
+
+.sf-list-panel {
+  margin: 0 !important;
+}
+
+.salesforce-leads th {
+  height: 48px !important;
+  background: #fafcff !important;
+  color: #334155 !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.04em !important;
+}
+
+.salesforce-leads td {
+  height: 58px !important;
+  color: var(--lf-text) !important;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  border-bottom-color: #f0f4fa !important;
+}
+
+.salesforce-leads tbody tr:hover {
+  background: #fafdff !important;
+}
+
+.salesforce-leads .link-cell {
+  color: var(--lf-blue) !important;
+  font-weight: 800 !important;
+}
+
+.salesforce-leads .pill {
+  border-radius: 999px !important;
+  font-weight: 800 !important;
+}
+
+.row-action-menu {
+  border-color: var(--lf-border) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 18px 44px rgba(15, 23, 42, 0.16) !important;
+}
+
+.companies-page .sf-title-block {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+}
+
+.companies-page .sf-title-block .companies-icon {
+  width: 44px !important;
+  height: 44px !important;
+  flex: 0 0 44px !important;
+  border-radius: 9px !important;
+  background: #2f80b7 !important;
+  background-image: none !important;
+  color: #ffffff !important;
+}
+
+.companies-page .sf-title-block > div:not(.companies-icon) {
+  display: grid !important;
+  gap: 2px !important;
+}
+
+.companies-page.salesforce-leads .sf-list-head {
+  margin: 0 !important;
+  padding: 24px !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: var(--radius-panel) !important;
+  background: var(--color-card) !important;
+  box-shadow: var(--shadow-panel) !important;
+}
+
+/* True final override: Contacts header identical to Leads header */
+.contacts-page.salesforce-leads .sf-list-head {
+  margin: 0 !important;
+  padding: 26px !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: var(--radius-panel) !important;
+  background: var(--color-card) !important;
+  box-shadow: var(--shadow-panel) !important;
+}
+
+/* True final selected row color */
+tbody tr.selected-row,
+tbody tr.selected-row:hover,
+.salesforce-leads tbody tr.selected-row,
+.salesforce-leads tbody tr.selected-row:hover {
+  background: #a2c1d6 !important;
+}
+
+.companies-page.salesforce-leads .link-cell {
+  color: var(--ui-text) !important;
+  font-weight: 700 !important;
+}
+
+.companies-page.salesforce-leads .table-link {
+  color: var(--ui-muted) !important;
+  font-weight: 400 !important;
+}
+
+/* Contacts status badges follow Leads status palette */
+.contacts-page.salesforce-leads .pill.active {
+  background: #d1fae5 !important;
+  color: #047857 !important;
+}
+
+.contacts-page.salesforce-leads .pill.inactive {
+  background: #fee2e2 !important;
+  color: #b91c1c !important;
+}
+
+.contacts-page.salesforce-leads .pill {
+  min-height: 24px !important;
+  border-radius: 999px !important;
+  padding: 2px 10px !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+}
+
+tbody tr.selected-row,
+tbody tr.selected-row:hover,
+.salesforce-leads tbody tr.selected-row,
+.salesforce-leads tbody tr.selected-row:hover {
+  background: #a2c1d6 !important;
+}
+
+/* Final action icon color */
+.icon-button,
+.salesforce-leads .icon-button,
+.row-menu-actions .icon-button,
+.action-menu-wrap .icon-button,
+.contacts-page .pin-button,
+.companies-page .pin-button,
+.sf-filter-toggle,
+.salesforce-leads .sf-filter-toggle {
+  color: #1c4f73 !important;
+}
+
+.icon-button svg,
+.salesforce-leads .icon-button svg,
+.row-menu-actions .icon-button svg,
+.action-menu-wrap .icon-button svg,
+.sf-filter-toggle svg,
+.salesforce-leads .sf-filter-toggle svg {
+  color: #1c4f73 !important;
+  stroke: #1c4f73 !important;
+}
+
+.icon-button:hover,
+.salesforce-leads .icon-button:hover,
+.row-menu-actions .icon-button:hover,
+.action-menu-wrap .icon-button:hover,
+.sf-filter-toggle:hover,
+.salesforce-leads .sf-filter-toggle:hover {
+  color: #1c4f73 !important;
+}
+
+/* Calm SaaS Leads theme: navy + emerald */
+:root {
+  --crm-bg: #f8fafc;
+  --crm-card: #ffffff;
+  --crm-sidebar: #0b1e33;
+  --crm-sidebar-2: #0b1e33;
+  --crm-sidebar-text: #cbd5e1;
+  --crm-sidebar-muted: #94a3b8;
+  --crm-heading: #0f172a;
+  --crm-body: #334155;
+  --crm-muted: #64748b;
+  --crm-border: #e2e8f0;
+  --crm-border-soft: #f1f5f9;
+  --crm-surface-muted: #f8fafc;
+  --crm-emerald: #10b981;
+  --crm-emerald-hover: #059669;
+  --crm-emerald-soft: rgba(16, 185, 129, 0.12);
+  --crm-blue-soft: #dbeafe;
+  --crm-blue-text: #245f9e;
+  --crm-rose-soft: #ffe4e6;
+  --crm-rose-text: #be123c;
+  --crm-amber-soft: #fef3c7;
+  --crm-amber-text: #b45309;
+  --crm-slate-soft: #f1f5f9;
+  --crm-slate-text: #475569;
+  --crm-violet-soft: #ede9fe;
+  --crm-violet-text: #6d5d8f;
+  --crm-radius-card: 0.5rem;
+  --crm-radius-control: 0.5rem;
+  --crm-radius-small: 0.375rem;
+  --crm-shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+}
+
+body {
+  background: var(--crm-bg);
+  color: var(--crm-body);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.app {
+  grid-template-columns: 240px minmax(0, 1fr);
+}
+
+.sidebar {
+  width: 240px;
+  background: var(--crm-sidebar);
+  color: var(--crm-sidebar-text);
+  padding: 20px 12px;
+  box-shadow: none;
+}
+
+.sidebar h1 {
+  width: auto;
+  min-height: 42px;
+  justify-content: flex-start;
+  gap: 10px;
+  margin: 0 0 18px;
+  padding: 0 12px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.sidebar h1::before {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  background: var(--crm-emerald);
+  clip-path: none;
+  box-shadow: none;
+}
+
+.sidebar button {
+  position: relative;
+  min-height: 42px;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 10px;
+  margin: 0 0 4px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: var(--crm-radius-control);
+  background: transparent;
+  color: var(--crm-sidebar-text);
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 150ms ease, color 150ms ease;
+}
+
+.sidebar button svg {
+  width: 18px;
+  height: 18px;
+}
+
+.sidebar button:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+}
+
+.sidebar button.active {
+  background: var(--crm-emerald-soft);
+  color: #ffffff;
+  box-shadow: none;
+}
+
+.sidebar button.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 9px;
+  bottom: 9px;
+  width: 3px;
+  border-radius: 999px;
+  background: var(--crm-emerald);
+}
+
+.sidebar-sales-icon {
+  width: 18px;
+  height: 18px;
+  border: 0;
+}
+
+.sidebar-sales-icon::before {
+  inset: 0;
+}
+
+.content {
+  padding: 24px;
+}
+
+.salesforce-leads {
+  max-width: 1440px;
+  gap: 12px;
+}
+
+.salesforce-leads::before {
+  display: none;
+}
+
+.salesforce-leads .sf-list-head {
+  margin: 0;
+  padding: 16px;
+  border: 1px solid var(--crm-border);
+  border-radius: var(--crm-radius-card);
+  background: var(--crm-card);
+  box-shadow: var(--crm-shadow-sm);
+}
+
+.salesforce-leads .sf-object-icon {
+  background: var(--crm-emerald) !important;
+  box-shadow: none;
+}
+
+.salesforce-leads .sf-title-wrap p {
+  color: var(--crm-muted);
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.salesforce-leads .sf-list-title {
+  color: var(--crm-heading);
+  font-size: 26px;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.salesforce-leads .sf-pin {
+  border: 1px solid var(--crm-border);
+  color: var(--crm-muted);
+  background: var(--crm-card);
+  box-shadow: none;
+}
+
+.sf-action-strip {
+  gap: 8px;
+  border: 0;
+  background: transparent;
+}
+
+.sf-action {
+  min-height: 40px;
+  border: 1px solid var(--crm-border);
+  border-radius: var(--crm-radius-control);
+  background: var(--crm-card);
+  color: var(--crm-body);
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: none;
+  transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+
+.sf-action:first-child {
+  background: var(--crm-emerald);
+  border-color: var(--crm-emerald);
+  color: #ffffff;
+}
+
+.sf-action:first-child:hover {
+  background: var(--crm-emerald-hover);
+  border-color: var(--crm-emerald-hover);
+}
+
+.sf-action:hover {
+  background: var(--crm-surface-muted);
+  border-color: #cbd5e1;
+  color: var(--crm-heading);
+  transform: none;
+}
+
+.salesforce-leads .sf-list-meta {
+  margin: 0 16px;
+  color: var(--crm-muted);
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.salesforce-leads .lead-toolbar {
+  margin: 0 16px;
+  gap: 8px;
+}
+
+.salesforce-leads .lead-toolbar .search {
+  min-height: 40px;
+  flex: 0 1 360px;
+  border: 1px solid var(--crm-border);
+  border-radius: var(--crm-radius-control);
+  background: var(--crm-surface-muted);
+  box-shadow: none;
+}
+
+.salesforce-leads .lead-toolbar .search input {
+  color: var(--crm-body);
+  font-size: 14px;
+}
+
+.salesforce-leads .lead-toolbar .search:focus-within {
+  border-color: var(--crm-emerald);
+  background: var(--crm-card);
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+}
+
+.salesforce-leads .lead-toolbar .icon-button,
+.salesforce-leads .sf-filter-toggle {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--crm-border);
+  border-radius: var(--crm-radius-control);
+  background: var(--crm-card);
+  color: var(--crm-muted);
+  box-shadow: none;
+  transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+
+.salesforce-leads .lead-toolbar .icon-button:hover,
+.salesforce-leads .sf-filter-toggle:hover {
+  background: var(--crm-surface-muted);
+  border-color: #cbd5e1;
+  color: var(--crm-heading);
+  transform: none;
+}
+
+.salesforce-leads .sf-filter-toggle.active {
+  background: var(--crm-emerald);
+  border-color: var(--crm-emerald);
+  color: #ffffff;
+}
+
+.salesforce-leads .sf-list-panel {
+  margin: 0 16px;
+  overflow: hidden;
+  border: 1px solid var(--crm-border);
+  border-radius: var(--crm-radius-card);
+  background: var(--crm-card);
+  box-shadow: var(--crm-shadow-sm);
+}
+
+.salesforce-leads .table-wrap {
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--crm-radius-card);
+  box-shadow: none;
+}
+
+.salesforce-leads table {
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.salesforce-leads th,
+.salesforce-leads td {
+  border-right: 0;
+  border-bottom: 1px solid var(--crm-border-soft);
+}
+
+.salesforce-leads th {
+  height: 44px;
+  padding: 0 16px;
+  background: var(--crm-surface-muted);
+  color: var(--crm-muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.salesforce-leads td {
+  height: 56px;
+  padding: 0 16px;
+  color: var(--crm-body);
+  font-size: 13.5px;
+  font-weight: 400;
+}
+
+.salesforce-leads th:first-child,
+.salesforce-leads td:first-child {
+  width: 48px;
+  padding-left: 20px;
+  padding-right: 12px;
+}
+
+.salesforce-leads th:last-child,
+.salesforce-leads td:last-child {
+  padding-right: 20px;
+}
+
+.salesforce-leads tbody tr {
+  background: var(--crm-card);
+  transition: background 150ms ease;
+}
+
+.salesforce-leads tbody tr:hover {
+  background: var(--crm-surface-muted);
+}
+
+.salesforce-leads input[type="checkbox"] {
+  accent-color: var(--crm-emerald);
+}
+
+.salesforce-leads .link-cell {
+  color: var(--crm-heading);
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.salesforce-leads .sort-indicator {
+  color: var(--crm-muted);
+}
+
+.salesforce-leads .pill {
+  min-height: 24px;
+  border-radius: var(--crm-radius-small);
+  padding: 2px 9px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.salesforce-leads .pill.high {
+  background: var(--crm-rose-soft);
+  color: var(--crm-rose-text);
+}
+
+.salesforce-leads .pill.medium {
+  background: var(--crm-amber-soft);
+  color: var(--crm-amber-text);
+}
+
+.salesforce-leads .pill.low {
+  background: var(--crm-slate-soft);
+  color: var(--crm-slate-text);
+}
+
+.salesforce-leads .pill.qualified,
+.salesforce-leads .pill.converted {
+  background: #d1fae5;
+  color: #047857;
+}
+
+.salesforce-leads .pill.new {
+  background: var(--crm-blue-soft);
+  color: var(--crm-blue-text);
+}
+
+.salesforce-leads .pill.contacted {
+  background: var(--crm-violet-soft);
+  color: var(--crm-violet-text);
+}
+
+.salesforce-leads .pill.lost {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.salesforce-leads .action-menu-wrap .icon-button {
+  opacity: 0;
+  border-color: transparent;
+  background: transparent;
+  color: var(--crm-muted);
+}
+
+.salesforce-leads tbody tr:hover .action-menu-wrap .icon-button {
+  opacity: 1;
+}
+
+/* Final exact Leads New button color */
+.salesforce-leads .sf-list-head .sf-action-strip .sf-action:first-child {
+  background: #1c4f73 !important;
+  border-color: #1c4f73 !important;
+  color: #ffffff !important;
+}
+
+.salesforce-leads .sf-list-head .sf-action-strip .sf-action:first-child:hover {
+  background: #153d59 !important;
+  border-color: #153d59 !important;
+}
+
+/* Shared primary button color from Leads New button */
+.button.primary,
+.button.success,
+.primary-action,
+.sf-action:first-child {
+  background: #1c4f73 !important;
+  border-color: #1c4f73 !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 20px rgba(28, 79, 115, 0.16) !important;
+}
+
+.button.primary:hover,
+.button.success:hover,
+.primary-action:hover,
+.sf-action:first-child:hover {
+  background: #153d59 !important;
+  border-color: #153d59 !important;
+}
+
+.button.danger,
+.bulk-delete,
+.recycle-selected,
+.danger-menu-item {
+  background: #b91c1c !important;
+  border-color: #b91c1c !important;
+  color: #ffffff !important;
+}
+
+.contacts-page .sf-actions .primary-action,
+.companies-page .sf-actions .primary-action {
+  background: #1c4f73 !important;
+  border-color: #1c4f73 !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 20px rgba(28, 79, 115, 0.16) !important;
+}
+
+.contacts-page .sf-actions .primary-action:hover,
+.companies-page .sf-actions .primary-action:hover {
+  background: #153d59 !important;
+  border-color: #153d59 !important;
+}
+
+.contacts-page .contacts-icon {
+  background: #1c4f73 !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 22px rgba(28, 79, 115, 0.18) !important;
+}
+
+.contacts-page .contacts-icon svg {
+  width: 23px;
+  height: 23px;
+  stroke-width: 2.2;
+}
+
+/* Final sidebar: remove all green active states */
+.sidebar h1::before {
+  display: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.sidebar-logo {
+  background: #2f80b7 !important;
+  color: #eaf6ff !important;
+  box-shadow: 0 10px 22px rgba(47, 128, 183, 0.22) !important;
+}
+
+.sidebar button.active {
+  background: #0d2a40 !important;
+  color: #b7d8f4 !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.sidebar button.active::before {
+  display: block !important;
+  background: #2f80b7 !important;
+}
+
+.sidebar button.active svg {
+  color: #b7d8f4 !important;
+}
+
+.sidebar button:hover {
+  background: rgba(47, 128, 183, 0.14) !important;
+  color: #d4e8f8 !important;
+}
+
+.salesforce-leads .sf-object-icon {
+  background: #2f80b7 !important;
+  box-shadow: 0 10px 22px rgba(47, 128, 183, 0.18) !important;
+}
+
+.salesforce-leads .sf-list-head .sf-title-wrap > .sf-object-icon {
+  background-color: #2f80b7 !important;
+  background-image: none !important;
+  box-shadow: 0 10px 22px rgba(47, 128, 183, 0.18) !important;
+}
+
+.sf-action:first-child {
+  background: #8ac4e5 !important;
+  border-color: #8ac4e5 !important;
+}
+
+.sf-action:first-child:hover {
+  background: #5aa7d8 !important;
+  border-color: #5aa7d8 !important;
+}
+
+/* Sidebar screenshot match */
+.sidebar {
+  width: 296px;
+  padding: 18px 14px;
+  background: #0b1e33;
+}
+
+.app {
+  grid-template-columns: 296px minmax(0, 1fr);
+}
+
+.sidebar h1 {
+  position: relative;
+  min-height: 56px;
+  margin: 0 -14px 34px;
+  padding: 0 24px 18px;
+  gap: 12px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+  color: #f8fafc;
+  font-family: Manrope, ui-sans-serif, system-ui, sans-serif;
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.sidebar h1::before {
+  display: none;
+}
+
+.sidebar h1::after {
+  display: none;
+}
+
+.sidebar-logo {
+  width: 37px;
+  height: 37px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 37px;
+  border-radius: 12px;
+  background: #2f80b7;
+  color: #eaf6ff;
+  box-shadow: 0 10px 22px rgba(47, 128, 183, 0.22);
+}
+
+.sidebar::before {
+  margin: 0 0 12px 18px;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.sidebar button {
+  min-height: 36px;
+  margin: 0 0 9px;
+  padding: 0 16px;
+  border-radius: 8px;
+  color: rgba(203, 213, 225, 0.72);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.sidebar button svg {
+  width: 17px;
+  height: 17px;
+  color: currentColor;
+  opacity: 0.86;
+}
+
+.sidebar button:hover {
+  background: rgba(13, 42, 64, 0.62);
+  color: #e2e8f0;
+}
+
+.sidebar button.active {
+  background: #0d2a40;
+  color: #e5edf5;
+}
+
+.sidebar button.active::before {
+  display: block;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: #2f80b7;
+}
+
+.sidebar-sales-icon {
+  display: none;
+}
+
+/* Sidebar blue highlight override */
+.sidebar h1::before {
+  display: none;
+}
+
+.sidebar-logo {
+  background: #2f80b7;
+  color: #eaf6ff;
+  box-shadow: 0 10px 22px rgba(47, 128, 183, 0.22);
+}
+
+.sidebar button.active {
+  background: #0d2a40;
+  color: #e5edf5;
+}
+
+.sidebar button.active::before {
+  display: block;
+  background: #2f80b7;
+}
+
+.sidebar button:hover {
+  background: rgba(47, 128, 183, 0.14);
+}
+
+/* Sidebar light-blue active state */
+.sidebar button {
+  color: #9fb1c5;
+}
+
+.sidebar button:hover {
+  background: rgba(46, 128, 183, 0.12);
+  color: #cfe4f7;
+}
+
+.sidebar button.active {
+  background: #0d2a40;
+  color: #b7d8f4;
+}
+
+.sidebar button.active svg {
+  color: #b7d8f4;
+}
+
+.sidebar button.active::before {
+  background: #2f80b7;
+}
+
+.selected-bulk-banner {
+  margin: 0 16px 8px;
+  border: 1px solid var(--crm-border);
+  border-radius: var(--crm-radius-card);
+  background: var(--crm-card);
+  box-shadow: var(--crm-shadow-sm);
+}
+
+.selected-bulk-icon {
+  background: var(--crm-emerald);
+  box-shadow: none;
+}
+
+.cancel-selected {
+  background: var(--crm-card);
+  color: var(--crm-body);
+  border-color: var(--crm-border);
+}
+
+.recycle-selected {
+  background: #b91c1c;
+  border-color: #b91c1c;
+}
+
+/* Final Leads polish: navy + blue, Sora headings, Manrope body */
+:root {
+  --crm-bg: #f8fafc;
+  --crm-card: #ffffff;
+  --crm-sidebar: #0b1e33;
+  --crm-sidebar-text: #cbd5e1;
+  --crm-sidebar-muted: #94a3b8;
+  --crm-heading: #0f172a;
+  --crm-body: #334155;
+  --crm-muted: #64748b;
+  --crm-border: #e2e8f0;
+  --crm-border-soft: #f1f5f9;
+  --crm-surface-muted: #f8fafc;
+  --crm-accent: #2f73c6;
+  --crm-accent-hover: #245f9e;
+  --crm-accent-soft: rgba(37, 99, 235, 0.12);
+}
+
+body {
+  background: var(--crm-bg);
+  color: var(--crm-body);
+  font-family: Manrope, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+.sf-list-title,
+.enhanced-heading {
+  font-family: Sora, Manrope, ui-sans-serif, system-ui, sans-serif;
+}
+
+.sidebar {
+  background: var(--crm-sidebar);
+  color: var(--crm-sidebar-text);
+}
+
+.sidebar h1 {
+  color: #ffffff;
+  font-family: Sora, Manrope, ui-sans-serif, system-ui, sans-serif;
+}
+
+.sidebar h1::before {
+  background: var(--crm-accent);
+  box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.12);
+}
+
+.sidebar button {
+  color: var(--crm-sidebar-text);
+}
+
+.sidebar button:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+}
+
+.sidebar button.active {
+  background: var(--crm-accent-soft);
+  color: #ffffff;
+}
+
+.sidebar button.active::before {
+  background: var(--crm-accent);
+}
+
+.salesforce-leads .sf-object-icon,
+.contacts-icon,
+.companies-icon,
+.pipeline-icon,
+.payment-icon {
+  background: var(--crm-accent) !important;
+}
+
+.sf-action:first-child,
+.button.primary,
+.primary-action,
+.salesforce-leads .sf-filter-toggle.active,
+.selected-bulk-icon {
+  background: var(--crm-accent) !important;
+  border-color: var(--crm-accent) !important;
+  color: #ffffff;
+  box-shadow: none;
+}
+
+.sf-action:first-child:hover,
+.button.primary:hover,
+.primary-action:hover {
+  background: var(--crm-accent-hover) !important;
+  border-color: var(--crm-accent-hover) !important;
+}
+
+.salesforce-leads .lead-toolbar .search:focus-within,
+.search:focus-within,
+.filter:focus-within,
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: rgba(37, 99, 235, 0.5);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+.salesforce-leads .link-cell,
+.table-link,
+.sort-indicator,
+.salesforce-leads .sort-indicator {
+  color: var(--crm-accent);
+}
+
+.salesforce-leads .sf-list-head,
+.salesforce-leads .sf-list-panel,
+.table-wrap,
+.salesforce-leads .table-wrap {
+  background: var(--crm-card);
+  border-color: var(--crm-border);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+}
+
+.salesforce-leads th {
+  background: var(--crm-surface-muted);
+  color: var(--crm-muted);
+}
+
+.salesforce-leads td {
+  color: var(--crm-body);
+}
+
+.salesforce-leads tbody tr:hover {
+  background: var(--crm-surface-muted);
+}
+
+.salesforce-leads .action-menu-wrap .icon-button {
+  opacity: 0.45;
+}
+
+.salesforce-leads tbody tr:hover .action-menu-wrap .icon-button {
+  opacity: 1;
+}
+
+.salesforce-leads input[type="checkbox"] {
+  accent-color: var(--crm-accent);
+}
+
+.salesforce-leads .pill.qualified,
+.salesforce-leads .pill.converted {
+  background: #d1fae5;
+  color: #047857;
+}
+
+.salesforce-leads .pill.new {
+  background: #dbeafe;
+  color: #245f9e;
+}
+
+.salesforce-leads .pill.contacted {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+/* Final override: Contacts header identical to Leads header */
+.contacts-page.salesforce-leads .sf-list-head {
+  margin: 0 !important;
+  padding: 26px !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: var(--radius-panel) !important;
+  background: var(--color-card) !important;
+  box-shadow: var(--shadow-panel) !important;
+}
+
+/* Contacts header must match Leads header exactly */
+.contacts-page .sf-list-head {
+  margin: 0 !important;
+  padding: 26px !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: var(--radius-panel) !important;
+  background: var(--color-card) !important;
+  box-shadow: var(--shadow-panel) !important;
+}
+
+.contacts-page .sf-title-wrap {
+  gap: 14px !important;
+}
+
+/* Final Contacts logo: blue only, no green */
+.contacts-page .sf-title-block .contacts-icon,
+.contacts-page .sf-object-icon.contacts-icon {
+  background: #2f80b7 !important;
+  background-image: none !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 22px rgba(47, 128, 183, 0.18) !important;
+}
+
+.contacts-page .sf-title-block .contacts-icon svg,
+.contacts-page .sf-object-icon.contacts-icon svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+.contacts-page .heading-with-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.contacts-page .heading-with-logo .contacts-icon {
+  flex: 0 0 auto;
+}
+
+.contacts-page .sf-list-head {
+  min-height: 90px !important;
+  margin: 0 !important;
+  padding: 26px !important;
+  gap: 18px !important;
+}
+
+.contacts-page .sf-title-block {
+  gap: 14px !important;
+}
+
+.contacts-page .enhanced-heading {
+  margin: 0 !important;
+  padding-bottom: 0 !important;
+  border-bottom: 0 !important;
+  color: var(--ui-text) !important;
+  font-family: Sora, Manrope, ui-sans-serif, sans-serif !important;
+  font-size: 24px !important;
+  line-height: 1.2 !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.03em !important;
+}
+
+.contacts-page .inline-list-meta {
+  margin-top: 2px !important;
+  color: var(--ui-muted) !important;
+  font-size: 14px !important;
+  line-height: 1.2 !important;
+}
+
+.contacts-page .sf-title-block > div:nth-child(1) {
+  gap: 1px !important;
+}
+
+.contacts-page .sf-list-head {
+  min-height: 90px !important;
+  margin: 0 !important;
+  padding: 26px !important;
+  gap: 18px !important;
+}
+
+.contacts-page .sf-title-wrap {
+  gap: 14px !important;
+}
+
+.contacts-page .sf-title-wrap p {
+  color: var(--ui-muted) !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+}
+
+.contacts-page .sf-list-title {
+  color: var(--ui-text) !important;
+  font-family: Sora, Manrope, ui-sans-serif, sans-serif !important;
+  font-size: 24px !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.03em !important;
+}
+
+/* Screenshot-matched CRM theme */
+:root {
+  --ui-bg: #eef3f7;
+  --ui-sidebar: #0b1e33;
+  --ui-sidebar-active: #0d2a40;
+  --ui-blue: #1c4f73;
+  --ui-blue-2: #163f5c;
+  --ui-card: #ffffff;
+  --ui-border: #d7e0e8;
+  --ui-border-soft: #e8eef4;
+  --ui-text: #0f172a;
+  --ui-muted: #5f7891;
+  --ui-header: #edf5fb;
+  --ui-hover: #f8fbfd;
+  --ui-shadow: 0 1px 2px rgba(15, 23, 42, 0.08), 0 8px 18px rgba(15, 23, 42, 0.04);
+}
+
+body {
+  background: var(--ui-bg);
+  color: var(--ui-text);
+  font-family: Manrope, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.app {
+  grid-template-columns: 255px minmax(0, 1fr);
+}
+
+.sidebar {
+  width: 255px;
+  background: var(--ui-sidebar);
+  padding: 16px;
+  color: #cbd5e1;
+}
+
+.sidebar h1 {
+  min-height: 40px;
+  margin: 0 0 40px;
+  padding: 0;
+  gap: 10px;
+  color: #ffffff;
+  font-family: Manrope, ui-sans-serif, system-ui, sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.sidebar h1::before {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: #2f80b7;
+  box-shadow: none;
+}
+
+.sidebar::before {
+  content: "MAIN";
+  display: block;
+  margin: 0 0 8px 6px;
+  color: #718096;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.sidebar button {
+  min-height: 32px;
+  margin-bottom: 5px;
+  padding: 0 10px;
+  border-radius: 8px;
+  color: #b5c1cf;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.sidebar button:hover,
+.sidebar button.active {
+  background: var(--ui-sidebar-active);
+  color: #ffffff;
+}
+
+.sidebar button.active::before {
+  display: none;
+}
+
+.content {
+  padding: 0;
+}
+
+.topbar {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 32px;
+  border-bottom: 1px solid var(--ui-border);
+  background: #ffffff;
+  color: #526b84;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.topbar svg {
+  color: #0f172a;
+}
+
+.topbar::after {
+  content: "";
+  order: -1;
+  height: 24px;
+  width: 1px;
+  margin-left: 20px;
+  background: var(--ui-border);
+}
+
+.page {
+  max-width: none;
+  margin: 0;
+}
+
+.salesforce-leads {
+  padding: 24px;
+  gap: 14px;
+}
+
+.salesforce-leads .sf-list-head {
+  min-height: 90px;
+  margin: 0;
+  padding: 20px;
+  border: 1px solid var(--ui-border);
+  border-radius: 14px;
+  background: var(--ui-card);
+  box-shadow: var(--ui-shadow);
+}
+
+.salesforce-leads .sf-title-wrap {
+  gap: 14px;
+}
+
+.salesforce-leads .sf-object-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 9px;
+  background: var(--ui-blue) !important;
+}
+
+.salesforce-leads .sf-title-wrap p {
+  color: var(--ui-muted);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.salesforce-leads .sf-list-title {
+  color: var(--ui-text);
+  font-family: Sora, Manrope, ui-sans-serif, sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.salesforce-leads .sf-pin {
+  display: none;
+}
+
+.sf-action-strip {
+  gap: 8px;
+}
+
+.sf-action {
+  min-height: 36px;
+  padding: 0 16px;
+  border: 1px solid #cfd9e3;
+  border-radius: 8px;
+  background: #f9fbfd;
+  color: var(--ui-text);
+  font-size: 14px;
+  font-weight: 650;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.12);
+}
+
+.sf-action:first-child {
+  background: var(--ui-blue) !important;
+  border-color: var(--ui-blue) !important;
+  color: #ffffff;
+}
+
+.sf-action:first-child::before {
+  content: "+";
+  margin-right: 2px;
+  font-size: 20px;
+  line-height: 1;
+  font-weight: 400;
+}
+
+.sf-action:hover {
+  background: #f1f5f9;
+  transform: none;
+}
+
+.sf-action:first-child:hover {
+  background: var(--ui-blue-2) !important;
+}
+
+.salesforce-leads .sf-list-meta {
+  margin: 2px 0 0;
+  color: var(--ui-muted);
+  font-size: 14px;
+}
+
+.salesforce-leads .lead-toolbar {
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.salesforce-leads .lead-toolbar .search {
+  width: 448px;
+  flex: 0 0 448px;
+  min-height: 40px;
+  border: 1px solid var(--ui-border);
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: var(--ui-shadow);
+}
+
+.salesforce-leads .lead-toolbar .icon-button,
+.salesforce-leads .sf-filter-toggle {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--ui-border);
+  border-radius: 8px;
+  background: #f9fbfd;
+  color: var(--ui-text);
+  box-shadow: var(--ui-shadow);
+}
+
+.salesforce-leads .lead-toolbar .icon-button:hover,
+.salesforce-leads .sf-filter-toggle:hover {
+  background: #f1f5f9;
+}
+
+.salesforce-leads .sf-filter-toggle.active {
+  background: var(--ui-blue) !important;
+  border-color: var(--ui-blue) !important;
+}
+
+.salesforce-leads .sf-list-panel {
+  margin: 0;
+  border: 1px solid var(--ui-border);
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: var(--ui-shadow);
+}
+
+.salesforce-leads .table-wrap {
+  border: 0;
+  border-radius: 14px;
+}
+
+.salesforce-leads table {
+  min-width: 1080px;
+}
+
+.salesforce-leads th {
+  height: 38px;
+  padding: 0 16px;
+  background: var(--ui-header);
+  color: #506a84;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.salesforce-leads td {
+  height: 49px;
+  padding: 0 16px;
+  border-bottom-color: var(--ui-border);
+  color: var(--ui-text);
+  font-size: 13.5px;
+  font-weight: 500;
+}
+
+.salesforce-leads tbody tr:hover {
+  background: var(--ui-hover);
+}
+
+.salesforce-leads .link-cell {
+  color: var(--ui-text);
+  font-weight: 700;
+}
+
+.salesforce-leads .pill {
+  min-height: 22px;
+  border-radius: 7px;
+  padding: 2px 9px;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.salesforce-leads .action-menu-wrap .icon-button {
+  opacity: 0.35;
+  box-shadow: none;
+}
+
+.salesforce-leads tbody tr:hover .action-menu-wrap .icon-button {
+  opacity: 1;
+}
+
+@media (max-width: 560px) {
+  .content {
+    padding: 14px;
+  }
+}
+
+/* Professional calm theme override */
+:root {
+  --primary: #2f73c6;
+  --primary-hover: #245f9e;
+  --primary-soft: #edf4ff;
+  --success: #16835f;
+  --success-soft: #e9f7f1;
+  --danger: #c93a3a;
+  --danger-soft: #fdeeee;
+  --warning: #a76713;
+  --warning-soft: #fff5e4;
+  --text: #172033;
+  --muted: #66758a;
+  --muted-strong: #48566b;
+  --border: #d8e1ec;
+  --border-strong: #c4d0df;
+}
+
+body {
+  background:
+    linear-gradient(135deg, rgba(37, 99, 235, 0.06), transparent 34%),
+    linear-gradient(180deg, #f8fbff 0%, #eef3f8 56%, #e9f0f7 100%);
+}
+
+.sidebar {
+  background: linear-gradient(180deg, #101828 0%, #17223a 100%);
+  box-shadow: 12px 0 32px rgba(16, 24, 40, 0.14);
+}
+
+.sidebar h1::before {
+  background: #70e0b2;
+  box-shadow: 0 0 0 5px rgba(112, 224, 178, 0.14);
+}
+
+.sidebar button:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.sidebar button.active {
+  background: #ffffff;
+  color: #172033;
+  border-color: #ffffff;
+  box-shadow: 0 12px 26px rgba(16, 24, 40, 0.18);
+}
+
+.button.primary,
+.primary-action {
+  background: #1c4f73;
+  border-color: #1c4f73;
+  color: #ffffff;
+  box-shadow: 0 12px 22px rgba(28, 79, 115, 0.2);
+}
+
+.button.primary:hover,
+.primary-action:hover {
+  background: #163f5c;
+}
+
+.button.secondary,
+.sf-action {
+  background: #ffffff;
+  border-color: #d8e1ec;
+  color: #172033;
+  box-shadow: none;
+}
+
+.button.success {
+  background: #16835f;
+}
+
+.button.danger,
+.bulk-delete,
+.recycle-selected {
+  background: #c93a3a;
+  border-color: #c93a3a;
+}
+
+.sf-object-icon,
+.contacts-icon,
+.companies-icon,
+.pipeline-icon,
+.payment-icon {
+  background: #2f73c6 !important;
+  box-shadow: 0 10px 22px rgba(37, 99, 235, 0.16);
+}
+
+.page-header,
+.sf-list-head {
+  background: rgba(255, 255, 255, 0.74);
+  border-color: rgba(216, 225, 236, 0.78);
+}
+
+.table-wrap,
+.salesforce-leads .table-wrap,
+.sf-list-panel {
+  border-color: #d8e1ec;
+  box-shadow: 0 10px 28px rgba(28, 45, 72, 0.08);
+}
+
+th,
+.salesforce-leads th {
+  background: #f1f6ff;
+  color: #24324a;
+}
+
+tbody tr.selected-row,
+tbody tr.selected-row:hover {
+  background: #eef5ff;
+}
+
+.selected-bulk-banner {
+  border-color: #b9d1ff;
+  background: #eaf2ff;
+}
+
+.selected-bulk-icon {
+  background: #2f73c6;
+  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.22);
+}
+
+.bulk-cancel,
+.cancel-selected {
+  border-color: #9bb8e8;
+  background: #ffffff;
+  color: #315f9f;
+}
+
+.icon-button,
+.salesforce-leads .icon-button,
+.contacts-page .pin-button,
+.companies-page .pin-button {
+  color: #2f73c6;
+  border-color: #d8e1ec;
+  background: #ffffff;
+}
+
+.icon-button:hover,
+.salesforce-leads .icon-button:hover,
+.contacts-page .pin-button:hover,
+.companies-page .pin-button:hover {
+  background: #edf4ff;
+  border-color: #b9d1ff;
+  color: #245f9e;
+}
+
+.pill,
+.salesforce-leads .pill {
+  background: #edf4ff;
+  color: #2f73c6;
+}
+
+.pill.high,
+.pill.lost,
+.pill.inactive,
+.pill.competitor,
+.pill.hot {
+  background: #fdeeee;
+  color: #c93a3a;
+}
+
+.pill.medium,
+.pill.contacted,
+.pill.qualified,
+.pill.warm,
+.pill.partially {
+  background: #fff5e4;
+  color: #a76713;
+}
+
+.pill.low,
+.pill.new,
+.pill.active,
+.pill.paid,
+.pill.converted,
+.pill.customer {
+  background: #e9f7f1;
+  color: #16835f;
+}
+
+.link-cell,
+.table-link,
+.sort-indicator,
+.salesforce-leads .link-cell {
+  color: #2f73c6;
+}
+
+.contacts-page .enhanced-heading,
+.companies-page .enhanced-heading {
+  color: #172033;
+  border-bottom-color: #8a94a6;
+}
+
+.search:focus-within,
+.filter:focus-within,
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: rgba(37, 99, 235, 0.58);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+/* Final simple professional palette */
+:root {
+  --bg: #eef3f8;
+  --bg-soft: #f7f9fc;
+  --surface: #ffffff;
+  --surface-muted: #f8fafc;
+  --border: #d8e1ec;
+  --border-strong: #c4d0df;
+  --text: #152033;
+  --muted: #66758a;
+  --muted-strong: #48566b;
+  --primary: #334f7d;
+  --primary-hover: #263f68;
+  --primary-soft: #eef3fb;
+  --success: #3f6f5f;
+  --success-soft: #edf5f2;
+  --danger: #9f4b4b;
+  --danger-soft: #f7eeee;
+  --warning: #7a6442;
+  --warning-soft: #f6f2ea;
+}
+
+body {
+  background: linear-gradient(180deg, #f8fbff 0%, #eef3f8 55%, #e9f0f7 100%);
+}
+
+.sidebar {
+  background: linear-gradient(180deg, #111827 0%, #1f2937 100%);
+  box-shadow: 10px 0 28px rgba(17, 24, 39, 0.14);
+}
+
+.sidebar h1::before {
+  background: #dbe5f2;
+  box-shadow: 0 0 0 5px rgba(219, 229, 242, 0.12);
+}
+
+.sidebar button {
+  color: rgba(255, 255, 255, 0.72);
+  border-color: transparent;
+}
+
+.sidebar button:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar button.active {
+  background: #ffffff;
+  color: #152033;
+  border-color: #ffffff;
+  box-shadow: 0 12px 24px rgba(17, 24, 39, 0.16);
+}
+
+.button.primary,
+.primary-action,
+.selected-bulk-icon,
+.sf-object-icon,
+.contacts-icon,
+.companies-icon,
+.pipeline-icon,
+.payment-icon {
+  background: #334f7d !important;
+  border-color: #334f7d;
+  color: #ffffff;
+  box-shadow: 0 10px 20px rgba(51, 79, 125, 0.18);
+}
+
+.button.primary:hover,
+.primary-action:hover {
+  background: #263f68 !important;
+}
+
+.button.secondary,
+.sf-action,
+.icon-button,
+.salesforce-leads .icon-button,
+.contacts-page .pin-button,
+.companies-page .pin-button {
+  background: #ffffff;
+  color: #334f7d;
+  border-color: #d8e1ec;
+  box-shadow: none;
+}
+
+.button.secondary:hover,
+.sf-action:hover,
+.icon-button:hover,
+.salesforce-leads .icon-button:hover,
+.contacts-page .pin-button:hover,
+.companies-page .pin-button:hover {
+  background: #eef3fb;
+  color: #263f68;
+  border-color: #c4d0df;
+}
+
+.page-header,
+.sf-list-head,
+.sf-list-panel,
+.table-wrap,
+.salesforce-leads .table-wrap,
+.modal,
+.drawer,
+.kanban-column,
+.detail-grid div,
+.detail-block,
+.profile-metrics div {
+  background: #ffffff;
+  border-color: #d8e1ec;
+  box-shadow: 0 10px 28px rgba(28, 45, 72, 0.08);
+}
+
+th,
+.salesforce-leads th {
+  background: #f4f7fb;
+  color: #24324a;
+}
+
+td,
+.salesforce-leads td {
+  color: #48566b;
+}
+
+tbody tr:hover,
+.salesforce-leads tbody tr:hover {
+  background: #f8fafc;
+}
+
+tbody tr.selected-row,
+tbody tr.selected-row:hover {
+  background: #eef3fb;
+}
+
+.selected-bulk-banner {
+  background: #eef3fb;
+  border-color: #c4d0df;
+}
+
+.bulk-cancel,
+.cancel-selected {
+  background: #ffffff;
+  color: #334f7d;
+  border-color: #c4d0df;
+}
+
+.bulk-delete,
+.recycle-selected,
+.button.danger {
+  background: #9f4b4b;
+  border-color: #9f4b4b;
+  color: #ffffff;
+}
+
+.pill,
+.salesforce-leads .pill {
+  background: #eef3fb;
+  color: #334f7d;
+}
+
+.pill.high,
+.pill.lost,
+.pill.inactive,
+.pill.competitor,
+.pill.hot {
+  background: #f7eeee;
+  color: #9f4b4b;
+}
+
+.pill.medium,
+.pill.contacted,
+.pill.qualified,
+.pill.warm,
+.pill.partially {
+  background: #f6f2ea;
+  color: #7a6442;
+}
+
+.pill.low,
+.pill.new,
+.pill.active,
+.pill.paid,
+.pill.converted,
+.pill.customer,
+.button.success {
+  background: #edf5f2;
+  color: #3f6f5f;
+}
+
+.button.success {
+  background: #3f6f5f;
+  color: #ffffff;
+  border-color: #3f6f5f;
+}
+
+.link-cell,
+.table-link,
+.sort-indicator,
+.salesforce-leads .link-cell,
+.contacts-page .enhanced-heading,
+.companies-page .enhanced-heading {
+  color: #334f7d;
+}
+
+.contacts-page .enhanced-heading,
+.companies-page .enhanced-heading {
+  border-bottom-color: #9aa8ba;
+}
+
+.search:focus-within,
+.filter:focus-within,
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: rgba(51, 79, 125, 0.55);
+  box-shadow: 0 0 0 4px rgba(51, 79, 125, 0.1);
+}
+
+/* Color harmony pass */
+:root {
+  --primary: #0f766e;
+  --primary-hover: #115e59;
+  --primary-soft: #e6fffb;
+  --navy: #0f172a;
+  --navy-2: #1e2a44;
+  --teal: #14b8a6;
+  --teal-soft: #e6fffb;
+  --gold: #f59e0b;
+  --gold-soft: #fff7e6;
+  --ink-blue: #1e3a8a;
+}
+
+body {
+  background:
+    radial-gradient(circle at 12% 0%, rgba(20, 184, 166, 0.13), transparent 32%),
+    radial-gradient(circle at 90% 8%, rgba(245, 158, 11, 0.12), transparent 28%),
+    linear-gradient(180deg, #f8fbff 0%, #eef3f8 52%, #e9f0f7 100%);
+}
+
+.sidebar {
+  background:
+    linear-gradient(180deg, rgba(20, 184, 166, 0.12), transparent 24%),
+    linear-gradient(180deg, #0f172a 0%, #16213a 52%, #1e2a44 100%);
+}
+
+.sidebar h1::before {
+  background: linear-gradient(135deg, #70e0b2, #14b8a6);
+  box-shadow: 0 0 0 5px rgba(20, 184, 166, 0.16), 0 0 22px rgba(20, 184, 166, 0.32);
+}
+
+.sidebar button {
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.sidebar button:hover {
+  background: rgba(20, 184, 166, 0.16);
+  border-color: rgba(112, 224, 178, 0.28);
+}
+
+.sidebar button.active {
+  background: linear-gradient(135deg, #70e0b2 0%, #ffffff 100%);
+  color: #0f172a;
+  border-color: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 14px 30px rgba(20, 184, 166, 0.24);
+}
+
+.button.primary,
+.primary-action {
+  background: linear-gradient(135deg, #0f766e, #14b8a6);
+  border-color: #0f766e;
+  box-shadow: 0 14px 28px rgba(15, 118, 110, 0.24);
+}
+
+.button.primary:hover,
+.primary-action:hover {
+  background: linear-gradient(135deg, #115e59, #0f766e);
+}
+
+.button.secondary,
+.sf-action {
+  border-color: #c9d7ea;
+  background: linear-gradient(180deg, #ffffff, #f8fbff);
+}
+
+.button.success {
+  background: linear-gradient(135deg, #0f8a5f, #14b8a6);
+}
+
+.button.danger,
+.bulk-delete,
+.recycle-selected {
+  background: linear-gradient(135deg, #dc2626, #c93434);
+}
+
+.icon-button,
+.salesforce-leads .icon-button,
+.contacts-page .pin-button,
+.companies-page .pin-button {
+  border-color: #c9d7ea;
+  color: #0f766e;
+  background: #ffffff;
+}
+
+.icon-button:hover,
+.salesforce-leads .icon-button:hover,
+.contacts-page .pin-button:hover,
+.companies-page .pin-button:hover {
+  background: #e6fffb;
+  border-color: rgba(15, 118, 110, 0.42);
+  color: #115e59;
+}
+
+.page-header,
+.sf-list-head {
+  border-color: rgba(216, 225, 236, 0.72);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(248, 251, 255, 0.9)),
+    linear-gradient(90deg, rgba(20, 184, 166, 0.1), rgba(245, 158, 11, 0.08));
+}
+
+.sf-object-icon,
+.contacts-icon,
+.companies-icon,
+.pipeline-icon,
+.payment-icon {
+  background: linear-gradient(135deg, #0f766e, #f59e0b) !important;
+  box-shadow: 0 12px 26px rgba(15, 118, 110, 0.2);
+}
+
+.table-wrap,
+.salesforce-leads .table-wrap,
+.sf-list-panel {
+  border-color: #cbd8ea;
+  box-shadow: 0 16px 36px rgba(30, 42, 68, 0.08);
+}
+
+th,
+.salesforce-leads th {
+  background: linear-gradient(180deg, #f3fbf9, #e9f7f3);
+  color: #1e2a44;
+}
+
+tbody tr.selected-row,
+tbody tr.selected-row:hover {
+  background: #e9fbf6;
+}
+
+.selected-bulk-banner {
+  border-color: #9ee6d6;
+  background:
+    linear-gradient(135deg, rgba(230, 255, 251, 0.96), rgba(255, 247, 230, 0.92));
+}
+
+.selected-bulk-icon {
+  background: linear-gradient(135deg, #0f766e, #14b8a6);
+  box-shadow: 0 12px 24px rgba(15, 118, 110, 0.24);
+}
+
+.pill,
+.salesforce-leads .pill {
+  background: #e6fffb;
+  color: #0f766e;
+}
+
+.link-cell,
+.table-link {
+  color: #0f766e;
+}
+
+.search:focus-within,
+.filter:focus-within,
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: rgba(15, 118, 110, 0.58);
+  box-shadow: 0 0 0 4px rgba(15, 118, 110, 0.1);
+}
+
+/* Premium Leads view: Deep Slate + Emerald */
+:root {
+  --color-background: #f7f9fb;
+  --color-card: #ffffff;
+  --color-sidebar-from: #0b1e33;
+  --color-sidebar-to: #0b1e33;
+  --color-sidebar-text: #94a3b8;
+  --color-sidebar-active-bg: rgba(16, 185, 129, 0.14);
+  --color-sidebar-active: #34d399;
+  --color-brand: #1c4f73;
+  --color-brand-hover: #163f5c;
+  --color-brand-soft: rgba(28, 79, 115, 0.1);
+  --color-heading: #0f172a;
+  --color-body: #334155;
+  --color-muted: #64748b;
+  --color-table-heading: #475569;
+  --color-border: #e6eaf0;
+  --shadow-panel: 0 1px 2px rgba(16, 24, 40, 0.04), 0 8px 24px -12px rgba(16, 24, 40, 0.12);
+  --radius-panel: 16px;
+  --radius-control: 12px;
+  --radius-small: 8px;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-body);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.app {
+  grid-template-columns: 248px minmax(0, 1fr);
+}
+
+.sidebar {
+  background: linear-gradient(180deg, var(--color-sidebar-from), var(--color-sidebar-to));
+  border-right: 0;
+  box-shadow: none;
+  padding: 22px 14px;
+}
+
+.sidebar h1 {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.sidebar h1::before {
+  background: #34d399;
+  box-shadow: 0 0 0 5px rgba(52, 211, 153, 0.12);
+}
+
+.sidebar button {
+  position: relative;
+  min-height: 42px;
+  border: 0;
+  border-radius: var(--radius-control);
+  color: var(--color-sidebar-text);
+  font-size: 14px;
+  transition: background 150ms ease, color 150ms ease;
+}
+
+.sidebar button:hover {
+  background: rgba(148, 163, 184, 0.1);
+  color: #e2e8f0;
+}
+
+.sidebar button.active {
+  background: var(--color-sidebar-active-bg);
+  color: var(--color-sidebar-active);
+  box-shadow: none;
+}
+
+.sidebar button.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  bottom: 10px;
+  width: 3px;
+  border-radius: 999px;
+  background: var(--color-sidebar-active);
+}
+
+.content {
+  padding: 36px;
+}
+
+.salesforce-leads {
+  gap: 12px;
+}
+
+.salesforce-leads::before {
+  display: none;
+}
+
+.salesforce-leads .sf-list-head {
+  margin: 0;
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-panel);
+  background: var(--color-card);
+  box-shadow: var(--shadow-panel);
+}
+
+.salesforce-leads .sf-title-wrap p {
+  color: var(--color-muted);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.salesforce-leads .sf-list-title {
+  color: var(--color-heading);
+  font-size: 26px;
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.salesforce-leads .sf-object-icon {
+  background: var(--color-brand) !important;
+  box-shadow: none;
+}
+
+.salesforce-leads .sf-pin {
+  border-color: var(--color-border);
+  color: var(--color-muted);
+}
+
+.sf-action-strip {
+  border: 0;
+  gap: 8px;
+  background: transparent;
+}
+
+.sf-action {
+  min-height: 40px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-control);
+  background: #ffffff;
+  color: var(--color-body);
+  font-size: 13px;
+  box-shadow: none;
+}
+
+.sf-action:first-child {
+  background: var(--color-brand);
+  border-color: var(--color-brand);
+  color: #ffffff;
+}
+
+.sf-action:first-child:hover {
+  background: var(--color-brand-hover);
+}
+
+.sf-action:hover {
+  background: #f8fafc;
+  color: var(--color-heading);
+  transform: none;
+}
+
+.salesforce-leads .sf-list-meta {
+  margin: 2px 24px 0;
+  color: var(--color-muted);
+  font-size: 13px;
+}
+
+.salesforce-leads .lead-toolbar {
+  margin: 0 24px;
+  gap: 8px;
+}
+
+.salesforce-leads .lead-toolbar .search,
+.salesforce-leads .lead-toolbar .icon-button,
+.salesforce-leads .sf-filter-toggle {
+  min-height: 40px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-control);
+  background: #f8fafc;
+  color: var(--color-muted);
+  box-shadow: none;
+}
+
+.salesforce-leads .lead-toolbar .search {
+  flex-basis: 360px;
+}
+
+.salesforce-leads .lead-toolbar .search:focus-within {
+  background: #ffffff;
+  border-color: rgba(5, 150, 105, 0.45);
+  box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.2);
+}
+
+.salesforce-leads .icon-button:hover,
+.salesforce-leads .sf-filter-toggle:hover {
+  background: #f1f5f9;
+  color: var(--color-heading);
+  transform: none;
+}
+
+.salesforce-leads .sf-filter-toggle.active {
+  background: var(--color-brand);
+  border-color: var(--color-brand);
+  color: #ffffff;
+}
+
+.salesforce-leads .sf-list-panel {
+  margin: 0 24px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-panel);
+  background: var(--color-card);
+  box-shadow: var(--shadow-panel);
+}
+
+.salesforce-leads .table-wrap {
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-panel);
+  box-shadow: none;
+}
+
+.salesforce-leads table {
+  min-width: 1160px;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.salesforce-leads th,
+.salesforce-leads td {
+  border-right: 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.salesforce-leads th {
+  height: 44px;
+  padding: 0 16px;
+  background: #f8fafc;
+  color: var(--color-table-heading);
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.salesforce-leads td {
+  height: 56px;
+  padding: 0 16px;
+  color: var(--color-body);
+  font-size: 13.5px;
+  font-weight: 500;
+}
+
+.salesforce-leads th:first-child,
+.salesforce-leads td:first-child {
+  width: 48px;
+  padding-left: 20px;
+  padding-right: 12px;
+}
+
+.salesforce-leads th:last-child,
+.salesforce-leads td:last-child {
+  padding-right: 20px;
+}
+
+.salesforce-leads tbody tr {
+  transition: background 120ms ease;
+}
+
+.salesforce-leads tbody tr:hover {
+  background: #f8fafc;
+}
+
+.salesforce-leads input[type="checkbox"] {
+  accent-color: var(--color-brand);
+}
+
+.salesforce-leads .link-cell {
+  color: var(--color-heading);
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.salesforce-leads td:has(.link-cell:first-child) .link-cell,
+.salesforce-leads .table-link {
+  font-variant-numeric: tabular-nums;
+}
+
+.salesforce-leads .pill {
+  min-height: 24px;
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.salesforce-leads .pill.qualified {
+  background: #d1fae5;
+  color: #047857;
+}
+
+.salesforce-leads .pill.new {
+  background: #dbeafe;
+  color: #245f9e;
+}
+
+.salesforce-leads .pill.contacted {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.salesforce-leads .pill.lost {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.salesforce-leads .pill.high {
+  background: #ffe4e6;
+  color: #be123c;
+}
+
+.salesforce-leads .pill.medium {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.salesforce-leads .pill.low {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.salesforce-leads .action-menu-wrap .icon-button {
+  opacity: 0.45;
+  border-color: transparent;
+  background: transparent;
+}
+
+.salesforce-leads tbody tr:hover .action-menu-wrap .icon-button {
+  opacity: 1;
+}
+
+.selected-bulk-banner {
+  margin: 0 24px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-panel);
+  background: #ffffff;
+  box-shadow: var(--shadow-panel);
+}
+
+.selected-bulk-icon {
+  background: var(--color-brand);
+  box-shadow: none;
+}
+
+.cancel-selected {
+  background: #ffffff;
+  color: var(--color-body);
+  border-color: var(--color-border);
+}
+
+.recycle-selected {
+  background: #b91c1c;
+  border-color: #b91c1c;
+}
+
+@media (max-width: 900px) {
+  .app {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: relative;
+    height: auto;
+  }
+
+  .content {
+    padding: 20px;
+  }
+}
+
+/* Final sidebar branding: LeadFlow reference */
+.sidebar {
+  background: #0b1e33 !important;
+  padding: 24px 20px !important;
+}
+
+.sidebar::before {
+  display: none !important;
+  content: none !important;
+}
+
+.sidebar h1 {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 12px !important;
+  width: auto !important;
+  min-height: 60px !important;
+  margin: 0 0 26px !important;
+  padding: 0 0 24px !important;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.12) !important;
+  background: transparent !important;
+  color: #ffffff !important;
+  font-size: 25px !important;
+  font-weight: 850 !important;
+  letter-spacing: -0.045em !important;
+  line-height: 1 !important;
+}
+
+.sidebar h1::before,
+.sidebar h1::after {
+  display: none !important;
+  content: none !important;
+}
+
+.sidebar h1 > span:not(.sidebar-logo) {
+  color: #2f73c6 !important;
+}
+
+.sidebar-logo {
+  width: 58px !important;
+  height: 58px !important;
+  min-width: 58px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 18px !important;
+  background: #123154 !important;
+  color: #2f73c6 !important;
+  box-shadow: none !important;
+}
+
+.sidebar-logo svg {
+  width: 34px !important;
+  height: 34px !important;
+  color: #2f73c6 !important;
+  stroke: #2f73c6 !important;
+  stroke-width: 2.35 !important;
+}
+
+.sidebar-section-label {
+  margin: 0 0 10px 8px !important;
+  color: #6f8196 !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+}
+

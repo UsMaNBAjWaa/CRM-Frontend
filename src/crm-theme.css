@@ -1,0 +1,623 @@
+:root {
+  --crm-theme-primary: #1c4f73;
+  --crm-theme-primary-hover: #163f5c;
+  --crm-theme-logo: #2f73c6;
+  --crm-theme-highlight: #2f73c6;
+  --crm-theme-highlight-soft: #eef2ff;
+  --crm-theme-danger: #b91c1c;
+  --crm-theme-on-primary: #ffffff;
+  --crm-theme-page-x: 12px;
+}
+
+/* Shared CRM action controls */
+button.button.primary,
+button.button.secondary,
+button.primary-action,
+button.sf-action,
+button.leadflow-primary-action,
+button.leadflow-outline-action,
+button.sf-filter-toggle,
+button.detail-edit-button,
+.panel-actions button.button.primary {
+  background: var(--crm-theme-primary) !important;
+  border-color: var(--crm-theme-primary) !important;
+  color: var(--crm-theme-on-primary) !important;
+}
+
+button.button.primary:hover,
+button.button.secondary:hover,
+button.primary-action:hover,
+button.sf-action:hover,
+button.leadflow-primary-action:hover,
+button.leadflow-outline-action:hover,
+button.sf-filter-toggle:hover,
+button.detail-edit-button:hover,
+.panel-actions button.button.primary:hover {
+  background: var(--crm-theme-primary-hover) !important;
+  border-color: var(--crm-theme-primary-hover) !important;
+  color: var(--crm-theme-on-primary) !important;
+}
+
+button.button.danger,
+button.bulk-delete,
+button.recycle-selected,
+button.danger-menu-item {
+  background: var(--crm-theme-danger) !important;
+  border-color: var(--crm-theme-danger) !important;
+  color: var(--crm-theme-on-primary) !important;
+}
+
+button.leadflow-chip.active,
+button.leadflow-chip.active-soft {
+  background: var(--crm-theme-primary) !important;
+  border-color: var(--crm-theme-primary) !important;
+  color: var(--crm-theme-on-primary) !important;
+}
+
+button.leadflow-chip.active:hover,
+button.leadflow-chip.active-soft:hover {
+  background: var(--crm-theme-primary-hover) !important;
+  border-color: var(--crm-theme-primary-hover) !important;
+  color: var(--crm-theme-on-primary) !important;
+}
+
+.leads-page .leadflow-object-icon,
+.leads-page .leadflow-object-icon i {
+  color: var(--crm-theme-logo) !important;
+}
+
+.leads-page .leadflow-object-icon {
+  padding: 0.5rem 0.72rem !important;
+}
+
+.leads-page .leadflow-object-icon i {
+  font-size: 1.85rem !important;
+}
+
+.sidebar h1 > span:not(.sidebar-logo),
+.sidebar-logo,
+.sidebar-logo svg {
+  color: var(--crm-theme-logo) !important;
+  stroke: var(--crm-theme-logo) !important;
+}
+
+/* Leads highlighted and active text */
+.leads-page .leadflow-title:hover,
+.leads-page .leadflow-date-pill svg,
+.leads-page .sf-list-view-menu button.selected,
+.leads-page .sf-list-view-menu button.selected svg,
+.leads-page .link-cell,
+.leads-page .table-link,
+.leads-page.salesforce-leads .link-cell,
+.leads-page.salesforce-leads .table-link {
+  color: var(--crm-theme-highlight) !important;
+}
+
+.leads-page .sf-list-view-menu button.selected,
+.leads-page.salesforce-leads td:has(.link-cell) .link-cell:first-child {
+  background: var(--crm-theme-highlight-soft) !important;
+}
+
+.leads-page .link-cell,
+.leads-page .link-cell *,
+.leads-page .table-link,
+.leads-page .table-link *,
+.leads-page.salesforce-leads td:has(.link-cell) .link-cell:first-child,
+.leads-page.salesforce-leads td:has(.link-cell) .link-cell:first-child * {
+  color: var(--crm-theme-highlight) !important;
+}
+
+.leads-page .search-highlight {
+  background: var(--crm-theme-highlight-soft) !important;
+  color: var(--crm-theme-highlight) !important;
+}
+
+.leadflow-filter-menu-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.leadflow-filter-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 80;
+  min-width: 170px;
+  padding: 8px;
+  border: 1px solid #d8e4f0;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.14);
+}
+
+.leadflow-filter-menu button {
+  width: 100%;
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: #102033;
+  padding: 0 11px;
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.leadflow-filter-menu button:hover {
+  background: var(--crm-theme-highlight-soft);
+  color: var(--crm-theme-highlight);
+}
+
+.leads-page .lead-toolbar {
+  margin-left: var(--crm-theme-page-x) !important;
+  margin-right: var(--crm-theme-page-x) !important;
+  width: calc(100% - (var(--crm-theme-page-x) * 2)) !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+  gap: 12px !important;
+  flex-wrap: wrap !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.leads-page.salesforce-leads .sf-list-head,
+.leads-page.salesforce-leads .sf-list-panel {
+  margin-left: var(--crm-theme-page-x) !important;
+  margin-right: var(--crm-theme-page-x) !important;
+  width: auto !important;
+}
+
+.leads-page.salesforce-leads .sf-list-head {
+  margin-top: -36px !important;
+  border-radius: 0 !important;
+}
+
+.leads-page .lead-toolbar .search,
+.leads-page.salesforce-leads .lead-toolbar .search,
+.leads-page .lead-toolbar .search input,
+.leads-page.salesforce-leads .lead-toolbar .search input,
+.leads-page .inline-filter-control.searchable-filter,
+.leads-page .inline-filter-control.searchable-filter input,
+.leads-page .inline-date-trigger,
+.leads-page .lead-clear-inline {
+  border-radius: 0 !important;
+}
+
+.leads-page .lead-toolbar .search::before,
+.leads-page .lead-toolbar .search::after {
+  border-radius: 0 !important;
+}
+
+.leads-page .lead-toolbar .search {
+  flex: 1 1 420px !important;
+  max-width: 520px !important;
+  min-height: 44px !important;
+  height: 44px !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  transform: none !important;
+}
+
+.leads-page .lead-toolbar .search input {
+  height: 100% !important;
+}
+
+.leads-page .lead-toolbar .search:first-child {
+  margin-inline-start: 0 !important;
+}
+
+.lead-inline-filters {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-end;
+  gap: 10px;
+  flex: 1 1 620px;
+  min-width: 0;
+}
+
+.inline-filter-item {
+  display: flex;
+  align-items: stretch;
+}
+
+.inline-filter-control.searchable-filter {
+  width: 220px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  border: 1px solid #d8e4f0;
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 0 34px 0 12px;
+  box-shadow: none;
+}
+
+.inline-filter-control.searchable-filter > span {
+  display: inline-flex;
+  align-items: center;
+  color: #48566b;
+  font-size: 13px;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.inline-filter-control.searchable-filter > svg:not(.searchable-chevron) {
+  flex: 0 0 auto;
+  color: #64748b;
+}
+
+.inline-filter-control.searchable-filter input {
+  width: 108px;
+  min-height: 32px;
+  border: 2px solid #d9e4ef;
+  outline: 0;
+  background: #ffffff;
+  color: #102033;
+  padding: 0 4px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.inline-filter-control .searchable-chevron {
+  position: absolute;
+  right: 10px;
+  color: var(--crm-theme-highlight);
+}
+
+.standard-filter-control.searchable-filter {
+  width: 210px;
+  padding: 0 34px 0 12px;
+}
+
+.standard-filter-control.searchable-filter > span {
+  display: none;
+}
+
+.standard-filter-control.searchable-filter input {
+  flex: 1;
+  width: 100%;
+  min-height: auto;
+  border: 0;
+  background: transparent;
+  color: #48566b;
+  padding: 0;
+  font-size: 13px;
+  font-weight: 850;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.standard-filter-control.searchable-filter input::placeholder {
+  color: #48566b;
+  opacity: 1;
+}
+
+.inline-date-filter-box {
+  position: relative;
+  min-width: 220px;
+}
+
+.inline-date-trigger {
+  width: 100%;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #d8e4f0;
+  border-radius: 10px;
+  background: #ffffff !important;
+  color: #102033;
+  padding: 0 34px 0 12px;
+  position: relative;
+}
+
+.inline-date-trigger > svg:first-child {
+  flex: 0 0 auto;
+  color: #64748b;
+}
+
+.inline-date-trigger > span {
+  flex: 1;
+  color: #48566b;
+  font-size: 13px;
+  font-weight: 850;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.inline-date-trigger > svg:last-child {
+  position: absolute;
+  right: 10px;
+  color: var(--crm-theme-highlight);
+}
+
+.inline-date-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 90;
+  width: 260px;
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid #d8e4f0;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.14);
+}
+
+.inline-date-menu label {
+  display: grid;
+  gap: 6px;
+}
+
+.inline-date-menu label span {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.inline-date-menu input {
+  min-height: 38px;
+  border: 1px solid #d8e4f0;
+  border-radius: 10px;
+  padding: 0 10px;
+  color: #102033;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.inline-date-menu button {
+  min-height: 36px;
+  border: 1px solid #d8e4f0;
+  border-radius: 10px;
+  background: #ffffff !important;
+  color: var(--crm-theme-primary) !important;
+  font-weight: 800;
+}
+
+.lead-clear-inline {
+  min-height: 40px;
+  min-width: 150px;
+  border: 1px solid #d8e4f0;
+  border-radius: 12px;
+  background: #ffffff !important;
+  color: var(--crm-theme-primary) !important;
+  padding: 0 14px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.lead-clear-inline:hover {
+  border-color: var(--crm-theme-highlight) !important;
+  background: var(--crm-theme-highlight-soft) !important;
+  color: var(--crm-theme-highlight) !important;
+}
+
+@media (max-width: 1200px) {
+  .lead-inline-filters {
+    justify-content: flex-start;
+  }
+}
+
+/* Premium Leads heading card */
+.leads-page.salesforce-leads .sf-list-head {
+  isolation: isolate;
+  position: relative !important;
+  overflow: hidden !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  gap: 22px 30px !important;
+  padding: 30px 34px 22px !important;
+  border: 1px solid #d8e4f0 !important;
+  border-top: 0 !important;
+  border-radius: 0 !important;
+  background:
+    linear-gradient(135deg, rgba(47, 115, 198, 0.055), transparent 38%),
+    linear-gradient(180deg, #ffffff 0%, #f9fbfe 100%) !important;
+  box-shadow: 0 12px 34px rgba(15, 30, 51, 0.07) !important;
+}
+
+.leads-page.salesforce-leads .sf-list-head::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #2f73c6 0%, rgba(47, 115, 198, 0.62) 42%, rgba(47, 115, 198, 0.14) 100%);
+}
+
+.leads-page.salesforce-leads .sf-list-head::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #2f73c6 0%, rgba(47, 115, 198, 0.62) 42%, rgba(47, 115, 198, 0.14) 100%);
+}
+
+.leads-page .leadflow-head-main {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.leads-page .leadflow-title-row {
+  gap: 18px;
+}
+
+.leads-page .leadflow-object-icon {
+  width: 58px;
+  height: 58px;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.leads-page .leadflow-object-icon i {
+  font-size: 2.35rem !important;
+}
+
+.leads-page .leadflow-title {
+  position: relative;
+  width: fit-content;
+  color: #1d4b79 !important;
+  background: transparent;
+  font-family: Inter, Manrope, ui-sans-serif, system-ui, sans-serif !important;
+  font-size: 38px !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.045em !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85);
+  padding-right: 3px;
+}
+
+.leads-page .leadflow-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -7px;
+  width: 72%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--crm-theme-logo), rgba(47, 115, 198, 0));
+  box-shadow: none;
+}
+
+.leads-page .leadflow-title::before {
+  display: none;
+  content: none;
+}
+
+.leads-page .leadflow-title:hover {
+  color: var(--crm-theme-primary) !important;
+}
+
+.leads-page .leadflow-title-copy {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+.leads-page .leadflow-eyebrow {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.leads-page .leadflow-title-copy p {
+  margin: 0;
+  color: #5e7187;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.leads-page .leadflow-title svg {
+  width: 18px;
+  height: 18px;
+  color: #64748b;
+  transition: transform 140ms ease, color 140ms ease;
+}
+
+.leads-page .leadflow-title:hover svg {
+  color: var(--crm-theme-highlight);
+  transform: translateY(1px);
+}
+
+.leads-page .leadflow-count {
+  min-height: 28px;
+  border: 1px solid #dfe8f2;
+  background: #f4f8fc;
+  color: #63758a;
+  padding: 4px 14px;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.leads-page .leadflow-head-actions {
+  align-self: center;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.leads-page .leadflow-outline-action,
+.leads-page .leadflow-primary-action {
+  min-height: 42px;
+  border-radius: 0 !important;
+  padding: 0 17px;
+  font-size: 14px;
+  font-weight: 800;
+  box-shadow: none !important;
+}
+
+.leads-page .leadflow-outline-action {
+  background: #f8fbfe !important;
+  color: #33475d !important;
+  border-color: #d6e1ed !important;
+}
+
+.leads-page .leadflow-outline-action:hover {
+  background: #f2f7fd !important;
+  color: var(--crm-theme-primary) !important;
+  border-color: #a9c2dc !important;
+}
+
+.leads-page .leadflow-primary-action {
+  min-width: 132px;
+  letter-spacing: 0.01em;
+}
+
+.leads-page .leadflow-filter-row {
+  align-items: center;
+  padding-top: 8px;
+  border-top: 1px solid #edf2f7;
+}
+
+.leads-page .leadflow-chip-group {
+  gap: 10px;
+}
+
+.leads-page .leadflow-chip,
+.leads-page .leadflow-date-pill {
+  min-height: 32px;
+  border-radius: 0 !important;
+  border: 1px solid #dce6f0;
+  background: #f8fbfe;
+  color: #4d5f73;
+  padding: 0 14px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.leads-page .leadflow-chip.active,
+.leads-page .leadflow-chip.active-soft {
+  background: var(--crm-theme-primary) !important;
+  border-color: var(--crm-theme-primary) !important;
+}
+
+.leads-page .leadflow-chip > span {
+  width: 7px;
+  height: 7px;
+}
+
+.leads-page .leadflow-date-pill {
+  background: #f4f8fc;
+  color: #63758a;
+}
+
+@media (max-width: 1180px) {
+  .leads-page .leadflow-head-actions {
+    flex-wrap: wrap;
+  }
+}
