@@ -1,0 +1,926 @@
+/* Last-loaded design standardization overrides. */
+:root {
+  --std-page-gap: 14px;
+  --std-header-bg: #17324d;
+  --std-header-shape: #274e78;
+  --std-header-kicker: #6f8fb7;
+  --std-primary: #1c4f73;
+  --std-primary-hover: #163f5c;
+  --std-border: #d8e4f0;
+}
+
+.crm-content {
+  padding: 28px;
+}
+
+.crm-legacy-page,
+.lf-page-content,
+.page,
+.lf-page {
+  width: 100%;
+  min-width: 0;
+}
+
+.salesforce-leads,
+.lf-page,
+.user-dashboard {
+  display: grid;
+  gap: var(--std-page-gap);
+}
+
+.portal-page--embedded {
+  min-height: auto;
+  padding: 0;
+}
+
+.user-dashboard-hero,
+.salesforce-leads .sf-list-head {
+  position: relative !important;
+  isolation: isolate !important;
+  min-height: 260px !important;
+  width: 100% !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  align-items: center !important;
+  gap: 28px !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 56px 42px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: var(--std-header-bg) !important;
+  box-shadow: none !important;
+  color: #ffffff !important;
+}
+
+.user-dashboard-hero::before,
+.salesforce-leads .sf-list-head::before {
+  display: none !important;
+  content: none !important;
+}
+
+.user-dashboard-hero::after,
+.salesforce-leads .sf-list-head::after {
+  content: "" !important;
+  position: absolute !important;
+  z-index: -1 !important;
+  inset: auto 0 0 auto !important;
+  width: 48% !important;
+  height: 124px !important;
+  background: var(--std-header-shape) !important;
+  clip-path: polygon(0 100%, 100% 0, 100% 100%) !important;
+  transform: none !important;
+  pointer-events: none !important;
+}
+
+.user-dashboard-hero-copy,
+.salesforce-leads .sf-title-wrap,
+.salesforce-leads .sf-title-block,
+.salesforce-leads .sf-action-strip,
+.salesforce-leads .sf-actions,
+.lf-page-actions--hero {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.salesforce-leads .sf-title-wrap,
+.salesforce-leads .sf-title-block,
+.salesforce-leads .sf-title-wrap > div,
+.salesforce-leads .sf-title-block > div {
+  display: block !important;
+  min-width: 0 !important;
+}
+
+.salesforce-leads .sf-object-icon,
+.salesforce-leads .sf-pin {
+  display: none !important;
+}
+
+.user-dashboard-kicker,
+.salesforce-leads .sf-title-wrap > div > p:first-child,
+.salesforce-leads .sf-title-block > div > span:first-child {
+  display: block !important;
+  width: fit-content !important;
+  min-height: 0 !important;
+  margin: 0 0 22px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: var(--std-header-kicker) !important;
+  font-size: 16px !important;
+  line-height: 1.15 !important;
+  font-weight: 800 !important;
+  letter-spacing: 0 !important;
+  text-transform: uppercase !important;
+}
+
+.user-dashboard-hero h1,
+.salesforce-leads .sf-list-title,
+.salesforce-leads .enhanced-heading {
+  display: block !important;
+  width: fit-content !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #ffffff !important;
+  font-size: clamp(44px, 4vw, 60px) !important;
+  line-height: 1.03 !important;
+  font-weight: 900 !important;
+  letter-spacing: 0 !important;
+  text-align: left !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+.salesforce-leads .sf-list-title svg {
+  display: none !important;
+}
+
+.user-dashboard-hero p,
+.salesforce-leads .sf-page-subtitle {
+  display: block !important;
+  width: auto !important;
+  max-width: 980px !important;
+  min-height: 0 !important;
+  margin: 18px 0 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #f4f8ff !important;
+  font-size: 21px !important;
+  line-height: 1.35 !important;
+  font-weight: 800 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+.salesforce-leads .sf-action-strip,
+.salesforce-leads .sf-actions,
+.lf-page-actions--hero {
+  align-self: center !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+  top: auto !important;
+  right: auto !important;
+}
+
+.button.primary,
+.primary-action,
+.salesforce-leads .sf-list-head .sf-action,
+.lf-page-actions--hero .lf-btn {
+  min-height: 54px !important;
+  height: 54px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  border: 1px solid var(--std-primary) !important;
+  border-radius: 999px !important;
+  background: var(--std-primary) !important;
+  color: #ffffff !important;
+  padding: 0 24px !important;
+  font-size: 18px !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
+  box-shadow: none !important;
+  transform: none !important;
+  white-space: nowrap !important;
+}
+
+.button.primary:hover,
+.primary-action:hover,
+.salesforce-leads .sf-list-head .sf-action:hover,
+.lf-page-actions--hero .lf-btn:hover {
+  background: var(--std-primary-hover) !important;
+  border-color: var(--std-primary-hover) !important;
+  color: #ffffff !important;
+  transform: none !important;
+}
+
+.salesforce-leads .lead-toolbar,
+.lf-filter-bar,
+.toolbar {
+  width: 100% !important;
+  display: flex !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.sf-list-panel,
+.table-wrap,
+.salesforce-leads .sf-list-panel,
+.salesforce-leads .table-wrap,
+.lf-table-card {
+  width: 100% !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  border: 1px solid var(--std-border) !important;
+  border-radius: 0 !important;
+  background: #ffffff !important;
+  box-shadow: 0 10px 28px rgba(28, 45, 72, 0.08) !important;
+}
+
+.table-wrap,
+.lf-table-scroll,
+.sf-list-panel {
+  overflow-x: auto !important;
+}
+
+table,
+.salesforce-leads table,
+.lf-leads-table,
+.small-table {
+  width: 100% !important;
+  min-width: 1040px !important;
+  border-collapse: collapse !important;
+  table-layout: auto !important;
+}
+
+th,
+.salesforce-leads th,
+.lf-leads-table thead th,
+.small-table th {
+  height: 44px !important;
+  background: #f8fafc !important;
+  color: #475569 !important;
+  font-size: 11px !important;
+  line-height: 1 !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+}
+
+td,
+.salesforce-leads td,
+.lf-leads-table tbody td,
+.small-table td {
+  height: 56px !important;
+  color: #334155 !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+}
+
+th,
+td,
+.salesforce-leads th,
+.salesforce-leads td,
+.lf-leads-table th,
+.lf-leads-table td,
+.small-table th,
+.small-table td {
+  border-bottom: 1px solid var(--std-border) !important;
+  padding: 0 16px !important;
+  white-space: nowrap !important;
+  vertical-align: middle !important;
+}
+
+tbody tr:hover,
+.salesforce-leads tbody tr:hover,
+.lf-leads-table tbody tr:hover {
+  background: #f8fafc !important;
+}
+
+tbody tr.selected-row,
+tbody tr.selected-row:hover,
+.lf-leads-table tbody tr.selected,
+.lf-leads-table tbody tr.selected:hover {
+  background: #eef3fb !important;
+}
+
+.pill,
+.salesforce-leads .pill,
+.lf-badge {
+  min-height: 24px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  border-radius: 999px !important;
+  padding: 2px 10px !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+}
+
+@media (max-width: 900px) {
+  .crm-content {
+    padding: 16px;
+  }
+
+  .user-dashboard-hero,
+  .salesforce-leads .sf-list-head {
+    min-height: 0 !important;
+    grid-template-columns: 1fr !important;
+    align-items: start !important;
+    padding: 34px 24px !important;
+  }
+
+  .user-dashboard-hero::after,
+  .salesforce-leads .sf-list-head::after {
+    width: 70% !important;
+    height: 84px !important;
+  }
+
+  .user-dashboard-hero h1,
+  .salesforce-leads .sf-list-title,
+  .salesforce-leads .enhanced-heading {
+    font-size: 38px !important;
+  }
+
+  .user-dashboard-hero p,
+  .salesforce-leads .sf-page-subtitle {
+    font-size: 18px !important;
+  }
+
+  .salesforce-leads .sf-list-head .sf-action,
+  .lf-page-actions--hero .lf-btn {
+    width: 100% !important;
+  }
+
+  table,
+  .salesforce-leads table,
+  .lf-leads-table,
+  .small-table {
+    min-width: 900px !important;
+  }
+}
+
+/* Hard override old per-page header art. These selectors intentionally outrank
+   the legacy .contacts-page.salesforce-leads header rules in styles.css. */
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.contacts-page .sf-list-head,
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.companies-page .sf-list-head,
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.salesforce-pipeline .sf-list-head,
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.salesforce-payments .sf-list-head {
+  position: relative !important;
+  isolation: isolate !important;
+  min-height: 260px !important;
+  width: 100% !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  align-items: center !important;
+  gap: 28px !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 56px 42px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: #17324d !important;
+  box-shadow: none !important;
+  color: #ffffff !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.contacts-page .sf-list-head::before,
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.companies-page .sf-list-head::before,
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.salesforce-pipeline .sf-list-head::before,
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.salesforce-payments .sf-list-head::before {
+  display: none !important;
+  content: none !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.contacts-page .sf-list-head::after,
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.companies-page .sf-list-head::after,
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.salesforce-pipeline .sf-list-head::after,
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.salesforce-payments .sf-list-head::after {
+  content: "" !important;
+  position: absolute !important;
+  z-index: -1 !important;
+  inset: auto 0 0 auto !important;
+  width: 48% !important;
+  height: 124px !important;
+  background: #274e78 !important;
+  clip-path: polygon(0 100%, 100% 0, 100% 100%) !important;
+  transform: none !important;
+  pointer-events: none !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.contacts-page .sf-object-icon,
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.companies-page .sf-object-icon,
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.salesforce-pipeline .sf-object-icon,
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.salesforce-payments .sf-object-icon,
+body #root .crm-shell .crm-main .crm-content .salesforce-leads .sf-pin {
+  display: none !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.contacts-page .sf-title-wrap,
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.companies-page .sf-title-wrap,
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.salesforce-pipeline .sf-title-wrap,
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.salesforce-payments .sf-title-wrap,
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.companies-page .sf-title-block {
+  position: relative !important;
+  z-index: 1 !important;
+  display: block !important;
+  min-width: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.contacts-page .sf-title-wrap > div > p:first-child,
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.companies-page .sf-title-wrap > div > p:first-child,
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.salesforce-pipeline .sf-title-wrap > div > p:first-child,
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.salesforce-payments .sf-title-wrap > div > p:first-child,
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.companies-page .sf-title-block > div > span:first-child {
+  display: block !important;
+  width: fit-content !important;
+  min-height: 0 !important;
+  margin: 0 0 22px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #6f8fb7 !important;
+  font-size: 16px !important;
+  line-height: 1.15 !important;
+  font-weight: 800 !important;
+  letter-spacing: 0 !important;
+  text-transform: uppercase !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.contacts-page .sf-list-title,
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.companies-page .sf-list-title,
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.salesforce-pipeline .sf-list-title,
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.salesforce-payments .sf-list-title,
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.companies-page .enhanced-heading,
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .user-dashboard-hero h1 {
+  display: block !important;
+  width: fit-content !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #ffffff !important;
+  font-size: clamp(44px, 4vw, 60px) !important;
+  line-height: 1.03 !important;
+  font-weight: 900 !important;
+  letter-spacing: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.contacts-page .sf-list-title svg,
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.companies-page .sf-list-title svg,
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.salesforce-pipeline .sf-list-title svg,
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.salesforce-payments .sf-list-title svg {
+  display: none !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.contacts-page .sf-page-subtitle,
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.companies-page .sf-page-subtitle,
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.salesforce-pipeline .sf-page-subtitle,
+body #root .crm-shell .crm-main .crm-content .salesforce-leads.salesforce-payments .sf-page-subtitle {
+  display: block !important;
+  width: auto !important;
+  max-width: 980px !important;
+  min-height: 0 !important;
+  margin: 18px 0 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #f4f8ff !important;
+  font-size: 21px !important;
+  line-height: 1.35 !important;
+  font-weight: 800 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-heading {
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .lead-wordmark {
+  display: inline-flex !important;
+  align-items: flex-end !important;
+  gap: 0 !important;
+  width: fit-content !important;
+  min-height: 74px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  color: #f8fafc !important;
+  font-family: Arial Black, Impact, Inter, ui-sans-serif, system-ui, sans-serif !important;
+  font-size: 74px !important;
+  line-height: 0.82 !important;
+  font-style: italic !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.08em !important;
+  text-transform: uppercase !important;
+  transform: skew(-4deg) !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .lead-wordmark > span:not(.lead-wordmark-person) {
+  display: inline-block !important;
+  color: #f8fafc !important;
+  text-shadow: 0 8px 18px rgba(0, 0, 0, 0.2) !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .lead-wordmark-person {
+  position: relative !important;
+  width: 68px !important;
+  height: 74px !important;
+  display: inline-block !important;
+  margin: 0 -3px 0 1px !important;
+  transform: skew(4deg) !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .lead-wordmark-head {
+  position: absolute !important;
+  top: 0 !important;
+  left: 24px !important;
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 999px !important;
+  background: #ff7a00 !important;
+  box-shadow: 0 8px 16px rgba(255, 122, 0, 0.2) !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .lead-wordmark-body {
+  position: absolute !important;
+  left: 20px !important;
+  bottom: 0 !important;
+  width: 34px !important;
+  height: 51px !important;
+  background: #ff7a00 !important;
+  clip-path: polygon(36% 0, 100% 0, 70% 100%, 0 100%) !important;
+  box-shadow: 0 8px 16px rgba(255, 122, 0, 0.18) !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .lead-wordmark-swoosh {
+  position: absolute !important;
+  top: 2px !important;
+  left: 34px !important;
+  width: 68px !important;
+  height: 42px !important;
+  background: #ff7a00 !important;
+  clip-path: polygon(0 58%, 100% 0, 12% 100%) !important;
+  transform: rotate(-7deg) !important;
+  transform-origin: left center !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-heading-logo .lead-wordmark-mini {
+  position: relative !important;
+  z-index: 1 !important;
+  display: inline-flex !important;
+  align-items: flex-end !important;
+  width: 46px !important;
+  height: 42px !important;
+  color: #ffffff !important;
+  font-family: Arial Black, Impact, Inter, ui-sans-serif, system-ui, sans-serif !important;
+  font-size: 28px !important;
+  line-height: 0.82 !important;
+  font-style: italic !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.1em !important;
+  transform: skew(-4deg) scale(0.82) !important;
+  transform-origin: center !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-heading-logo .lead-wordmark-person {
+  width: 24px !important;
+  height: 34px !important;
+  margin: 0 -1px 0 1px !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-heading-logo .lead-wordmark-head {
+  left: 8px !important;
+  width: 12px !important;
+  height: 12px !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-heading-logo .lead-wordmark-body {
+  left: 7px !important;
+  width: 14px !important;
+  height: 24px !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-heading-logo .lead-wordmark-swoosh {
+  top: 3px !important;
+  left: 15px !important;
+  width: 27px !important;
+  height: 18px !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-title-wordmark {
+  display: inline-flex !important;
+  align-items: flex-end !important;
+  gap: 0 !important;
+  color: #f8fafc !important;
+  font-family: Arial Black, Impact, Inter, ui-sans-serif, system-ui, sans-serif !important;
+  font-size: 72px !important;
+  line-height: 0.82 !important;
+  font-style: italic !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.08em !important;
+  text-transform: uppercase !important;
+  transform: skew(-4deg) !important;
+  text-shadow: 0 8px 18px rgba(0, 0, 0, 0.18) !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-title-wordmark > span:not(.lead-wordmark-person) {
+  display: inline-block !important;
+  color: #f8fafc !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-title-wordmark .lead-wordmark-person {
+  position: relative !important;
+  width: 66px !important;
+  height: 74px !important;
+  display: inline-block !important;
+  margin: 0 -3px 0 1px !important;
+  transform: skew(4deg) !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-title-wordmark .lead-wordmark-head {
+  position: absolute !important;
+  top: 0 !important;
+  left: 24px !important;
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 999px !important;
+  background: #ff7a00 !important;
+  box-shadow: 0 8px 16px rgba(255, 122, 0, 0.2) !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-title-wordmark .lead-wordmark-body {
+  position: absolute !important;
+  left: 20px !important;
+  bottom: 0 !important;
+  width: 34px !important;
+  height: 51px !important;
+  background: #ff7a00 !important;
+  clip-path: polygon(36% 0, 100% 0, 70% 100%, 0 100%) !important;
+  box-shadow: 0 8px 16px rgba(255, 122, 0, 0.18) !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-title-wordmark .lead-wordmark-swoosh {
+  position: absolute !important;
+  top: 2px !important;
+  left: 34px !important;
+  width: 68px !important;
+  height: 42px !important;
+  background: #ff7a00 !important;
+  clip-path: polygon(0 58%, 100% 0, 12% 100%) !important;
+  transform: rotate(-7deg) !important;
+  transform-origin: left center !important;
+}
+
+@media (max-width: 900px) {
+  body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-title-wordmark {
+    font-size: 46px !important;
+  }
+
+  body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-title-wordmark .lead-wordmark-person {
+    width: 43px !important;
+    height: 48px !important;
+  }
+
+  body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-title-wordmark .lead-wordmark-head {
+    left: 16px !important;
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-title-wordmark .lead-wordmark-body {
+    left: 13px !important;
+    width: 22px !important;
+    height: 33px !important;
+  }
+
+  body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-title-wordmark .lead-wordmark-swoosh {
+    left: 22px !important;
+    width: 44px !important;
+    height: 27px !important;
+  }
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-heading-logo {
+  position: relative !important;
+  width: 72px !important;
+  height: 72px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 auto !important;
+  overflow: visible !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-heading-logo::before,
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-heading-logo::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 16px !important;
+  border: 3px solid rgba(219, 234, 254, 0.84) !important;
+  border-radius: 2px !important;
+  background: transparent !important;
+  box-shadow: 0 8px 18px rgba(5, 18, 35, 0.18) !important;
+  transform: rotate(45deg) !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-heading-logo::after {
+  inset: 22px !important;
+  border-width: 2px !important;
+  border-color: rgba(47, 115, 198, 0.56) !important;
+  box-shadow: none !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-cycle-box {
+  position: absolute !important;
+  inset: 21px !important;
+  border-radius: 6px !important;
+  background: rgba(219, 234, 254, 0.12) !important;
+  border: 1px solid rgba(219, 234, 254, 0.18) !important;
+  pointer-events: none !important;
+  transform: rotate(45deg) !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-cycle-arrow {
+  position: absolute !important;
+  z-index: 2 !important;
+  width: 0 !important;
+  height: 0 !important;
+  filter: drop-shadow(0 8px 10px rgba(4, 18, 34, 0.26)) !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-cycle-arrow--top-left {
+  left: 2px !important;
+  top: 7px !important;
+  border-left: 17px solid transparent !important;
+  border-right: 17px solid transparent !important;
+  border-bottom: 36px solid #f4f6f7 !important;
+  transform: rotate(135deg) !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-cycle-arrow--top-right {
+  right: 2px !important;
+  top: 7px !important;
+  border-left: 17px solid transparent !important;
+  border-right: 17px solid transparent !important;
+  border-bottom: 36px solid #ff7a00 !important;
+  transform: rotate(-135deg) !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-cycle-arrow--bottom-right {
+  right: 2px !important;
+  bottom: 7px !important;
+  border-left: 17px solid transparent !important;
+  border-right: 17px solid transparent !important;
+  border-bottom: 36px solid #f4f6f7 !important;
+  transform: rotate(-45deg) !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-cycle-arrow--bottom-left {
+  left: 2px !important;
+  bottom: 7px !important;
+  border-left: 17px solid transparent !important;
+  border-right: 17px solid transparent !important;
+  border-bottom: 36px solid #ff7a00 !important;
+  transform: rotate(45deg) !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header {
+  min-height: 170px !important;
+  width: calc(100% + 56px) !important;
+  max-width: calc(100% + 56px) !important;
+  margin-top: -28px !important;
+  margin-left: -28px !important;
+  margin-right: -28px !important;
+  padding-top: 30px !important;
+  padding-left: 28px !important;
+  padding-right: 28px !important;
+  padding-bottom: 30px !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .lf-page-actions--hero {
+  position: absolute !important;
+  top: 28px !important;
+  right: 28px !important;
+  align-self: auto !important;
+  justify-content: flex-end !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .lf-filter-bar,
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .lf-bulk-bar,
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .lf-table-card {
+  width: calc(100% + 56px) !important;
+  margin-left: -28px !important;
+  margin-right: -28px !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .lf-filter-bar {
+  margin-top: 0 !important;
+}
+
+@media (max-width: 900px) {
+  body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header {
+    min-height: 0 !important;
+    width: 100% !important;
+    margin-top: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-top: 28px !important;
+    padding-bottom: 28px !important;
+  }
+
+  body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .lf-filter-bar,
+  body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .lf-bulk-bar,
+  body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .lf-table-card {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .lf-page-actions--hero {
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    margin-top: 20px !important;
+  }
+}
+
+/* Professional monochrome Leads header cleanup */
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header {
+  background: #fffdfa !important;
+  border: 1px solid #e3e8ef !important;
+  box-shadow: 0 10px 28px rgba(15, 30, 51, 0.06) !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header::after {
+  display: none !important;
+  content: none !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-heading {
+  gap: 18px !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-title-text {
+  color: #17324d !important;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  font-size: clamp(44px, 4vw, 60px) !important;
+  line-height: 1.03 !important;
+  font-style: normal !important;
+  font-weight: 900 !important;
+  letter-spacing: 0 !important;
+  text-shadow: none !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-heading-logo {
+  width: 58px !important;
+  height: 58px !important;
+  border-radius: 16px !important;
+  background: #f4f6f7 !important;
+  border: 1px solid #d9e2ec !important;
+  box-shadow: none !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-heading-logo::before {
+  inset: 15px !important;
+  border-color: rgba(23, 50, 77, 0.34) !important;
+  box-shadow: none !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-heading-logo::after {
+  display: none !important;
+  content: none !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-cycle-box {
+  display: none !important;
+}
+
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-cycle-arrow--top-left,
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-cycle-arrow--top-right,
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-cycle-arrow--bottom-right,
+body #root .crm-shell .crm-main .crm-content .lf-page.leads-page .sales-page-header .leads-cycle-arrow--bottom-left {
+  border-left-width: 13px !important;
+  border-right-width: 13px !important;
+  border-bottom-width: 28px !important;
+  border-bottom-color: #17324d !important;
+  opacity: 0.86 !important;
+  filter: none !important;
+}

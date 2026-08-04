@@ -1,0 +1,1432 @@
+:root {
+  --crm-theme-primary: #1c4f73;
+  --crm-theme-primary-hover: #163f5c;
+  --crm-theme-logo: #2f73c6;
+  --crm-theme-highlight: #2f73c6;
+  --crm-theme-highlight-soft: #eef2ff;
+  --crm-theme-danger: #b91c1c;
+  --crm-theme-on-primary: #ffffff;
+  --crm-theme-page-x: 12px;
+}
+
+/* Shared CRM action controls */
+button.button.primary,
+button.button.secondary,
+button.primary-action,
+button.sf-action,
+button.leadflow-primary-action,
+button.leadflow-outline-action,
+button.sf-filter-toggle,
+button.detail-edit-button,
+.panel-actions button.button.primary {
+  background: var(--crm-theme-primary) !important;
+  border-color: var(--crm-theme-primary) !important;
+  color: var(--crm-theme-on-primary) !important;
+}
+
+button.button.primary:hover,
+button.button.secondary:hover,
+button.primary-action:hover,
+button.sf-action:hover,
+button.leadflow-primary-action:hover,
+button.leadflow-outline-action:hover,
+button.sf-filter-toggle:hover,
+button.detail-edit-button:hover,
+.panel-actions button.button.primary:hover {
+  background: var(--crm-theme-primary-hover) !important;
+  border-color: var(--crm-theme-primary-hover) !important;
+  color: var(--crm-theme-on-primary) !important;
+}
+
+button.button.danger,
+button.bulk-delete,
+button.recycle-selected,
+button.danger-menu-item {
+  background: var(--crm-theme-danger) !important;
+  border-color: var(--crm-theme-danger) !important;
+  color: var(--crm-theme-on-primary) !important;
+}
+
+button.leadflow-chip.active,
+button.leadflow-chip.active-soft {
+  background: var(--crm-theme-primary) !important;
+  border-color: var(--crm-theme-primary) !important;
+  color: var(--crm-theme-on-primary) !important;
+}
+
+button.leadflow-chip.active:hover,
+button.leadflow-chip.active-soft:hover {
+  background: var(--crm-theme-primary-hover) !important;
+  border-color: var(--crm-theme-primary-hover) !important;
+  color: var(--crm-theme-on-primary) !important;
+}
+
+.leads-page .leadflow-object-icon,
+.leads-page .leadflow-object-icon i {
+  color: var(--crm-theme-logo) !important;
+}
+
+.leads-page .leadflow-object-icon {
+  padding: 0.5rem 0.72rem !important;
+}
+
+.leads-page .leadflow-object-icon i {
+  font-size: 1.85rem !important;
+}
+
+.sidebar h1 > span:not(.sidebar-logo),
+.sidebar-logo,
+.sidebar-logo svg {
+  color: var(--crm-theme-logo) !important;
+  stroke: var(--crm-theme-logo) !important;
+}
+
+/* Leads highlighted and active text */
+.leads-page .leadflow-title:hover,
+.leads-page .leadflow-date-pill svg,
+.leads-page .sf-list-view-menu button.selected,
+.leads-page .sf-list-view-menu button.selected svg,
+.leads-page .link-cell,
+.leads-page .table-link,
+.leads-page.salesforce-leads .link-cell,
+.leads-page.salesforce-leads .table-link {
+  color: var(--crm-theme-highlight) !important;
+}
+
+.leads-page .sf-list-view-menu button.selected,
+.leads-page.salesforce-leads td:has(.link-cell) .link-cell:first-child {
+  background: var(--crm-theme-highlight-soft) !important;
+}
+
+.leads-page .link-cell,
+.leads-page .link-cell *,
+.leads-page .table-link,
+.leads-page .table-link *,
+.leads-page.salesforce-leads td:has(.link-cell) .link-cell:first-child,
+.leads-page.salesforce-leads td:has(.link-cell) .link-cell:first-child * {
+  color: var(--crm-theme-highlight) !important;
+}
+
+.leads-page .search-highlight {
+  background: var(--crm-theme-highlight-soft) !important;
+  color: var(--crm-theme-highlight) !important;
+}
+
+.leadflow-filter-menu-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.leadflow-filter-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 80;
+  min-width: 170px;
+  padding: 8px;
+  border: 1px solid #d8e4f0;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.14);
+}
+
+.leadflow-filter-menu button {
+  width: 100%;
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: #102033;
+  padding: 0 11px;
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.leadflow-filter-menu button:hover {
+  background: var(--crm-theme-highlight-soft);
+  color: var(--crm-theme-highlight);
+}
+
+.leads-page .lead-toolbar {
+  margin-left: var(--crm-theme-page-x) !important;
+  margin-right: var(--crm-theme-page-x) !important;
+  width: calc(100% - (var(--crm-theme-page-x) * 2)) !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+  gap: 12px !important;
+  flex-wrap: wrap !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.leads-page.salesforce-leads .sf-list-head,
+.leads-page.salesforce-leads .sf-list-panel {
+  margin-left: var(--crm-theme-page-x) !important;
+  margin-right: var(--crm-theme-page-x) !important;
+  width: auto !important;
+}
+
+.leads-page.salesforce-leads .sf-list-head {
+  margin-top: -36px !important;
+  border-radius: 0 !important;
+}
+
+.leads-page .lead-toolbar .search,
+.leads-page.salesforce-leads .lead-toolbar .search,
+.leads-page .lead-toolbar .search input,
+.leads-page.salesforce-leads .lead-toolbar .search input,
+.leads-page .inline-filter-control.searchable-filter,
+.leads-page .inline-filter-control.searchable-filter input,
+.leads-page .inline-date-trigger,
+.leads-page .lead-clear-inline {
+  border-radius: 0 !important;
+}
+
+.leads-page .lead-toolbar .search::before,
+.leads-page .lead-toolbar .search::after {
+  border-radius: 0 !important;
+}
+
+.leads-page .lead-toolbar .search {
+  flex: 1 1 420px !important;
+  max-width: 520px !important;
+  min-height: 44px !important;
+  height: 44px !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  transform: none !important;
+}
+
+.leads-page .lead-toolbar .search input {
+  height: 100% !important;
+}
+
+.leads-page .lead-toolbar .search:first-child {
+  margin-inline-start: 0 !important;
+}
+
+.lead-inline-filters {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-end;
+  gap: 10px;
+  flex: 1 1 620px;
+  min-width: 0;
+}
+
+.inline-filter-item {
+  display: flex;
+  align-items: stretch;
+}
+
+.inline-filter-control.searchable-filter {
+  width: 220px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  border: 1px solid #d8e4f0;
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 0 34px 0 12px;
+  box-shadow: none;
+}
+
+.inline-filter-control.searchable-filter > span {
+  display: inline-flex;
+  align-items: center;
+  color: #48566b;
+  font-size: 13px;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.inline-filter-control.searchable-filter > svg:not(.searchable-chevron) {
+  flex: 0 0 auto;
+  color: #64748b;
+}
+
+.inline-filter-control.searchable-filter input {
+  width: 108px;
+  min-height: 32px;
+  border: 2px solid #d9e4ef;
+  outline: 0;
+  background: #ffffff;
+  color: #102033;
+  padding: 0 4px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.inline-filter-control .searchable-chevron {
+  position: absolute;
+  right: 10px;
+  color: var(--crm-theme-highlight);
+}
+
+.standard-filter-control.searchable-filter {
+  width: 210px;
+  padding: 0 34px 0 12px;
+}
+
+.standard-filter-control.searchable-filter > span {
+  display: none;
+}
+
+.standard-filter-control.searchable-filter input {
+  flex: 1;
+  width: 100%;
+  min-height: auto;
+  border: 0;
+  background: transparent;
+  color: #48566b;
+  padding: 0;
+  font-size: 13px;
+  font-weight: 850;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.standard-filter-control.searchable-filter input::placeholder {
+  color: #48566b;
+  opacity: 1;
+}
+
+.inline-date-filter-box {
+  position: relative;
+  min-width: 220px;
+}
+
+.inline-date-trigger {
+  width: 100%;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #d8e4f0;
+  border-radius: 10px;
+  background: #ffffff !important;
+  color: #102033;
+  padding: 0 34px 0 12px;
+  position: relative;
+}
+
+.inline-date-trigger > svg:first-child {
+  flex: 0 0 auto;
+  color: #64748b;
+}
+
+.inline-date-trigger > span {
+  flex: 1;
+  color: #48566b;
+  font-size: 13px;
+  font-weight: 850;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.inline-date-trigger > svg:last-child {
+  position: absolute;
+  right: 10px;
+  color: var(--crm-theme-highlight);
+}
+
+.inline-date-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 90;
+  width: 260px;
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid #d8e4f0;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.14);
+}
+
+.inline-date-menu label {
+  display: grid;
+  gap: 6px;
+}
+
+.inline-date-menu label span {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.inline-date-menu input {
+  min-height: 38px;
+  border: 1px solid #d8e4f0;
+  border-radius: 10px;
+  padding: 0 10px;
+  color: #102033;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.inline-date-menu button {
+  min-height: 36px;
+  border: 1px solid #d8e4f0;
+  border-radius: 10px;
+  background: #ffffff !important;
+  color: var(--crm-theme-primary) !important;
+  font-weight: 800;
+}
+
+.lead-clear-inline {
+  min-height: 40px;
+  min-width: 150px;
+  border: 1px solid #d8e4f0;
+  border-radius: 12px;
+  background: #ffffff !important;
+  color: var(--crm-theme-primary) !important;
+  padding: 0 14px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.lead-clear-inline:hover {
+  border-color: var(--crm-theme-highlight) !important;
+  background: var(--crm-theme-highlight-soft) !important;
+  color: var(--crm-theme-highlight) !important;
+}
+
+@media (max-width: 1200px) {
+  .lead-inline-filters {
+    justify-content: flex-start;
+  }
+}
+
+/* Premium Leads heading card */
+.leads-page.salesforce-leads .sf-list-head {
+  isolation: isolate;
+  position: relative !important;
+  overflow: hidden !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  gap: 22px 30px !important;
+  padding: 30px 34px 22px !important;
+  border: 1px solid #d8e4f0 !important;
+  border-top: 0 !important;
+  border-radius: 0 !important;
+  background:
+    linear-gradient(135deg, rgba(47, 115, 198, 0.055), transparent 38%),
+    linear-gradient(180deg, #ffffff 0%, #f9fbfe 100%) !important;
+  box-shadow: 0 12px 34px rgba(15, 30, 51, 0.07) !important;
+}
+
+.leads-page.salesforce-leads .sf-list-head::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #2f73c6 0%, rgba(47, 115, 198, 0.62) 42%, rgba(47, 115, 198, 0.14) 100%);
+}
+
+.leads-page.salesforce-leads .sf-list-head::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #2f73c6 0%, rgba(47, 115, 198, 0.62) 42%, rgba(47, 115, 198, 0.14) 100%);
+}
+
+.leads-page .leadflow-head-main {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.leads-page .leadflow-title-row {
+  gap: 18px;
+}
+
+.leads-page .leadflow-object-icon {
+  width: 58px;
+  height: 58px;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.leads-page .leadflow-object-icon i {
+  font-size: 2.35rem !important;
+}
+
+.leads-page .leadflow-title {
+  position: relative;
+  width: fit-content;
+  color: #1d4b79 !important;
+  background: transparent;
+  font-family: Inter, Manrope, ui-sans-serif, system-ui, sans-serif !important;
+  font-size: 38px !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.045em !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85);
+  padding-right: 3px;
+}
+
+.leads-page .leadflow-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -7px;
+  width: 72%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--crm-theme-logo), rgba(47, 115, 198, 0));
+  box-shadow: none;
+}
+
+.leads-page .leadflow-title::before {
+  display: none;
+  content: none;
+}
+
+.leads-page .leadflow-title:hover {
+  color: var(--crm-theme-primary) !important;
+}
+
+.leads-page .leadflow-title-copy {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+.leads-page .leadflow-eyebrow {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.leads-page .leadflow-title-copy p {
+  margin: 0;
+  color: #5e7187;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.leads-page .leadflow-title svg {
+  width: 18px;
+  height: 18px;
+  color: #64748b;
+  transition: transform 140ms ease, color 140ms ease;
+}
+
+.leads-page .leadflow-title:hover svg {
+  color: var(--crm-theme-highlight);
+  transform: translateY(1px);
+}
+
+.leads-page .leadflow-count {
+  min-height: 28px;
+  border: 1px solid #dfe8f2;
+  background: #f4f8fc;
+  color: #63758a;
+  padding: 4px 14px;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.leads-page .leadflow-head-actions {
+  align-self: center;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.leads-page .leadflow-outline-action,
+.leads-page .leadflow-primary-action {
+  min-height: 42px;
+  border-radius: 0 !important;
+  padding: 0 17px;
+  font-size: 14px;
+  font-weight: 800;
+  box-shadow: none !important;
+}
+
+.leads-page .leadflow-outline-action {
+  background: #f8fbfe !important;
+  color: #33475d !important;
+  border-color: #d6e1ed !important;
+}
+
+.leads-page .leadflow-outline-action:hover {
+  background: #f2f7fd !important;
+  color: var(--crm-theme-primary) !important;
+  border-color: #a9c2dc !important;
+}
+
+.leads-page .leadflow-primary-action {
+  min-width: 132px;
+  letter-spacing: 0.01em;
+}
+
+.leads-page .leadflow-filter-row {
+  align-items: center;
+  padding-top: 8px;
+  border-top: 1px solid #edf2f7;
+}
+
+.leads-page .leadflow-chip-group {
+  gap: 10px;
+}
+
+.leads-page .leadflow-chip,
+.leads-page .leadflow-date-pill {
+  min-height: 32px;
+  border-radius: 0 !important;
+  border: 1px solid #dce6f0;
+  background: #f8fbfe;
+  color: #4d5f73;
+  padding: 0 14px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.leads-page .leadflow-chip.active,
+.leads-page .leadflow-chip.active-soft {
+  background: var(--crm-theme-primary) !important;
+  border-color: var(--crm-theme-primary) !important;
+}
+
+.leads-page .leadflow-chip > span {
+  width: 7px;
+  height: 7px;
+}
+
+.leads-page .leadflow-date-pill {
+  background: #f4f8fc;
+  color: #63758a;
+}
+
+@media (max-width: 1180px) {
+  .leads-page .leadflow-head-actions {
+    flex-wrap: wrap;
+  }
+}
+
+/* Shared design system: dashboard heading, Contact action button, Contact table */
+:root {
+  --app-background: var(--lf-bg, #eef3f8);
+  --surface-background: var(--lf-card, #ffffff);
+  --primary-color: var(--lf-primary, #1c4f73);
+  --primary-hover-color: var(--lf-primary-hover, #163f5c);
+  --primary-text-color: #ffffff;
+  --heading-color: #ffffff;
+  --heading-font-size: clamp(30px, 4vw, 46px);
+  --heading-font-weight: 900;
+  --text-primary: var(--lf-text, #0b1e33);
+  --text-secondary: var(--lf-muted, #64748b);
+  --border-color: var(--lf-border, #d8e4f0);
+  --button-height: 42px;
+  --button-radius: 0;
+  --table-header-height: 44px;
+  --table-row-height: 56px;
+  --table-radius: 0;
+  --content-padding: 28px;
+  --section-gap: 14px;
+}
+
+.crm-content {
+  background: var(--app-background);
+  padding: var(--content-padding);
+}
+
+.crm-legacy-page,
+.lf-page-content {
+  width: 100%;
+  min-width: 0;
+}
+
+.page,
+.lf-page,
+.portal-main {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+}
+
+.salesforce-leads,
+.lf-page {
+  display: grid;
+  gap: var(--section-gap);
+}
+
+.portal-page--embedded {
+  min-height: auto;
+  padding: 0;
+}
+
+.user-dashboard {
+  gap: var(--section-gap);
+}
+
+.user-dashboard-hero,
+.salesforce-leads .sf-list-head,
+.lf-page-heading--dashboard {
+  position: relative !important;
+  width: 100% !important;
+  min-height: 210px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 24px !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 34px !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--table-radius) !important;
+  background:
+    linear-gradient(135deg, rgba(11, 30, 51, 0.96), rgba(16, 42, 68, 0.96)),
+    linear-gradient(90deg, rgba(47, 115, 198, 0.25), transparent) !important;
+  box-shadow: 0 18px 46px rgba(15, 30, 51, 0.16) !important;
+  color: var(--heading-color) !important;
+}
+
+.user-dashboard-hero::before,
+.salesforce-leads .sf-list-head::before,
+.lf-page-heading--dashboard::before {
+  display: none !important;
+  content: none !important;
+}
+
+.user-dashboard-hero::after,
+.salesforce-leads .sf-list-head::after,
+.lf-page-heading--dashboard::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: auto -12% -54% 54% !important;
+  width: auto !important;
+  height: 180px !important;
+  background: rgba(47, 115, 198, 0.28) !important;
+  transform: rotate(-8deg) !important;
+}
+
+.user-dashboard-hero-copy,
+.salesforce-leads .sf-title-wrap,
+.salesforce-leads .sf-title-block,
+.salesforce-leads .sf-action-strip,
+.salesforce-leads .sf-actions,
+.lf-page-actions--hero {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.salesforce-leads .sf-title-wrap,
+.salesforce-leads .sf-title-block {
+  min-width: 0 !important;
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  align-items: start !important;
+  gap: 0 !important;
+}
+
+.salesforce-leads .sf-object-icon,
+.salesforce-leads .sf-pin {
+  display: none !important;
+}
+
+.user-dashboard-kicker,
+.salesforce-leads .sf-title-wrap p,
+.salesforce-leads .sf-title-block span {
+  width: fit-content !important;
+  min-height: 28px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 0 !important;
+  background: rgba(47, 115, 198, 0.22) !important;
+  color: #dbeafe !important;
+  padding: 0 11px !important;
+  font-size: 12px !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.08em !important;
+  line-height: 1 !important;
+  text-transform: uppercase !important;
+}
+
+.user-dashboard-hero h1,
+.salesforce-leads .sf-list-title,
+.salesforce-leads .enhanced-heading {
+  width: auto !important;
+  min-height: 0 !important;
+  margin: 16px 0 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  color: var(--heading-color) !important;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  font-size: var(--heading-font-size) !important;
+  line-height: 1.05 !important;
+  font-weight: var(--heading-font-weight) !important;
+  letter-spacing: 0 !important;
+  text-align: left !important;
+  box-shadow: none !important;
+}
+
+.salesforce-leads .sf-list-title svg {
+  display: none !important;
+}
+
+.user-dashboard-hero p,
+.salesforce-leads .sf-page-subtitle {
+  width: auto !important;
+  min-height: 0 !important;
+  display: block !important;
+  max-width: 680px !important;
+  margin: 12px 0 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  color: #cbd5e1 !important;
+  font-size: 16px !important;
+  line-height: 1.55 !important;
+  font-weight: 650 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+.sf-action-strip,
+.sf-actions,
+.lf-page-actions--hero {
+  align-self: center !important;
+  top: auto !important;
+  right: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+}
+
+.button.primary,
+.primary-action,
+.sf-action:first-child,
+.salesforce-leads .sf-list-head .sf-action-strip .sf-action,
+.lf-page-actions .lf-btn-primary,
+.lf-page-actions .lf-btn-secondary,
+.lf-modal-actions .primary,
+.lf-empty-state .primary,
+.leadflow-primary-action,
+.leadflow-outline-action,
+.detail-edit-button {
+  min-height: var(--button-height) !important;
+  height: var(--button-height) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  border: 1px solid var(--primary-color) !important;
+  border-radius: var(--button-radius) !important;
+  background: var(--primary-color) !important;
+  color: var(--primary-text-color) !important;
+  padding: 0 17px !important;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
+  box-shadow: none !important;
+  transform: none !important;
+  white-space: nowrap !important;
+}
+
+.button.primary:hover,
+.primary-action:hover,
+.sf-action:first-child:hover,
+.salesforce-leads .sf-list-head .sf-action-strip .sf-action:hover,
+.lf-page-actions .lf-btn-primary:hover,
+.lf-page-actions .lf-btn-secondary:hover,
+.lf-modal-actions .primary:hover,
+.lf-empty-state .primary:hover,
+.leadflow-primary-action:hover,
+.leadflow-outline-action:hover,
+.detail-edit-button:hover {
+  background: var(--primary-hover-color) !important;
+  border-color: var(--primary-hover-color) !important;
+  color: var(--primary-text-color) !important;
+  transform: none !important;
+}
+
+.button.primary:disabled,
+.sf-action:disabled,
+.lf-page-actions button:disabled {
+  cursor: not-allowed !important;
+  opacity: 0.62 !important;
+}
+
+.salesforce-leads .lead-toolbar,
+.lf-filter-bar,
+.toolbar {
+  width: 100% !important;
+  display: flex !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.search,
+.salesforce-leads .lead-toolbar .search,
+.lead-toolbar .search,
+.lf-combo-button,
+.lf-clear-filters,
+.sf-filter-toggle,
+.icon-button,
+.salesforce-leads .lead-toolbar .icon-button {
+  min-height: 42px !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 0 !important;
+  background: var(--surface-background) !important;
+  color: var(--text-secondary) !important;
+  box-shadow: none !important;
+}
+
+.search {
+  flex: 1 1 360px !important;
+}
+
+.search input,
+.lf-combo-button,
+.lf-clear-filters {
+  color: var(--text-primary) !important;
+  font-size: 14px !important;
+  font-weight: 650 !important;
+}
+
+.search:focus-within,
+.salesforce-leads .lead-toolbar .search:focus-within,
+.lf-combo-button:focus,
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+  border-color: rgba(47, 115, 198, 0.62) !important;
+  box-shadow: 0 0 0 4px rgba(47, 115, 198, 0.1) !important;
+}
+
+.sf-list-panel,
+.table-wrap,
+.salesforce-leads .sf-list-panel,
+.salesforce-leads .table-wrap,
+.lf-table-card,
+.custom-fields-table,
+.detail-block:has(.small-table) {
+  width: 100% !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--table-radius) !important;
+  background: var(--surface-background) !important;
+  box-shadow: 0 10px 28px rgba(28, 45, 72, 0.08) !important;
+}
+
+.table-wrap,
+.lf-table-scroll,
+.sf-list-panel {
+  overflow-x: auto !important;
+}
+
+table,
+.salesforce-leads table,
+.lf-leads-table,
+.small-table {
+  width: 100% !important;
+  min-width: 1040px !important;
+  border-collapse: collapse !important;
+  border-spacing: 0 !important;
+  table-layout: auto !important;
+  text-align: left !important;
+  font-variant-numeric: tabular-nums !important;
+}
+
+th,
+td,
+.salesforce-leads th,
+.salesforce-leads td,
+.lf-leads-table th,
+.lf-leads-table td,
+.small-table th,
+.small-table td {
+  border-right: 0 !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  padding: 0 16px !important;
+  white-space: nowrap !important;
+  vertical-align: middle !important;
+}
+
+th,
+.salesforce-leads th,
+.lf-leads-table thead th,
+.small-table th {
+  height: var(--table-header-height) !important;
+  background: #f8fafc !important;
+  color: #475569 !important;
+  font-size: 11px !important;
+  line-height: 1 !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+}
+
+td,
+.salesforce-leads td,
+.lf-leads-table tbody td,
+.small-table td {
+  height: var(--table-row-height) !important;
+  color: #334155 !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+}
+
+tbody tr,
+.salesforce-leads tbody tr,
+.lf-leads-table tbody tr {
+  transition: background 120ms ease !important;
+}
+
+tbody tr:hover,
+.salesforce-leads tbody tr:hover,
+.lf-leads-table tbody tr:hover {
+  background: #f8fafc !important;
+}
+
+tbody tr.selected-row,
+tbody tr.selected-row:hover,
+.lf-leads-table tbody tr.selected,
+.lf-leads-table tbody tr.selected:hover {
+  background: #eef3fb !important;
+}
+
+.pill,
+.salesforce-leads .pill,
+.lf-badge {
+  min-height: 24px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  border-radius: 999px !important;
+  padding: 2px 10px !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+}
+
+.actions,
+.inline-row-actions,
+.row-menu-actions {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.icon-button,
+.salesforce-leads .icon-button,
+.lf-actions-cell > button {
+  width: 34px !important;
+  height: 34px !important;
+  min-height: 34px !important;
+  padding: 0 !important;
+}
+
+.lf-table-card {
+  overflow: hidden !important;
+}
+
+.lf-filter-bar {
+  margin-bottom: 0 !important;
+}
+
+.lf-select-field {
+  flex: 1 1 190px !important;
+}
+
+.lf-clear-filters {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  padding: 0 14px !important;
+}
+
+.generated-page-head,
+.profile-metrics,
+.detail-grid {
+  border-color: var(--border-color) !important;
+}
+
+@media (max-width: 900px) {
+  :root {
+    --content-padding: 16px;
+  }
+
+  .user-dashboard-hero,
+  .salesforce-leads .sf-list-head,
+  .lf-page-heading--dashboard {
+    min-height: 0 !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    align-items: start !important;
+    padding: 26px !important;
+  }
+
+  .sf-action-strip,
+  .sf-actions,
+  .lf-page-actions--hero {
+    justify-content: flex-start !important;
+  }
+
+  .sf-action-strip .sf-action,
+  .sf-actions .sf-action,
+  .lf-page-actions--hero button {
+    width: 100% !important;
+  }
+
+  .search,
+  .salesforce-leads .lead-toolbar .search,
+  .lf-select-field,
+  .lf-clear-filters {
+    flex-basis: 100% !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  table,
+  .salesforce-leads table,
+  .lf-leads-table,
+  .small-table {
+    min-width: 900px !important;
+  }
+}
+
+/* Heading correction: keep page headers static and aligned, not boxed controls */
+.salesforce-leads .sf-list-head,
+.lf-page-heading--dashboard {
+  min-height: 176px !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  align-items: center !important;
+  gap: 24px !important;
+  padding: 34px 32px !important;
+  border: 1px solid #d8e4f0 !important;
+  border-radius: 16px !important;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(248, 251, 255, 0.96)),
+    linear-gradient(90deg, rgba(47, 115, 198, 0.1), transparent) !important;
+  box-shadow: 0 12px 34px rgba(15, 30, 51, 0.07) !important;
+}
+
+.salesforce-leads .sf-list-head::before,
+.lf-page-heading--dashboard::before {
+  display: none !important;
+  content: none !important;
+}
+
+.salesforce-leads .sf-list-head::after,
+.lf-page-heading--dashboard::after {
+  content: "" !important;
+  position: absolute !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: auto !important;
+  top: auto !important;
+  width: 48% !important;
+  height: 92px !important;
+  background: rgba(47, 115, 198, 0.22) !important;
+  clip-path: polygon(0 100%, 100% 0, 100% 100%) !important;
+  transform: none !important;
+  pointer-events: none !important;
+}
+
+.salesforce-leads .sf-title-wrap,
+.salesforce-leads .sf-title-block {
+  display: block !important;
+  min-width: 0 !important;
+}
+
+.salesforce-leads .sf-title-wrap > div,
+.salesforce-leads .sf-title-block > div {
+  display: block !important;
+  min-width: 0 !important;
+}
+
+.user-dashboard-kicker,
+.salesforce-leads .sf-title-wrap > div > p:first-child,
+.salesforce-leads .sf-title-block > div > span:first-child {
+  min-height: 0 !important;
+  display: block !important;
+  width: fit-content !important;
+  margin: 0 0 10px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #5f7694 !important;
+  padding: 0 !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+  line-height: 1.2 !important;
+  text-transform: none !important;
+}
+
+.salesforce-leads .sf-list-title,
+.salesforce-leads .enhanced-heading {
+  display: block !important;
+  width: fit-content !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 0 10px !important;
+  border: 0 !important;
+  border-bottom: 1px solid rgba(15, 30, 51, 0.55) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #061936 !important;
+  font-size: 32px !important;
+  line-height: 1.1 !important;
+  font-weight: 800 !important;
+  letter-spacing: 0 !important;
+  box-shadow: none !important;
+  text-align: left !important;
+}
+
+.salesforce-leads .sf-list-title svg {
+  display: none !important;
+}
+
+.salesforce-leads .sf-page-subtitle {
+  display: block !important;
+  width: fit-content !important;
+  max-width: 680px !important;
+  min-height: 0 !important;
+  margin: 12px 0 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #5f7694 !important;
+  padding: 0 !important;
+  font-size: 14px !important;
+  line-height: 1.45 !important;
+  font-weight: 650 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+.salesforce-leads .sf-action-strip,
+.salesforce-leads .sf-actions,
+.lf-page-actions--hero {
+  position: relative !important;
+  z-index: 1 !important;
+  align-self: center !important;
+}
+
+.salesforce-leads .sf-list-head .sf-action,
+.lf-page-actions--hero .lf-btn {
+  min-height: 54px !important;
+  height: 54px !important;
+  border-radius: 999px !important;
+  padding: 0 24px !important;
+  background: #1c4f73 !important;
+  border-color: #1c4f73 !important;
+  color: #ffffff !important;
+  font-size: 18px !important;
+  font-weight: 800 !important;
+  box-shadow: none !important;
+}
+
+.salesforce-leads .sf-list-head .sf-action:hover,
+.lf-page-actions--hero .lf-btn:hover {
+  background: #163f5c !important;
+  border-color: #163f5c !important;
+  color: #ffffff !important;
+}
+
+@media (max-width: 900px) {
+  .salesforce-leads .sf-list-head,
+  .lf-page-heading--dashboard {
+    grid-template-columns: 1fr !important;
+    min-height: 0 !important;
+    padding: 26px !important;
+  }
+
+  .salesforce-leads .sf-list-head::after,
+  .lf-page-heading--dashboard::after {
+    width: 70% !important;
+    height: 64px !important;
+  }
+
+  .salesforce-leads .sf-list-title,
+  .salesforce-leads .enhanced-heading {
+    font-size: 28px !important;
+  }
+
+  .salesforce-leads .sf-list-head .sf-action,
+  .lf-page-actions--hero .lf-btn {
+    width: 100% !important;
+  }
+}
+
+/* Dashboard header reference sync */
+.user-dashboard-hero,
+.salesforce-leads .sf-list-head,
+.lf-page-heading--dashboard {
+  position: relative !important;
+  isolation: isolate !important;
+  min-height: 260px !important;
+  width: 100% !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  align-items: center !important;
+  gap: 28px !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 56px 42px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: #17324d !important;
+  box-shadow: none !important;
+  color: #ffffff !important;
+}
+
+.user-dashboard-hero::before,
+.salesforce-leads .sf-list-head::before,
+.lf-page-heading--dashboard::before {
+  display: none !important;
+  content: none !important;
+}
+
+.user-dashboard-hero::after,
+.salesforce-leads .sf-list-head::after,
+.lf-page-heading--dashboard::after {
+  content: "" !important;
+  position: absolute !important;
+  z-index: -1 !important;
+  inset: auto 0 0 auto !important;
+  width: 48% !important;
+  height: 124px !important;
+  background: #274e78 !important;
+  clip-path: polygon(0 100%, 100% 0, 100% 100%) !important;
+  transform: none !important;
+  pointer-events: none !important;
+}
+
+.user-dashboard-hero-copy,
+.salesforce-leads .sf-title-wrap,
+.salesforce-leads .sf-title-block {
+  position: relative !important;
+  z-index: 1 !important;
+  display: block !important;
+  min-width: 0 !important;
+}
+
+.user-dashboard-kicker,
+.salesforce-leads .sf-title-wrap > div > p:first-child,
+.salesforce-leads .sf-title-block > div > span:first-child {
+  display: block !important;
+  width: fit-content !important;
+  min-height: 0 !important;
+  margin: 0 0 22px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #6f8fb7 !important;
+  font-size: 16px !important;
+  line-height: 1.15 !important;
+  font-weight: 800 !important;
+  letter-spacing: 0 !important;
+  text-transform: uppercase !important;
+}
+
+.user-dashboard-hero h1,
+.salesforce-leads .sf-list-title,
+.salesforce-leads .enhanced-heading {
+  display: block !important;
+  width: fit-content !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #ffffff !important;
+  font-size: clamp(44px, 4vw, 60px) !important;
+  line-height: 1.03 !important;
+  font-weight: 900 !important;
+  letter-spacing: 0 !important;
+  text-align: left !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+.salesforce-leads .sf-list-title svg {
+  display: none !important;
+}
+
+.user-dashboard-hero p,
+.salesforce-leads .sf-page-subtitle {
+  display: block !important;
+  width: auto !important;
+  max-width: 980px !important;
+  min-height: 0 !important;
+  margin: 18px 0 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #f4f8ff !important;
+  font-size: 21px !important;
+  line-height: 1.35 !important;
+  font-weight: 800 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+.salesforce-leads .sf-action-strip,
+.salesforce-leads .sf-actions,
+.lf-page-actions--hero {
+  position: relative !important;
+  z-index: 1 !important;
+  align-self: center !important;
+  justify-content: flex-end !important;
+}
+
+@media (max-width: 900px) {
+  .user-dashboard-hero,
+  .salesforce-leads .sf-list-head,
+  .lf-page-heading--dashboard {
+    min-height: 0 !important;
+    grid-template-columns: 1fr !important;
+    align-items: start !important;
+    padding: 34px 24px !important;
+  }
+
+  .user-dashboard-hero h1,
+  .salesforce-leads .sf-list-title,
+  .salesforce-leads .enhanced-heading {
+    font-size: 38px !important;
+  }
+
+  .user-dashboard-hero p,
+  .salesforce-leads .sf-page-subtitle {
+    font-size: 18px !important;
+  }
+}
