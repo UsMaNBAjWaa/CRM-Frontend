@@ -4,26 +4,18 @@ import {
   BarChart3,
   Bell,
   Boxes,
-  BriefcaseBusiness,
   Building2,
-  ChevronDown,
-  ChevronRight,
-  Clock3,
   CreditCard,
   Database,
-  ExternalLink,
   HelpCircle,
   LayoutGrid,
   Lock,
   MessageSquareText,
   Menu,
-  Monitor,
-  Moon,
   Power,
   Search,
   Settings,
   ShieldCheck,
-  Sun,
   TrendingUp,
   UserRound,
   Users,
@@ -259,14 +251,6 @@ export default function App() {
 
         </nav>
 
-        {/* Sidebar footer */}
-        <div className="crm-sb-footer">
-          <div className="crm-sb-footer-avatar" aria-hidden="true">{getInitials(currentUser.username)}</div>
-          <div className="crm-sb-footer-meta">
-            <span className="crm-sb-footer-name">{formatUsername(currentUser.username)}</span>
-            <span className="crm-sb-footer-role">{currentUser.user_type === 'ADMIN' ? 'Admin' : 'User'}</span>
-          </div>
-        </div>
       </aside>
 
       {/* ── Right column: Navbar + Content ── */}
@@ -824,62 +808,17 @@ function AccountDrawer({ user, onClose, onLogout }) {
   return (
     <div className="account-drawer-layer" role="presentation">
       <button className="account-drawer-backdrop" type="button" aria-label="Close account panel" onClick={onClose} />
-      <aside className="account-drawer" role="dialog" aria-modal="true" aria-label="Account panel">
-        <button className="account-drawer-close" type="button" aria-label="Close account panel" onClick={onClose}>
-          <X size={22} />
-        </button>
-
+      <aside className="account-drawer account-drawer--simple" role="menu" aria-label="Account menu">
         <header className="account-drawer-head">
           <div className="account-drawer-avatar">{getInitials(user.username)}</div>
           <div>
             <h2>{formatUsername(user.username)}</h2>
             <p>User Id: {user.id}</p>
-            <button className="account-role-pill" type="button">
-              {user.user_type === 'ADMIN' ? 'admin' : 'user'} <ChevronDown size={14} />
-            </button>
           </div>
         </header>
 
-        <div className="account-drawer-body">
-          <section className="account-plan-card">
-            <div className="account-trial">
-              <Clock3 size={18} />
-              <span>Your trial plan <strong>Expires in 14 day(s)</strong></span>
-            </div>
-            <div className="account-plan-row">
-              <span className="account-plan-icon"><BriefcaseBusiness size={18} /></span>
-              <strong>Enterprise Edition</strong>
-              <button type="button">UPGRADE</button>
-            </div>
-          </section>
-
-          <section className="account-setup-card">
-            <span className="account-setup-icon"><Settings size={24} /></span>
-            <div>
-              <h3>Start your quick setup</h3>
-              <p>Go to landing page</p>
-            </div>
-            <button type="button" aria-label="Open quick setup"><ChevronRight size={22} /></button>
-          </section>
-
-          <section className="account-mode-card">
-            <h3>Mode</h3>
-            <div className="account-mode-toggle" role="group" aria-label="Theme mode">
-              <button className="active" type="button"><Sun size={18} />Day</button>
-              <button type="button"><Moon size={18} />Night</button>
-              <button type="button"><Monitor size={18} />Auto</button>
-            </div>
-          </section>
-
-          <section className="account-help-card">
-            <h3>Need Help?</h3>
-            <p>Access account tools or sign out from this panel.</p>
-          </section>
-        </div>
-
         <footer className="account-drawer-footer">
-          <button type="button"><ExternalLink size={18} />My Account</button>
-          <button type="button" onClick={onLogout}><Power size={18} />Sign Out</button>
+          <button type="button" className="account-signout-button" role="menuitem" onClick={onLogout}><Power size={18} />Sign Out</button>
         </footer>
       </aside>
     </div>

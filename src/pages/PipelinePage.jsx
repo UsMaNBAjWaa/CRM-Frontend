@@ -233,7 +233,16 @@ export default function PipelinePage({ leads, setLeads, opportunities, setOpport
     Negotiation: 80,
     Won: 100,
   };
-  const opportunityId = editingOpportunityId || `OP-${3000 + opportunities.length + 1}`;
+  const makeNextOpportunityId = () => {
+    const usedNumbers = [
+      ...opportunities.map((item) => item.id),
+      ...stageRecords.map((record) => record.opportunityId || record.id),
+    ]
+      .map((id) => Number(String(id || '').match(/^OP-(\d+)$/)?.[1]))
+      .filter(Number.isFinite);
+    return `OP-${Math.max(3000, ...usedNumbers) + 1}`;
+  };
+  const opportunityId = editingOpportunityId || makeNextOpportunityId();
   const probability = stageProbability[opportunityForm.stage] ?? 10;
   const configuredOpportunityStageName = opportunityStageConfig.name || dynamicStagePage || '';
   const opportunityStage = stageList.find((stage) => stage.id === opportunityStageId || stage.name === configuredOpportunityStageName);
@@ -463,7 +472,7 @@ export default function PipelinePage({ leads, setLeads, opportunities, setOpport
       return;
     }
     setOpportunityErrors([]);
-    const nextOpportunityId = editingOpportunityId || `OP-${3000 + opportunities.length + 1}`;
+    const nextOpportunityId = editingOpportunityId || makeNextOpportunityId();
     const nextOpportunity = {
       name: opportunityForm.dealName.trim(),
       company: opportunityForm.company,
@@ -669,7 +678,7 @@ export default function PipelinePage({ leads, setLeads, opportunities, setOpport
       return;
     }
     const source = customDrop?.lead || customDrop?.item;
-    const nextOpportunityId = customDrop.type === 'lead' ? `OP-${3000 + opportunities.length + 1}` : customDrop.item.id;
+    const nextOpportunityId = customDrop.type === 'lead' ? makeNextOpportunityId() : customDrop.item.id;
     const dealName = source?.name || makeInitialDealName(source || {});
     const amountField = customFields.find((field) => /amount|value|deal/i.test(field.label));
     const closeDateField = customFields.find((field) => /close|date/i.test(field.label));
