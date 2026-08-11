@@ -5,6 +5,7 @@ import { owners } from '../data/crmData';
 
 const companyColumns = [
   ['id', 'Company ID', 'link-cell'],
+  ['date', 'Date'],
   ['name', 'Company Name'],
   ['type', 'Type'],
   ['annualRevenue', 'Annual Revenue'],
@@ -15,9 +16,9 @@ const companyColumns = [
 ];
 
 const companyRows = [
-  { id: 'CO001', name: 'Northstar Foods', contact: 'Northstar Foods', company: 'Northstar Foods', designation: 'Food & Beverage', type: 'Prospect', employees: '50', annualRevenue: '$1,250,000', industry: 'Food & Beverage', phone: '+92 300 4455667', email: 'info@northstar.example', owner: 'Ali Raza', status: 'Active' },
-  { id: 'CO002', name: 'Metro Health', contact: 'Metro Health', company: 'Metro Health', designation: 'Healthcare', type: 'Customer', employees: '35', annualRevenue: '$850,000', industry: 'Healthcare', phone: '+92 321 7788990', email: 'hello@metrohealth.example', owner: 'Sara Ahmed', status: 'Active' },
-  { id: 'CO003', name: 'Cedar Labs', contact: 'Cedar Labs', company: 'Cedar Labs', designation: 'Technology', type: 'Prospect', employees: '22', annualRevenue: '$500,000', industry: 'Technology', phone: '+92 333 1122334', email: 'team@cedarlabs.example', owner: 'Ali Raza', status: 'Inactive' },
+  { id: 'CO001', date: '2026-07-20', name: 'Northstar Foods', contact: 'Northstar Foods', company: 'Northstar Foods', designation: 'Food & Beverage', type: 'Prospect', employees: '50', annualRevenue: '$1,250,000', industry: 'Food & Beverage', phone: '+92 300 4455667', email: 'info@northstar.example', owner: 'Ali Raza', status: 'Active' },
+  { id: 'CO002', date: '2026-07-21', name: 'Metro Health', contact: 'Metro Health', company: 'Metro Health', designation: 'Healthcare', type: 'Customer', employees: '35', annualRevenue: '$850,000', industry: 'Healthcare', phone: '+92 321 7788990', email: 'hello@metrohealth.example', owner: 'Sara Ahmed', status: 'Active' },
+  { id: 'CO003', date: '2026-07-22', name: 'Cedar Labs', contact: 'Cedar Labs', company: 'Cedar Labs', designation: 'Technology', type: 'Prospect', employees: '22', annualRevenue: '$500,000', industry: 'Technology', phone: '+92 333 1122334', email: 'team@cedarlabs.example', owner: 'Ali Raza', status: 'Inactive' },
 ];
 
 const blankCompanyForm = {
@@ -28,6 +29,7 @@ const blankCompanyForm = {
   industry: '',
   phone: '',
   email: '',
+  date: '',
   owner: 'Ali Raza',
 };
 
@@ -42,6 +44,7 @@ const companyFormFields = [
   { key: 'industry', label: 'Industry' },
   { key: 'phone', label: 'Phone' },
   { key: 'email', label: 'Email', type: 'email' },
+  { key: 'date', label: 'Date', type: 'date' },
   { key: 'owner', label: 'Owner', kind: 'select', options: owners.filter((item) => item !== 'All') },
 ];
 
@@ -54,6 +57,7 @@ const companyDetailFields = [
   { key: 'industry', label: 'Industry' },
   { key: 'phone', label: 'Phone' },
   { key: 'email', label: 'Email' },
+  { key: 'date', label: 'Date' },
   { key: 'owner', label: 'Owner' },
 ];
 
@@ -63,19 +67,33 @@ const companyFilters = [
   { key: 'dateRange', label: 'Date range', type: 'dateRange', options: companyDateRangeOptions, defaultValue: 'All' },
 ];
 
-export default function CompaniesPage({ setMessage, onDetailOpenChange }) {
+export default function CompaniesPage({ companies, setCompanies, setMessage, onDetailOpenChange, summaryItems, addButtonLabel = 'New Company', addButtonIcon, filterConfig = companyFilters, panelAfterContent = null, hideTable = false, onAddButtonClick = null, actionExtraContent = null }) {
   const [companiesAsContacts, setCompaniesAsContacts] = useState(companyRows);
+  const companyData = companies?.length ? companies.map((company) => ({
+    ...company,
+    id: company.id,
+    date: company.date || company.createdDate || '',
+    contact: company.contact || company.name || company.company || '',
+    company: company.company || company.name || '',
+    name: company.name || company.company || '',
+    designation: company.designation || company.industry || '',
+    employees: company.employees || company.employeeCount || '',
+    annualRevenue: company.annualRevenue || '',
+    status: company.status || 'Active',
+  })) : companiesAsContacts;
+  const updateCompanyData = setCompanies || setCompaniesAsContacts;
 
   return (
     <ContactsPage
-      contacts={companiesAsContacts}
-      setContacts={setCompaniesAsContacts}
+      contacts={companyData}
+      setContacts={updateCompanyData}
       setMessage={setMessage}
       onDetailOpenChange={onDetailOpenChange}
       pageClassName="companies-copy-page"
       tableColumns={companyColumns}
       showSerialColumn
-      addButtonLabel="New Company"
+      addButtonLabel={addButtonLabel}
+      addButtonIcon={addButtonIcon}
       blankFormValue={blankCompanyForm}
       formFields={companyFormFields}
       formSectionTitle="Company Information"
@@ -93,9 +111,13 @@ export default function CompaniesPage({ setMessage, onDetailOpenChange }) {
       detailFields={companyDetailFields}
       detailExtraContent={<CompanyLinkedRecords />}
       showActivitySections={false}
-      filterConfig={companyFilters}
+      filterConfig={filterConfig}
+      panelAfterContent={panelAfterContent}
+      hideTable={hideTable}
+      onAddButtonClick={onAddButtonClick}
+      actionExtraContent={actionExtraContent}
       customDetailRenderer={(props) => <CompanyDetailPage {...props} />}
-      filterTopContent={<CompanySummaryStrip />}
+      filterTopContent={<CompanySummaryStrip items={summaryItems} />}
     />
   );
 }
@@ -127,8 +149,8 @@ function CompanyDetailPage({ record, onBack, onEdit }) {
             <strong>{record.employees || '-'}</strong>
           </div>
           <div>
-            <span>Annual Revenue</span>
-            <strong>{record.annualRevenue || '-'}</strong>
+            <span>Date</span>
+            <strong>{record.date || '-'}</strong>
           </div>
         </section>
 
@@ -158,25 +180,20 @@ function CompanyDetailPage({ record, onBack, onEdit }) {
   );
 }
 
-function CompanySummaryStrip() {
+function CompanySummaryStrip({ items = [
+  { label: 'Total Companies', value: '20' },
+  { label: 'Prospects', value: '19', className: 'company-summary-blue' },
+  { label: 'Customers', value: '1', className: 'company-summary-green' },
+  { label: 'Partners', value: '0', className: 'company-summary-cyan' },
+] }) {
   return (
-    <section className="company-summary-strip" aria-label="Company summary">
-      <article>
-        <span>Total Companies</span>
-        <strong>20</strong>
-      </article>
-      <article>
-        <span>Prospects</span>
-        <strong className="company-summary-blue">19</strong>
-      </article>
-      <article>
-        <span>Customers</span>
-        <strong className="company-summary-green">1</strong>
-      </article>
-      <article>
-        <span>Partners</span>
-        <strong className="company-summary-cyan">0</strong>
-      </article>
+    <section className="crm-summary-strip company-summary-strip" aria-label="Company summary">
+      {items.map((item) => (
+        <article key={item.label}>
+          <span>{item.label}</span>
+          <strong className={item.className}>{item.value}</strong>
+        </article>
+      ))}
     </section>
   );
 }

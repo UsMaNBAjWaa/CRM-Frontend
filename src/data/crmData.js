@@ -10,7 +10,7 @@ export const companies = ['All', 'Northstar Foods', 'Metro Health', 'Cedar Labs'
 export const contactStatuses = ['All', 'Active', 'Inactive'];
 export const designations = ['All', 'Operations Director', 'Procurement Lead', 'Sales Manager'];
 export const lostReasons = ['No Budget', 'Competitor', 'Not Interested', 'Wrong Fit'];
-export const stages = ['Prospecting', 'Qualified', 'Demo', 'Proposal', 'Negotiation', 'Won'];
+export const stages = ['New', 'Contacted', 'Confirm', 'Proposal', 'Negotiation', 'Won', 'Lost'];
 export const products = ['All', 'CRM Suite', 'Sales Automation', 'Support Desk'];
 export const paymentStatuses = ['All', 'Unpaid', 'Partially Paid', 'Paid'];
 export const paymentMethods = ['All', 'Bank Transfer', 'Card', 'Cash', 'Cheque'];
@@ -18,7 +18,7 @@ export const companyTypes = ['Prospect', 'Customer', 'Partner', 'Competitor', 'O
 export const companyRatings = ['None', 'Hot', 'Warm', 'Cold'];
 
 export const leadSeed = [
-  { id: 'LD-1001', clientId: 'CL-1001', date: '2026-07-20', customer: 'Ayesha Khan', company: 'Northstar Foods', phone: '+92 300 1234567', email: 'ayesha@northstar.example', source: 'Website', owner: 'Ali Raza', priority: 'High', status: 'Qualified', leadValue: 850000, lastActivity: 'Proposal sent', nextFollowUp: '2026-07-27', notes: 'Requested pricing for a multi-branch CRM rollout.' },
+  { id: 'LD-1001', clientId: 'CL-1001', date: '2026-07-20', customer: 'Ayesha Khan', company: 'Northstar Foods', phone: '+92 300 1234567', email: 'ayesha@northstar.example', source: 'Website', owner: 'Ali Raza', priority: 'High', status: 'Proposal', leadValue: 850000, lastActivity: 'Proposal sent', nextFollowUp: '2026-07-27', notes: 'Requested pricing for a multi-branch CRM rollout.' },
   { id: 'LD-1002', clientId: 'CL-1002', date: '2026-07-21', customer: 'Hamza Malik', company: 'Metro Health', phone: '+92 321 5559012', email: 'hamza@metrohealth.example', source: 'Referral', owner: 'Sara Ahmed', priority: 'Medium', status: 'New', leadValue: 540000, lastActivity: 'New inquiry', nextFollowUp: '2026-07-25', notes: 'Initial inquiry received from partner referral.' },
   { id: 'LD-1003', clientId: 'CL-1003', date: '2026-07-22', customer: 'Mina Joseph', company: 'Cedar Labs', phone: '+92 333 9876543', email: 'mina@cedarlabs.example', source: 'Facebook', owner: 'Ali Raza', priority: 'Low', status: 'Contacted', leadValue: 320000, lastActivity: 'Demo scheduled', nextFollowUp: '2026-07-29', notes: 'Demo follow-up pending.' },
 ];
@@ -31,8 +31,8 @@ export const contactSeed = [
 
 export const opportunitySeed = [
   { id: 'OP-3001', name: 'CRM Expansion', company: 'Northstar Foods', contact: 'Zainab Sheikh', value: 850000, priority: 'High', closeDate: '2026-08-18', owner: 'Ali Raza', stage: 'Proposal', product: 'CRM Suite', notes: 'Proposal review scheduled with operations team.' },
-  { id: 'OP-3002', name: 'Sales Team Rollout', company: 'Metro Health', contact: 'Bilal Tariq', value: 540000, priority: 'Medium', closeDate: '2026-08-28', owner: 'Sara Ahmed', stage: 'Demo', product: 'Sales Automation', notes: 'Demo requested for procurement and regional leads.' },
-  { id: 'OP-3003', name: 'Support Desk Setup', company: 'Cedar Labs', contact: 'Hira Nadeem', value: 320000, priority: 'Low', closeDate: '2026-09-10', owner: 'Ali Raza', stage: 'Prospecting', product: 'Support Desk', notes: 'Discovery call completed.' },
+  { id: 'OP-3002', name: 'Sales Team Rollout', company: 'Metro Health', contact: 'Bilal Tariq', value: 540000, priority: 'Medium', closeDate: '2026-08-28', owner: 'Sara Ahmed', stage: 'Confirm', product: 'Sales Automation', notes: 'Confirmation call done, awaiting sign-off.' },
+  { id: 'OP-3003', name: 'Support Desk Setup', company: 'Cedar Labs', contact: 'Hira Nadeem', value: 320000, priority: 'Low', closeDate: '2026-09-10', owner: 'Ali Raza', stage: 'Contacted', product: 'Support Desk', notes: 'Discovery call completed.' },
   { id: 'OP-3004', name: 'Enterprise CRM License', company: 'Northstar Foods', contact: 'Ayesha Khan', value: 1250000, priority: 'High', closeDate: '2026-07-30', owner: 'Sara Ahmed', stage: 'Negotiation', product: 'CRM Suite', notes: 'Commercial terms under review.' },
   { id: 'OP-3005', name: 'Won Renewal', company: 'Metro Health', contact: 'Bilal Tariq', value: 410000, priority: 'Medium', closeDate: '2026-07-12', owner: 'Ali Raza', stage: 'Won', product: 'CRM Suite', notes: 'Closed and handed to finance.' },
 ];

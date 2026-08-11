@@ -4,6 +4,7 @@ import { contactStatuses, owners } from '../data/crmData';
 
 const contactColumns = [
   ['contactId', 'Contact ID', 'link-cell'],
+  ['date', 'Date'],
   ['contact', 'Contact'],
   ['company', 'Company'],
   ['designation', 'Designation'],
@@ -14,9 +15,9 @@ const contactColumns = [
 ];
 
 const dummyContacts = [
-  { id: 'CT-D001', contactId: 'CT-000041', contact: 'Sophia Bennett', company: 'Northstar Digital', designation: 'VP Operations', phone: '+1 (415) 555-0138', email: 'sophia@northstardigital.com', owner: 'Ali Raza', status: 'Active' },
-  { id: 'CT-D002', contactId: 'CT-000039', contact: 'Ethan Carter', company: 'Carter Logistics', designation: 'Founder', phone: '+1 (312) 555-0182', email: 'ethan@carterlogistics.com', owner: 'Sara Ahmed', status: 'Active' },
-  { id: 'CT-D003', contactId: 'CT-000038', contact: 'Olivia Martin', company: 'Horizon Properties', designation: 'Head of Sales', phone: '+1 (646) 555-0169', email: 'olivia@horizonproperties.com', owner: 'Ali Raza', status: 'Inactive' },
+  { id: 'CT-D001', contactId: 'CT-000041', date: '2026-07-24', contact: 'Sophia Bennett', company: 'Northstar Digital', designation: 'VP Operations', phone: '+1 (415) 555-0138', email: 'sophia@northstardigital.com', owner: 'Ali Raza', status: 'Active' },
+  { id: 'CT-D002', contactId: 'CT-000039', date: '2026-07-23', contact: 'Ethan Carter', company: 'Carter Logistics', designation: 'Founder', phone: '+1 (312) 555-0182', email: 'ethan@carterlogistics.com', owner: 'Sara Ahmed', status: 'Active' },
+  { id: 'CT-D003', contactId: 'CT-000038', date: '2026-07-22', contact: 'Olivia Martin', company: 'Horizon Properties', designation: 'Head of Sales', phone: '+1 (646) 555-0169', email: 'olivia@horizonproperties.com', owner: 'Ali Raza', status: 'Inactive' },
 ];
 
 const blankContactForm = {
@@ -25,6 +26,7 @@ const blankContactForm = {
   designation: '',
   phone: '',
   email: '',
+  date: '',
   owner: 'Ali Raza',
   status: 'Active',
 };
@@ -35,6 +37,7 @@ const defaultContactFormFields = [
   { key: 'designation', label: 'Designation' },
   { key: 'phone', label: 'Phone' },
   { key: 'email', label: 'Email', type: 'email' },
+  { key: 'date', label: 'Date', type: 'date' },
   { key: 'owner', label: 'Owner', kind: 'select', options: owners.filter((item) => item !== 'All') },
   { key: 'status', label: 'Status', kind: 'select', options: contactStatuses.filter((item) => item !== 'All') },
 ];
@@ -56,7 +59,7 @@ const dateRangeOptions = ['All', 'Today', 'Last 7 Days', 'This Month', 'Custom R
 const defaultContactFilters = [
   { key: 'status', label: 'Status', options: contactStatuses },
   { key: 'owner', label: 'Owner', options: owners },
-  { key: 'dateRange', label: 'Date range', type: 'dateRange', options: dateRangeOptions, defaultValue: 'Today' },
+  { key: 'dateRange', label: 'Date range', type: 'dateRange', options: dateRangeOptions, defaultValue: 'All' },
 ];
 
 export default function ContactsPage({
@@ -69,6 +72,7 @@ export default function ContactsPage({
   tableColumns = contactColumns,
   showSerialColumn = true,
   addButtonLabel = 'New Contact',
+  addButtonIcon: AddButtonIcon = PlusCircle,
   blankFormValue = blankContactForm,
   formFields = defaultContactFormFields,
   formSectionTitle = 'Contact Information',
@@ -87,7 +91,12 @@ export default function ContactsPage({
   detailExtraContent = null,
   showActivitySections = true,
   filterConfig = defaultContactFilters,
+  panelAfterContent = null,
+  hideTable = false,
+  onAddButtonClick = null,
+  actionExtraContent = null,
   customDetailRenderer = null,
+  useFallbackRows = true,
 }) {
   const [filters, setFilters] = useState(() => buildDefaultFilters(filterConfig));
   const [dateRanges, setDateRanges] = useState({});
@@ -99,7 +108,15 @@ export default function ContactsPage({
   const [fallbackContacts, setFallbackContacts] = useState(dummyContacts);
   const contactRows = contacts.length > 0
     ? contacts.map((contact) => ({ ...contact, contactId: contact.contactId || contact.id }))
-    : fallbackContacts.map((contact) => ({ ...contact, contactId: contact.contactId || contact.id }));
+    : useFallbackRows
+      ? fallbackContacts.map((contact) => ({ ...contact, contactId: contact.contactId || contact.id }))
+      : [];
+  const contactSummary = useMemo(() => ({
+    total: contactRows.length,
+    active: contactRows.filter((contact) => contact.status === 'Active').length,
+    inactive: contactRows.filter((contact) => contact.status === 'Inactive').length,
+    companies: new Set(contactRows.map((contact) => contact.company).filter(Boolean)).size,
+  }), [contactRows]);
 
   const rows = useMemo(() => contactRows
     .filter((contact) => filterConfig.every((filter) => {
@@ -111,10 +128,18 @@ export default function ContactsPage({
 
   const activeFilterCount = Object.values(filters).filter((value) => value !== 'All' && value !== 'Any Time').length;
   const updateFilter = (key, value) => setFilters((current) => ({ ...current, [key]: value }));
-  const resetFilters = () => setFilters(buildDefaultFilters(filterConfig));
+  const resetFilters = () => {
+    setFilters(buildDefaultFilters(filterConfig));
+    setDateRanges({});
+  };
   const updateVisibleContacts = (updater) => {
     if (contacts.length > 0) {
       setContacts?.(updater);
+      return;
+    }
+    if (!useFallbackRows) {
+      const nextRows = typeof updater === 'function' ? updater([]) : updater;
+      setContacts?.(nextRows);
       return;
     }
     setFallbackContacts(updater);
@@ -136,7 +161,7 @@ export default function ContactsPage({
   };
 
   const openAddContact = () => {
-    setForm(blankFormValue);
+    setForm({ ...blankFormValue, date: blankFormValue.date || new Date().toISOString().slice(0, 10) });
     setEditingContact(null);
     setSelectedContact(null);
     onDetailOpenChange?.(false);
@@ -174,7 +199,7 @@ export default function ContactsPage({
       contact: form.contact || form.name || form.company || '',
       company: form.company || form.name || '',
       designation: form.designation || form.industry || '',
-      date: new Date().toISOString().slice(0, 10),
+      date: form.date || new Date().toISOString().slice(0, 10),
     };
 
     updateVisibleContacts((current) => [nextContact, ...current]);
@@ -274,7 +299,7 @@ export default function ContactsPage({
     <div className={`lf-page leads-page contacts-page${pageClassName ? ` ${pageClassName}` : ''}`}>
       <section className="lf-table-card sales-table-card">
         <section className="page-panel leads-page-panel">
-          {filterTopContent}
+          {filterTopContent || <ContactSummaryStrip summary={contactSummary} />}
           <section className="page-panel-filters lf-filter-bar" aria-label="Contact filters">
             {filterConfig.map((filter) => (
               <ContactFilter
@@ -294,12 +319,15 @@ export default function ContactsPage({
           </section>
           <header className="page-panel-header sales-page-header" aria-label="Contact actions">
             <div className="lf-page-actions lf-page-actions--hero">
-              <button className="lf-btn lf-btn-primary" onClick={openAddContact}><PlusCircle size={17} />{addButtonLabel}</button>
+              {actionExtraContent}
+              <button className="lf-btn lf-btn-primary" onClick={onAddButtonClick || openAddContact}><AddButtonIcon size={17} />{addButtonLabel}</button>
             </div>
           </header>
         </section>
 
-        <div className="lf-table-scroll">
+        {panelAfterContent}
+
+        {!hideTable && <div className="lf-table-scroll">
           <table className="lf-leads-table">
             <thead>
               <tr>
@@ -331,7 +359,7 @@ export default function ContactsPage({
               })}
             </tbody>
           </table>
-        </div>
+        </div>}
       </section>
       {deletingContact && (
         <ConfirmDeleteContact
@@ -341,6 +369,29 @@ export default function ContactsPage({
         />
       )}
     </div>
+  );
+}
+
+function ContactSummaryStrip({ summary }) {
+  return (
+    <section className="crm-summary-strip contact-summary-strip" aria-label="Contact summary">
+      <article>
+        <span>Total Contacts</span>
+        <strong>{summary.total}</strong>
+      </article>
+      <article>
+        <span>Active</span>
+        <strong className="contact-summary-blue">{summary.active}</strong>
+      </article>
+      <article>
+        <span>Inactive</span>
+        <strong className="contact-summary-red">{summary.inactive}</strong>
+      </article>
+      <article>
+        <span>Companies</span>
+        <strong className="contact-summary-green">{summary.companies}</strong>
+      </article>
+    </section>
   );
 }
 
@@ -378,7 +429,7 @@ function ContactFormPage({ title, description, submitLabel, sectionTitle, fields
   );
 }
 
-function ContactRecordDetailPage({ contact, onBack, onEdit, onDelete }) {
+function ContactRecordDetailPage({ contact, onBack, onEdit }) {
   return (
     <div className="lf-page leads-page contact-record-page">
       <section className="payment-record-detail contact-record-detail" aria-label="Contact details">
@@ -390,7 +441,6 @@ function ContactRecordDetailPage({ contact, onBack, onEdit, onDelete }) {
           </div>
           <div className="contact-record-actions">
             <button className="payment-record-edit" type="button" onClick={onEdit}>Edit</button>
-            <button className="contact-record-delete" type="button" onClick={onDelete}>Delete</button>
           </div>
         </header>
 
@@ -492,7 +542,7 @@ function ContactFormSelect({ label, value, options, onChange }) {
   );
 }
 
-function ContactDetailsPage({ contact, pageClassName, title, ariaLabel, fields, extraContent, showActivitySections, onClose, onEdit, onDelete }) {
+function ContactDetailsPage({ contact, pageClassName, title, ariaLabel, fields, extraContent, showActivitySections, onClose, onEdit }) {
   return (
     <div className={`lf-page leads-page contacts-page${pageClassName ? ` ${pageClassName}` : ''}`}>
       <section className="lead-detail-page contact-detail-page" aria-label={ariaLabel}>
@@ -560,7 +610,6 @@ function ContactDetailsPage({ contact, pageClassName, title, ariaLabel, fields, 
 
           <div className="lf-drawer-actions lf-drawer-actions--footer">
             <button type="button" onClick={onEdit}><Edit3 size={15} />Edit</button>
-            <button type="button" className="danger" onClick={onDelete}><Trash2 size={15} />Delete</button>
           </div>
         </div>
       </section>

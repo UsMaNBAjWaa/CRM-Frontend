@@ -142,6 +142,8 @@ export default function App() {
   // Close mobile sidebar when navigating
   const navigate = (key) => {
     setPage(key);
+    if (key === 'pipelineStage') setActiveStagePage(dynamicStagePage);
+    if (key === 'pipeline') setActiveStagePage('');
     setSidebarOpen(false);
     setProfileOpen(false);
     if (key !== 'leads') setLeadDetailOpen(false);
@@ -172,12 +174,14 @@ export default function App() {
       ? 'Contact Detail'
       : page === 'companies' && companyDetailOpen
         ? 'Company Detail'
-      : '';
+        : '';
   const currentNavItem = NAV_ITEMS.find((item) => item.key === (page === 'pipelineStage' ? 'pipeline' : page)) || NAV_ITEMS[0];
   const CurrentPageIcon = currentNavItem.Icon;
   const visibleNavItems = currentUser?.user_type === 'ADMIN'
     ? NAV_ITEMS.filter((item) => item.key === 'dashboard')
-    : NAV_ITEMS;
+    : dynamicStagePage
+      ? [...NAV_ITEMS, { key: 'pipelineStage', label: dynamicStagePage, Icon: BarChart3 }]
+      : NAV_ITEMS;
 
   const handleLogin = async ({ username, password }) => {
     const response = await authRequest('/api/login/', {
@@ -271,92 +275,92 @@ export default function App() {
 
         {/* ── Top Navbar ── */}
         <header className="crm-navbar" role="banner">
-            {/* Mobile menu toggle */}
-            <button
-              className="crm-navbar-menu-btn"
-              type="button"
-              aria-label="Toggle sidebar"
-              onClick={() => setSidebarOpen((o) => !o)}
-            >
-              <Menu size={20} />
-            </button>
+          {/* Mobile menu toggle */}
+          <button
+            className="crm-navbar-menu-btn"
+            type="button"
+            aria-label="Toggle sidebar"
+            onClick={() => setSidebarOpen((o) => !o)}
+          >
+            <Menu size={20} />
+          </button>
 
-            <div className="crm-navbar-brand" aria-hidden="true">
-              <span className="crm-navbar-page-icon">
-                <CurrentPageIcon size={18} />
-              </span>
-              <span>{pageTitleOverride || pageLabels[page]}</span>
-            </div>
+          <div className="crm-navbar-brand" aria-hidden="true">
+            <span className="crm-navbar-page-icon">
+              <CurrentPageIcon size={18} />
+            </span>
+            <span>{pageTitleOverride || pageLabels[page]}</span>
+          </div>
 
-            {/* Logo (mobile only, hidden on desktop) */}
-            <div className="crm-navbar-brand-mobile" aria-hidden="true">
-              <Boxes size={20} />
-              <span>Lead<span>Flow</span></span>
-            </div>
+          {/* Logo (mobile only, hidden on desktop) */}
+          <div className="crm-navbar-brand-mobile" aria-hidden="true">
+            <Boxes size={20} />
+            <span>Lead<span>Flow</span></span>
+          </div>
 
-            {/* Global search (center) */}
-            <div
-              className={`crm-navbar-search${globalSearchOpen ? ' crm-navbar-search--active' : ''}`}
-              role="search"
-              onBlur={(event) => {
-                if (!event.currentTarget.contains(event.relatedTarget)) setGlobalSearchOpen(false);
+          {/* Global search (center) */}
+          <div
+            className={`crm-navbar-search${globalSearchOpen ? ' crm-navbar-search--active' : ''}`}
+            role="search"
+            onBlur={(event) => {
+              if (!event.currentTarget.contains(event.relatedTarget)) setGlobalSearchOpen(false);
+            }}
+          >
+            <Search size={15} aria-hidden="true" />
+            <input
+              id="global-search"
+              type="search"
+              placeholder="Search..."
+              aria-label="Global CRM search"
+              value={globalSearch}
+              onFocus={() => setGlobalSearchOpen(true)}
+              onChange={(event) => {
+                setGlobalSearch(event.target.value);
+                setGlobalSearchOpen(true);
               }}
-            >
-              <Search size={15} aria-hidden="true" />
-              <input
-                id="global-search"
-                type="search"
-                placeholder="Search..."
-                aria-label="Global CRM search"
-                value={globalSearch}
-                onFocus={() => setGlobalSearchOpen(true)}
-                onChange={(event) => {
-                  setGlobalSearch(event.target.value);
-                  setGlobalSearchOpen(true);
-                }}
-              />
-              {globalSearchOpen && (
-                <div className="crm-search-popover">
-                  <div className="crm-search-popover-head">
-                    <strong>Search Results</strong>
-                    {globalSearch && <span>{globalSearchResults.length} found</span>}
-                  </div>
-                  {globalSearch.trim() ? (
-                    <div className="crm-search-results">
-                      {globalSearchResults.length > 0 ? globalSearchResults.map((result) => (
-                        <button
-                          type="button"
-                          key={`${result.type}-${result.id}`}
-                          onMouseDown={(event) => event.preventDefault()}
-                          onClick={() => {
-                            setPage(result.page);
-                            if (result.type === 'Lead') setLeadDetailRequest(result.id);
-                            setGlobalSearchOpen(false);
-                          }}
-                        >
-                          <span>{result.type}</span>
-                          <strong>{highlightMatch(result.title, globalSearch)}</strong>
-                          <small>{highlightMatch(result.meta, globalSearch)}</small>
-                        </button>
-                      )) : <p>No matching records found.</p>}
-                    </div>
-                  ) : (
-                    <p className="crm-search-empty">Type a name, ID, company, phone, email, status, or amount.</p>
-                  )}
+            />
+            {globalSearchOpen && (
+              <div className="crm-search-popover">
+                <div className="crm-search-popover-head">
+                  <strong>Search Results</strong>
+                  {globalSearch && <span>{globalSearchResults.length} found</span>}
                 </div>
-              )}
-            </div>
+                {globalSearch.trim() ? (
+                  <div className="crm-search-results">
+                    {globalSearchResults.length > 0 ? globalSearchResults.map((result) => (
+                      <button
+                        type="button"
+                        key={`${result.type}-${result.id}`}
+                        onMouseDown={(event) => event.preventDefault()}
+                        onClick={() => {
+                          setPage(result.page);
+                          if (result.type === 'Lead') setLeadDetailRequest(result.id);
+                          setGlobalSearchOpen(false);
+                        }}
+                      >
+                        <span>{result.type}</span>
+                        <strong>{highlightMatch(result.title, globalSearch)}</strong>
+                        <small>{highlightMatch(result.meta, globalSearch)}</small>
+                      </button>
+                    )) : <p>No matching records found.</p>}
+                  </div>
+                ) : (
+                  <p className="crm-search-empty">Type a name, ID, company, phone, email, status, or amount.</p>
+                )}
+              </div>
+            )}
+          </div>
 
-            {/* Right controls */}
-            <div className="crm-navbar-right">
-              <button className="crm-navbar-icon-btn" type="button" aria-label="Notifications" title="Notifications">
-                <Bell size={18} />
-                <span className="crm-notif-dot" aria-label="3 unread notifications" />
-              </button>
-              <button className="crm-navbar-icon-btn" type="button" aria-label="Help and support" title="Help">
-                <HelpCircle size={18} />
-              </button>
-              <div className="crm-profile-wrap">
+          {/* Right controls */}
+          <div className="crm-navbar-right">
+            <button className="crm-navbar-icon-btn" type="button" aria-label="Notifications" title="Notifications">
+              <Bell size={18} />
+              <span className="crm-notif-dot" aria-label="3 unread notifications" />
+            </button>
+            <button className="crm-navbar-icon-btn" type="button" aria-label="Help and support" title="Help">
+              <HelpCircle size={18} />
+            </button>
+            <div className="crm-profile-wrap">
               <button
                 className="crm-navbar-profile"
                 type="button"
@@ -371,9 +375,9 @@ export default function App() {
                   <span className="crm-profile-role">{currentUser.user_type === 'ADMIN' ? 'Admin' : 'User'}</span>
                 </div>
               </button>
-              </div>
             </div>
-          </header>
+          </div>
+        </header>
 
         {profileOpen && (
           <AccountDrawer
@@ -420,6 +424,8 @@ export default function App() {
                 leads={leads}
                 contacts={contacts}
                 setLeads={setLeads}
+                setContacts={setContacts}
+                setCompanies={setCompanies}
                 setMessage={setMessage}
                 onDetailOpenChange={setLeadDetailOpen}
                 globalSearch={globalSearch}
@@ -454,7 +460,7 @@ export default function App() {
           )}
 
           {(page === 'pipeline' || page === 'pipelineStage') && (
-            <div className="crm-legacy-page">
+            <div className="lf-page-content">
               <PipelinePage
                 leads={leads}
                 setLeads={setLeads}
@@ -750,15 +756,15 @@ function RoleDashboardPanel({ user, usingBackendData, counts, onNavigate }) {
 
   const cards = isAdmin
     ? [
-        ['Admin Access', `${formatUsername(user.username)} is active in the admin panel with full CRM oversight.`, ShieldCheck],
-        ['Backend Database', usingBackendData ? 'Connected to back/crm SQLite data through Django APIs.' : 'Waiting for backend APIs to respond.', Database],
-        ['System Configuration', 'Use backend pipeline endpoints for global CRM stages, workflow rules, and panel settings.', Settings],
-      ]
+      ['Admin Access', `${formatUsername(user.username)} is active in the admin panel with full CRM oversight.`, ShieldCheck],
+      ['Backend Database', usingBackendData ? 'Connected to back/crm SQLite data through Django APIs.' : 'Waiting for backend APIs to respond.', Database],
+      ['System Configuration', 'Use backend pipeline endpoints for global CRM stages, workflow rules, and panel settings.', Settings],
+    ]
     : [
-        ['Workspace Access', `${formatUsername(user.username)} is active in the user panel with live role-based access.`, UserRound],
-        ['Backend Database', usingBackendData ? 'Connected to back/crm SQLite data through Django APIs.' : 'Using local fallback until backend APIs respond.', Database],
-        ['Support Queue', 'Track support requests, customer follow-ups, and service conversations from one workspace.', MessageSquareText],
-      ];
+      ['Workspace Access', `${formatUsername(user.username)} is active in the user panel with live role-based access.`, UserRound],
+      ['Backend Database', usingBackendData ? 'Connected to back/crm SQLite data through Django APIs.' : 'Using local fallback until backend APIs respond.', Database],
+      ['Support Queue', 'Track support requests, customer follow-ups, and service conversations from one workspace.', MessageSquareText],
+    ];
 
   return (
     <div className="portal-page portal-page--embedded user-dashboard">

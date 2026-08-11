@@ -196,10 +196,10 @@ export function Drawer({ title, onClose, children }) {
   );
 }
 
-export function Modal({ title, onClose, children }) {
+export function Modal({ title, onClose, children, className = '' }) {
   return (
     <div className="modal-bg">
-      <div className="modal">
+      <div className={`modal${className ? ` ${className}` : ''}`}>
         <div className="panel-head">
           <h3>{title}</h3>
           <IconButton label="Close" onClick={onClose}><X size={16} /></IconButton>

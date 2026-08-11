@@ -85,7 +85,7 @@ export default function PaymentsPage({ payments, setPayments, setMessage }) {
     <section className="page salesforce-leads salesforce-payments">
       <div className="sf-list-panel">
         <section className="payment-merged-panel" aria-label="Payment summary and filters">
-          <div className="payment-summary-strip">
+          <div className="crm-summary-strip payment-summary-strip">
             <article>
               <span>Total Payments</span>
               <strong>{paymentSummary.total}</strong>
@@ -105,8 +105,8 @@ export default function PaymentsPage({ payments, setPayments, setMessage }) {
           </div>
 
           <div className="payment-filter-row">
-            <SearchableSelect className="payment-inline-filter" label="Status" value={filters.status} options={paymentStatuses} onChange={(status) => updateFilter('status', status)} placeholder="Search status" />
-            <SearchableSelect className="payment-inline-filter" label="Method" value={filters.method} options={paymentMethods} onChange={(method) => updateFilter('method', method)} placeholder="Search method" />
+            <SearchableSelect className="payment-inline-filter payment-status-filter" label="Status" value={filters.status} options={paymentStatuses} onChange={(status) => updateFilter('status', status)} placeholder="Search status" />
+            <SearchableSelect className="payment-inline-filter payment-method-filter" label="Method" value={filters.method} options={paymentMethods} onChange={(method) => updateFilter('method', method)} placeholder="Search method" />
             <SearchableSelect className="payment-inline-filter payment-date-filter" label="Date range" value={filters.dateRange} options={paymentDateRangeOptions} onChange={updateDateRange} placeholder="Search date range" />
             <button className="payment-record-btn" type="button" onClick={openRecord}><PlusCircle size={17} />New Payment</button>
           </div>

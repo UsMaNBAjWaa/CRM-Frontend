@@ -34,6 +34,7 @@ const priorityRank = { Urgent: 1, High: 2, Medium: 3, Low: 4 };
 const statusRank = { New: 1, Contacted: 2, Qualified: 3, 'Proposal Sent': 4, Negotiation: 5, Converted: 6, Lost: 7 };
 const salesTableColumns = [
   { key: 'clientId', label: 'Lead ID', sortable: true },
+  { key: 'createdDate', label: 'Date', sortable: true },
   { key: 'customer', label: 'Customer', sortable: true },
   { key: 'company', label: 'Company', sortable: true },
   { key: 'phone', label: 'Phone' },
@@ -61,12 +62,13 @@ const blankLeadForm = {
   owner: 'Ali Raza',
   priority: 'Medium',
   status: 'New',
+  createdDate: '',
   estimatedValue: '',
   expectedCloseDate: '',
   notes: '',
 };
 
-export default function LeadsPage({ setLeads, setMessage, onDetailOpenChange, globalSearch = '', detailRequestId = '', onDetailRequestHandled }) {
+export default function LeadsPage({ setLeads, setContacts, setCompanies, setMessage, onDetailOpenChange, globalSearch = '', detailRequestId = '', onDetailRequestHandled }) {
   const [leads, setLocalLeads] = useState(mockLeads);
   const [filters, setFilters] = useState({ status: 'All Statuses', owner: 'All Owners', priority: 'All Priorities', source: 'All Sources', dateRange: 'Any Time' });
   const [dateRange, setDateRange] = useState({ from: '', to: '' });
@@ -117,6 +119,69 @@ export default function LeadsPage({ setLeads, setMessage, onDetailOpenChange, gl
   }, [detailRequestId, leads, onDetailRequestHandled]);
 
   const showToast = (text) => setMessage?.(text);
+
+  const upsertRelatedContact = (lead) => {
+    if (!setContacts || !lead.customer) return;
+    const contactRow = {
+      id: `CT-${lead.clientId || lead.id}`,
+      contactId: `CT-${lead.clientId || lead.id}`,
+      clientId: lead.clientId,
+      date: lead.createdDate,
+      contact: lead.customer,
+      company: lead.company,
+      designation: lead.jobTitle || '',
+      phone: lead.phone,
+      email: lead.email,
+      whatsapp: lead.phone,
+      owner: lead.owner,
+      status: 'Active',
+      notes: lead.notes || '',
+      relatedLeadId: lead.id,
+    };
+    setContacts((current = []) => {
+      const existing = current.find((contact) => (
+        contact.relatedLeadId === lead.id
+        || (lead.phone && contact.phone === lead.phone)
+        || (lead.email && contact.email === lead.email)
+      ));
+      if (existing) {
+        return current.map((contact) => contact.id === existing.id ? { ...contact, ...contactRow, id: existing.id, contactId: existing.contactId || existing.id } : contact);
+      }
+      return [contactRow, ...current];
+    });
+  };
+
+  const upsertRelatedCompany = (lead) => {
+    if (!setCompanies || !lead.company) return;
+    const companyRow = {
+      id: `CO-${String(lead.company).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || lead.clientId || lead.id}`,
+      date: lead.createdDate,
+      name: lead.company,
+      company: lead.company,
+      contact: lead.company,
+      type: lead.companyType || 'Prospect',
+      employees: lead.companyEmployees || '',
+      annualRevenue: lead.companyAnnualRevenue || 0,
+      industry: lead.companyIndustry || '',
+      phone: lead.companyPhone || lead.phone,
+      email: lead.companyEmail || lead.email,
+      owner: lead.companyOwner || lead.owner,
+      status: 'Active',
+      leadSource: lead.source,
+      description: lead.notes || '',
+      relatedLeadId: lead.id,
+    };
+    setCompanies((current = []) => {
+      const existing = current.find((company) => (
+        company.relatedLeadId === lead.id
+        || String(company.name || company.company || '').toLowerCase() === String(lead.company).toLowerCase()
+      ));
+      if (existing) {
+        return current.map((company) => company.id === existing.id ? { ...company, ...companyRow, id: existing.id } : company);
+      }
+      return [companyRow, ...current];
+    });
+  };
 
   const updateLeads = (nextLeads) => {
     setLocalLeads(nextLeads);
@@ -170,6 +235,13 @@ export default function LeadsPage({ setLeads, setMessage, onDetailOpenChange, gl
   const safePage = Math.min(currentPage, totalPages);
   const pageStart = (safePage - 1) * rowsPerPage;
   const pageRows = filteredLeads.slice(pageStart, pageStart + rowsPerPage);
+  const leadSummary = useMemo(() => ({
+    total: leads.length,
+    new: leads.filter((lead) => lead.status === 'New').length,
+    qualified: leads.filter((lead) => lead.status === 'Qualified').length,
+    converted: leads.filter((lead) => lead.status === 'Converted').length,
+    lost: leads.filter((lead) => lead.status === 'Lost').length,
+  }), [leads]);
   const activeFilterCount = Object.values(filters).filter((value) => !String(value).startsWith('All') && value !== 'Any Time').length;
   const displayColumns = salesTableColumns;
   const hasEmailHidden = false;
@@ -207,7 +279,7 @@ export default function LeadsPage({ setLeads, setMessage, onDetailOpenChange, gl
 
   const openAdd = () => {
     setEditingLead(null);
-    setForm(blankLeadForm);
+    setForm({ ...blankLeadForm, createdDate: new Date().toISOString().slice(0, 10) });
     setErrors({});
     setAddOpen(true);
   };
@@ -233,6 +305,7 @@ export default function LeadsPage({ setLeads, setMessage, onDetailOpenChange, gl
       owner: lead.owner,
       priority: lead.priority,
       status: lead.status,
+      createdDate: lead.createdDate,
       estimatedValue: String(lead.estimatedValue),
       expectedCloseDate: lead.expectedCloseDate,
       notes: lead.notes,
@@ -259,7 +332,7 @@ export default function LeadsPage({ setLeads, setMessage, onDetailOpenChange, gl
       const payload = {
         id: editingLead?.id || `lead-${Date.now()}`,
         clientId: editingLead?.clientId || `LD-${10249 + leads.length}`,
-        createdDate: editingLead?.createdDate || new Date().toISOString().slice(0, 10),
+        createdDate: form.createdDate || editingLead?.createdDate || new Date().toISOString().slice(0, 10),
         customer,
         company: form.company,
         phone: form.phone,
@@ -284,6 +357,8 @@ export default function LeadsPage({ setLeads, setMessage, onDetailOpenChange, gl
       };
       const nextLeads = editingLead ? leads.map((lead) => lead.id === editingLead.id ? payload : lead) : [payload, ...leads];
       updateLeads(nextLeads);
+      upsertRelatedContact(payload);
+      upsertRelatedCompany(payload);
       showToast(editingLead ? 'Lead updated successfully' : mode === 'draft' ? 'Lead saved as draft' : 'Lead created successfully');
       closeForm();
     }, 500);
@@ -318,6 +393,7 @@ export default function LeadsPage({ setLeads, setMessage, onDetailOpenChange, gl
       {!addOpen && !detailsLead && (
       <section className="lf-table-card sales-table-card">
         <PagePanel>
+          <LeadSummaryStrip summary={leadSummary} />
           <PageFilters
             filters={filters}
             dateRange={dateRange}
@@ -414,6 +490,29 @@ function PagePanel({ children }) {
 
 function Divider() {
   return <div className="page-panel-divider" role="presentation" />;
+}
+
+function LeadSummaryStrip({ summary }) {
+  return (
+    <section className="crm-summary-strip lead-summary-strip" aria-label="Lead summary">
+      <article>
+        <span>Total Leads</span>
+        <strong>{summary.total}</strong>
+      </article>
+      <article>
+        <span>New</span>
+        <strong className="lead-summary-blue">{summary.new}</strong>
+      </article>
+      <article>
+        <span>Won</span>
+        <strong className="lead-summary-orange">{summary.qualified}</strong>
+      </article>
+      <article>
+        <span>Lost</span>
+        <strong className="lead-summary-red">{summary.lost}</strong>
+      </article>
+    </section>
+  );
 }
 
 function PageHeader({ onAdd }) {
@@ -615,6 +714,7 @@ function AddLeadModal({ form, setForm, errors, saving, editing, onClose, onDraft
           <section className="lead-info-column lead-person-box">
             <h3>Person Information</h3>
             <TextInput label="Full Name" value={fullName} error={errors.firstName || errors.lastName} onChange={setFullName} required />
+            <TextInput label="Date" type="date" value={form.createdDate} onChange={(value) => setField('createdDate', value)} />
             <TextInput label="Phone Number" value={form.phone} error={errors.phone} onChange={(value) => setField('phone', value)} />
             <TextInput label="Email Address" value={form.email} error={errors.email} onChange={(value) => setField('email', value)} />
             <FormSelect label="Lead Source" value={form.source} options={leadSourceOptions.filter((item) => item !== 'All Sources')} onChange={(value) => setField('source', value)} />
@@ -680,8 +780,8 @@ function LeadDetailsDrawer({ lead, onClose, onEdit, onConvert, onMarkLost, onToa
 
       <section className="payment-record-summary" aria-label="Lead summary">
         <div><span>Lead ID</span><strong>{lead.clientId || lead.id}</strong></div>
+        <div><span>Date</span><strong>{formatDate(lead.createdDate)}</strong></div>
         <div><span>Status</span><strong>{lead.status || '-'}</strong></div>
-        <div><span>Priority</span><strong>{lead.priority || '-'}</strong></div>
         <div><span>Estimated Value</span><strong>{estimatedValue ? `$${estimatedValue.toLocaleString()}` : '-'}</strong></div>
       </section>
 
@@ -690,6 +790,7 @@ function LeadDetailsDrawer({ lead, onClose, onEdit, onConvert, onMarkLost, onToa
           <h3>Person Information</h3>
           <dl>
             <div><dt>Full Name*</dt><dd>{lead.customer || '-'}</dd></div>
+            <div><dt>Date</dt><dd>{formatDate(lead.createdDate)}</dd></div>
             <div><dt>Phone Number</dt><dd>{lead.phone || '-'}</dd></div>
             <div><dt>Email Address</dt><dd>{lead.email || '-'}</dd></div>
             <div><dt>Lead Source</dt><dd>{lead.source || '-'}</dd></div>
@@ -714,7 +815,7 @@ function LeadDetailsDrawer({ lead, onClose, onEdit, onConvert, onMarkLost, onToa
         </section>
       </div>
 
-      <section className="payment-record-section payment-record-history">
+      <section className="payment-record-section payment-record-history lead-notes-section">
         <h3>Notes</h3>
         <p>{lead.notes || 'No notes added.'}</p>
       </section>
